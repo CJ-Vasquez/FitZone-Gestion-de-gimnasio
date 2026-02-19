@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 -- Usuario admin inicial (password: admin123)
 INSERT INTO users (username, email, password, role) VALUES
-('admin', 'admin@fitzone.pe', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'ADMIN')
+('admin', 'admin@fitzone.pe', '$2a$10$jBg62A4RqT1n.OHK764.deTTPAOWtl815o.9l/1fqWva0g7Kj2NM.', 'ADMIN')
 ON CONFLICT DO NOTHING;
 
 -- =====================================

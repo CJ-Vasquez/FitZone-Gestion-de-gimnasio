@@ -15,5 +15,11 @@ fitzone-frontend/dist/
 *.iml
 .idea/
 
+# Angular cache
+fitzone-frontend/.angular/
+
+# VSCode
+.vscode/
+
 # Logs
 *.log
