@@ -1,0 +1,12 @@
+package com.fitzone.attendance.repository;
+
+import com.fitzone.attendance.entity.Attendance;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import java.util.List;
+
+@Repository
+public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
+    List<Attendance> findByMemberId(Long memberId);
+    List<Attendance> findByMemberIdOrderByCheckInDesc(Long memberId);
+}

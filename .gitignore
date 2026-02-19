@@ -1,0 +1,19 @@
+# Maven
+**/target/
+**/pom.xml.tag
+**/pom.xml.releaseBackup
+*.class
+
+# Node
+fitzone-frontend/node_modules/
+fitzone-frontend/dist/
+
+# IDE
+.classpath
+.project
+.settings/
+*.iml
+.idea/
+
+# Logs
+*.log
