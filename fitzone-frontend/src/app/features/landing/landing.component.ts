@@ -150,10 +150,10 @@ import { AuthService } from '../../core/services/auth.service';
                 <tr><td>Eureka Server</td><td>8761</td><td>Service Discovery</td></tr>
                 <tr><td>API Gateway</td><td>8080</td><td>Enrutamiento y filtro JWT</td></tr>
                 <tr><td>Auth Service</td><td>8081</td><td>Autenticacion (login, registro)</td></tr>
-                <tr><td>Member Service</td><td>8082</td><td>Gestion de miembros</td></tr>
+                <tr><td>Miembro Service</td><td>8082</td><td>Gestion de miembros</td></tr>
                 <tr><td>Plan Service</td><td>8083</td><td>Gestion de planes</td></tr>
-                <tr><td>Attendance Service</td><td>8084</td><td>Control de asistencia</td></tr>
-                <tr><td>Payment Service</td><td>8085</td><td>Registro de pagos</td></tr>
+                <tr><td>Asistencia Service</td><td>8084</td><td>Control de asistencia</td></tr>
+                <tr><td>Pago Service</td><td>8085</td><td>Registro de pagos</td></tr>
               </tbody>
             </table>
           </div>
@@ -398,7 +398,7 @@ export class LandingComponent implements OnInit, OnDestroy {
     this.authService.login(this.credentials).subscribe({
       next: () => {
         this.loading = false;
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/panel']);
       },
       error: (err) => {
         this.errorMsg = err.error?.message || 'Credenciales incorrectas';

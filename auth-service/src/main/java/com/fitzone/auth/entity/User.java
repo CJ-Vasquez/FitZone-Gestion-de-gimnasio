@@ -32,20 +32,20 @@ public class User implements UserDetails {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
-    private Role role;
+    @Column(name = "role", nullable = false, length = 20)
+    private Rol rol;
 
-    @Column(nullable = false)
+    @Column(name = "enabled", nullable = false)
     @Builder.Default
-    private Boolean enabled = true;
+    private Boolean habilitado = true;
 
     @Column(name = "created_at")
     @Builder.Default
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime fechaCreacion = LocalDateTime.now();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + role.name()));
+        return List.of(new SimpleGrantedAuthority("ROLE_" + rol.name()));
     }
 
     @Override
@@ -58,9 +58,9 @@ public class User implements UserDetails {
     public boolean isCredentialsNonExpired() { return true; }
 
     @Override
-    public boolean isEnabled() { return enabled; }
+    public boolean isEnabled() { return habilitado; }
 
-    public enum Role {
-        ADMIN, TRAINER, MEMBER
+    public enum Rol {
+        ADMIN, ENTRENADOR, MIEMBRO
     }
 }

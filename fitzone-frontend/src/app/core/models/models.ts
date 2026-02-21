@@ -20,49 +20,50 @@ export interface AuthResponse {
   message: string;
 }
 
-// models/member.model.ts
-export interface Member {
+// models/miembro.model.ts
+export interface Miembro {
   id?: number;
-  firstName: string;
-  lastName: string;
+  nombre: string;
+  apellido: string;
   email: string;
-  phone?: string;
+  telefono?: string;
   dni: string;
-  status?: string;
+  estado?: string;
   planId?: number;
-  registeredAt?: string;
-  updatedAt?: string;
+  fechaRegistro?: string;
+  fechaActualizacion?: string;
 }
 
 // models/plan.model.ts
 export interface Plan {
   id?: number;
-  name: string;
-  description?: string;
-  price: number;
-  durationDays: number;
-  active?: boolean;
-  createdAt?: string;
+  nombre: string;
+  descripcion?: string;
+  precio: number;
+  duracionDias: number;
+  activo?: boolean;
+  fechaCreacion?: string;
+  fechaActualizacion?: string;
 }
 
-// models/attendance.model.ts
-export interface Attendance {
+// models/asistencia.model.ts
+export interface Asistencia {
   id?: number;
-  memberId: number;
-  checkIn?: string;
-  checkOut?: string;
-  observation?: string;
-  minutesSpent?: number;
+  miembroId: number;
+  entrada?: string;
+  salida?: string;
+  observacion?: string;
+  minutosEnLocal?: number;
 }
 
-// models/payment.model.ts
-export interface Payment {
+// models/pago.model.ts
+export interface Pago {
   id?: number;
-  memberId: number;
+  miembroId: number;
   planId: number;
-  amount: number;
-  paymentMethod: string;
-  status?: string;
-  paymentDate?: string;
-  notes?: string;
+  monto: number;
+  metodoPago: string;
+  estado?: string;
+  fechaPago?: string;
+  notas?: string;
 }

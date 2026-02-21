@@ -7,26 +7,26 @@ import java.time.LocalDateTime;
 public class AttendanceDTOs {
 
     @Data @Builder @NoArgsConstructor @AllArgsConstructor
-    public static class CheckInRequest {
-        @NotNull(message = "Member ID is required")
-        private Long memberId;
-        private String observation;
+    public static class RegistroEntradaRequest {
+        @NotNull(message = "El ID del miembro es obligatorio")
+        private Long miembroId;
+        private String observacion;
     }
 
     @Data @Builder @NoArgsConstructor @AllArgsConstructor
-    public static class UpdateAttendanceRequest {
-        private LocalDateTime checkIn;
-        private LocalDateTime checkOut;
-        private String observation;
+    public static class ActualizarAsistenciaRequest {
+        private LocalDateTime entrada;
+        private LocalDateTime salida;
+        private String observacion;
     }
 
     @Data @Builder @NoArgsConstructor @AllArgsConstructor
-    public static class AttendanceResponse {
+    public static class AsistenciaRespuesta {
         private Long id;
-        private Long memberId;
-        private LocalDateTime checkIn;
-        private LocalDateTime checkOut;
-        private String observation;
-        private Long minutesSpent;
+        private Long miembroId;
+        private LocalDateTime entrada;
+        private LocalDateTime salida;
+        private String observacion;
+        private Long minutosEnLocal;
     }
 }

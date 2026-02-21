@@ -7,27 +7,27 @@ export const routes: Routes = [
     loadComponent: () => import('./features/landing/landing.component').then(m => m.LandingComponent)
   },
   {
-    path: 'dashboard',
+    path: 'panel',
     canActivate: [authGuard],
     loadComponent: () => import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent)
   },
   {
-    path: 'members',
+    path: 'miembros',
     canActivate: [authGuard],
     loadComponent: () => import('./features/members/members.component').then(m => m.MembersComponent)
   },
   {
-    path: 'plans',
+    path: 'planes',
     canActivate: [authGuard],
     loadComponent: () => import('./features/plans/plans.component').then(m => m.PlansComponent)
   },
   {
-    path: 'attendance',
+    path: 'asistencia',
     canActivate: [authGuard],
     loadComponent: () => import('./features/attendance/attendance.component').then(m => m.AttendanceComponent)
   },
   {
-    path: 'payments',
+    path: 'pagos',
     canActivate: [authGuard],
     loadComponent: () => import('./features/payments/payments.component').then(m => m.PaymentsComponent)
   },

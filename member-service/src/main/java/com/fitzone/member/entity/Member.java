@@ -18,41 +18,41 @@ public class Member {
     private Long id;
 
     @Column(name = "first_name", nullable = false, length = 100)
-    private String firstName;
+    private String nombre;
 
     @Column(name = "last_name", nullable = false, length = 100)
-    private String lastName;
+    private String apellido;
 
     @Column(unique = true, nullable = false, length = 150)
     private String email;
 
-    @Column(length = 15)
-    private String phone;
+    @Column(name = "phone", length = 15)
+    private String telefono;
 
     @Column(unique = true, nullable = false, length = 8)
     private String dni;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
+    @Column(name = "status", nullable = false, length = 20)
     @Builder.Default
-    private Status status = Status.PENDING;
+    private Estado estado = Estado.PENDIENTE;
 
     @Column(name = "plan_id")
     private Long planId;
 
     @Column(name = "registered_at")
     @Builder.Default
-    private LocalDateTime registeredAt = LocalDateTime.now();
+    private LocalDateTime fechaRegistro = LocalDateTime.now();
 
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    private LocalDateTime fechaActualizacion;
 
     @PreUpdate
     protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
+        fechaActualizacion = LocalDateTime.now();
     }
 
-    public enum Status {
-        ACTIVE, INACTIVE, PENDING
+    public enum Estado {
+        ACTIVO, INACTIVO, PENDIENTE
     }
 }

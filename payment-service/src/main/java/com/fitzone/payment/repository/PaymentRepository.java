@@ -7,7 +7,7 @@ import java.util.List;
 
 @Repository
 public interface PaymentRepository extends JpaRepository<Payment, Long> {
-    List<Payment> findByMemberId(Long memberId);
-    List<Payment> findByMemberIdOrderByPaymentDateDesc(Long memberId);
-    List<Payment> findByStatus(Payment.PaymentStatus status);
+    List<Payment> findByMiembroId(Long miembroId);
+    List<Payment> findByMiembroIdOrderByFechaPagoDesc(Long miembroId);
+    List<Payment> findByEstado(Payment.EstadoPago estado);
 }

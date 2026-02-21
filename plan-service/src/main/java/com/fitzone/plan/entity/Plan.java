@@ -12,28 +12,28 @@ public class Plan {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 100)
-    private String name;
+    @Column(name = "name", nullable = false, length = 100)
+    private String nombre;
 
-    @Column(length = 500)
-    private String description;
+    @Column(name = "description", length = 500)
+    private String descripcion;
 
-    @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal price;
+    @Column(name = "price", nullable = false, precision = 10, scale = 2)
+    private BigDecimal precio;
 
     @Column(name = "duration_days", nullable = false)
-    private Integer durationDays;
+    private Integer duracionDias;
 
-    @Column(nullable = false)
+    @Column(name = "active", nullable = false)
     @Builder.Default
-    private Boolean active = true;
+    private Boolean activo = true;
 
     @Column(name = "created_at") @Builder.Default
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime fechaCreacion = LocalDateTime.now();
 
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    private LocalDateTime fechaActualizacion;
 
     @PreUpdate
-    protected void onUpdate() { updatedAt = LocalDateTime.now(); }
+    protected void onUpdate() { fechaActualizacion = LocalDateTime.now(); }
 }

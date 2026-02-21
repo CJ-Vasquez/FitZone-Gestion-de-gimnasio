@@ -15,54 +15,54 @@ public class PlanService {
 
     private final PlanRepository planRepository;
 
-    public List<PlanResponse> getAllPlans() {
-        return planRepository.findAll().stream().map(this::mapToResponse).collect(Collectors.toList());
+    public List<PlanRespuesta> obtenerTodosLosPlanes() {
+        return planRepository.findAll().stream().map(this::mapearARespuesta).collect(Collectors.toList());
     }
 
-    public List<PlanResponse> getActivePlans() {
-        return planRepository.findByActiveTrue().stream().map(this::mapToResponse).collect(Collectors.toList());
+    public List<PlanRespuesta> obtenerPlanesActivos() {
+        return planRepository.findByActivoTrue().stream().map(this::mapearARespuesta).collect(Collectors.toList());
     }
 
-    public PlanResponse getPlanById(Long id) {
+    public PlanRespuesta obtenerPlanPorId(Long id) {
         Plan plan = planRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Plan not found with id: " + id));
-        return mapToResponse(plan);
+                .orElseThrow(() -> new RuntimeException("Plan no encontrado con id: " + id));
+        return mapearARespuesta(plan);
     }
 
-    public PlanResponse createPlan(CreatePlanRequest request) {
+    public PlanRespuesta crearPlan(CrearPlanRequest request) {
         Plan plan = Plan.builder()
-                .name(request.getName())
-                .description(request.getDescription())
-                .price(request.getPrice())
-                .durationDays(request.getDurationDays())
-                .active(request.getActive())
+                .nombre(request.getNombre())
+                .descripcion(request.getDescripcion())
+                .precio(request.getPrecio())
+                .duracionDias(request.getDuracionDias())
+                .activo(request.getActivo())
                 .build();
-        return mapToResponse(planRepository.save(plan));
+        return mapearARespuesta(planRepository.save(plan));
     }
 
-    public PlanResponse updatePlan(Long id, UpdatePlanRequest request) {
+    public PlanRespuesta actualizarPlan(Long id, ActualizarPlanRequest request) {
         Plan plan = planRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Plan not found with id: " + id));
+                .orElseThrow(() -> new RuntimeException("Plan no encontrado con id: " + id));
 
-        if (request.getName() != null) plan.setName(request.getName());
-        if (request.getDescription() != null) plan.setDescription(request.getDescription());
-        if (request.getPrice() != null) plan.setPrice(request.getPrice());
-        if (request.getDurationDays() != null) plan.setDurationDays(request.getDurationDays());
-        if (request.getActive() != null) plan.setActive(request.getActive());
+        if (request.getNombre() != null) plan.setNombre(request.getNombre());
+        if (request.getDescripcion() != null) plan.setDescripcion(request.getDescripcion());
+        if (request.getPrecio() != null) plan.setPrecio(request.getPrecio());
+        if (request.getDuracionDias() != null) plan.setDuracionDias(request.getDuracionDias());
+        if (request.getActivo() != null) plan.setActivo(request.getActivo());
 
-        return mapToResponse(planRepository.save(plan));
+        return mapearARespuesta(planRepository.save(plan));
     }
 
-    public void deletePlan(Long id) {
-        if (!planRepository.existsById(id)) throw new RuntimeException("Plan not found with id: " + id);
+    public void eliminarPlan(Long id) {
+        if (!planRepository.existsById(id)) throw new RuntimeException("Plan no encontrado con id: " + id);
         planRepository.deleteById(id);
     }
 
-    private PlanResponse mapToResponse(Plan plan) {
-        return PlanResponse.builder()
-                .id(plan.getId()).name(plan.getName()).description(plan.getDescription())
-                .price(plan.getPrice()).durationDays(plan.getDurationDays())
-                .active(plan.getActive()).createdAt(plan.getCreatedAt()).updatedAt(plan.getUpdatedAt())
+    private PlanRespuesta mapearARespuesta(Plan plan) {
+        return PlanRespuesta.builder()
+                .id(plan.getId()).nombre(plan.getNombre()).descripcion(plan.getDescripcion())
+                .precio(plan.getPrecio()).duracionDias(plan.getDuracionDias())
+                .activo(plan.getActivo()).fechaCreacion(plan.getFechaCreacion()).fechaActualizacion(plan.getFechaActualizacion())
                 .build();
     }
 }

@@ -1,6 +1,6 @@
 package com.fitzone.member.config;
 
-import com.fitzone.member.dto.MemberDTOs.PaymentEvent;
+import com.fitzone.member.dto.MemberDTOs.EventoPago;
 import com.fitzone.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -51,8 +51,8 @@ public class RabbitMQConfig {
     }
 
     @RabbitListener(queues = PAYMENT_QUEUE)
-    public void handlePaymentConfirmed(PaymentEvent event) {
-        log.info("Received payment event: {}", event);
+    public void handlePaymentConfirmed(EventoPago event) {
+        log.info("Evento de pago recibido: {}", event);
         memberService.activateMembershipFromPayment(event);
     }
 }

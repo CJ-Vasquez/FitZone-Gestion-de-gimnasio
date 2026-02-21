@@ -17,55 +17,55 @@ public class AttendanceService {
 
     private final AttendanceRepository attendanceRepository;
 
-    public List<AttendanceResponse> getAllAttendance() {
+    public List<AsistenciaRespuesta> getAllAttendance() {
         return attendanceRepository.findAll().stream().map(this::mapToResponse).collect(Collectors.toList());
     }
 
-    public List<AttendanceResponse> getAttendanceByMember(Long memberId) {
-        return attendanceRepository.findByMemberIdOrderByCheckInDesc(memberId).stream()
+    public List<AsistenciaRespuesta> getAttendanceByMember(Long miembroId) {
+        return attendanceRepository.findByMiembroIdOrderByEntradaDesc(miembroId).stream()
                 .map(this::mapToResponse).collect(Collectors.toList());
     }
 
-    public AttendanceResponse getAttendanceById(Long id) {
+    public AsistenciaRespuesta getAttendanceById(Long id) {
         Attendance a = attendanceRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Attendance record not found with id: " + id));
+                .orElseThrow(() -> new RuntimeException("Registro de asistencia no encontrado con id: " + id));
         return mapToResponse(a);
     }
 
-    public AttendanceResponse checkIn(CheckInRequest request) {
+    public AsistenciaRespuesta checkIn(RegistroEntradaRequest request) {
         Attendance attendance = Attendance.builder()
-                .memberId(request.getMemberId())
-                .checkIn(LocalDateTime.now())
-                .observation(request.getObservation())
+                .miembroId(request.getMiembroId())
+                .entrada(LocalDateTime.now())
+                .observacion(request.getObservacion())
                 .build();
         return mapToResponse(attendanceRepository.save(attendance));
     }
 
-    public AttendanceResponse updateAttendance(Long id, UpdateAttendanceRequest request) {
+    public AsistenciaRespuesta updateAttendance(Long id, ActualizarAsistenciaRequest request) {
         Attendance attendance = attendanceRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Attendance record not found with id: " + id));
+                .orElseThrow(() -> new RuntimeException("Registro de asistencia no encontrado con id: " + id));
 
-        if (request.getCheckIn() != null) attendance.setCheckIn(request.getCheckIn());
-        if (request.getCheckOut() != null) attendance.setCheckOut(request.getCheckOut());
-        if (request.getObservation() != null) attendance.setObservation(request.getObservation());
+        if (request.getEntrada() != null) attendance.setEntrada(request.getEntrada());
+        if (request.getSalida() != null) attendance.setSalida(request.getSalida());
+        if (request.getObservacion() != null) attendance.setObservacion(request.getObservacion());
 
         return mapToResponse(attendanceRepository.save(attendance));
     }
 
     public void deleteAttendance(Long id) {
-        if (!attendanceRepository.existsById(id)) throw new RuntimeException("Attendance record not found: " + id);
+        if (!attendanceRepository.existsById(id)) throw new RuntimeException("Registro de asistencia no encontrado con id: " + id);
         attendanceRepository.deleteById(id);
     }
 
-    private AttendanceResponse mapToResponse(Attendance a) {
+    private AsistenciaRespuesta mapToResponse(Attendance a) {
         Long minutes = null;
-        if (a.getCheckIn() != null && a.getCheckOut() != null) {
-            minutes = Duration.between(a.getCheckIn(), a.getCheckOut()).toMinutes();
+        if (a.getEntrada() != null && a.getSalida() != null) {
+            minutes = Duration.between(a.getEntrada(), a.getSalida()).toMinutes();
         }
-        return AttendanceResponse.builder()
-                .id(a.getId()).memberId(a.getMemberId())
-                .checkIn(a.getCheckIn()).checkOut(a.getCheckOut())
-                .observation(a.getObservation()).minutesSpent(minutes)
+        return AsistenciaRespuesta.builder()
+                .id(a.getId()).miembroId(a.getMiembroId())
+                .entrada(a.getEntrada()).salida(a.getSalida())
+                .observacion(a.getObservacion()).minutosEnLocal(minutes)
                 .build();
     }
 }

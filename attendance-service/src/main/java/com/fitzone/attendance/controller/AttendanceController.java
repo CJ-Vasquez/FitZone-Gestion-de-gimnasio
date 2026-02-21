@@ -11,35 +11,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/attendance")
+@RequestMapping("/asistencia")
 @RequiredArgsConstructor
 public class AttendanceController {
 
     private final AttendanceService attendanceService;
 
     @GetMapping
-    public ResponseEntity<List<AttendanceResponse>> getAllAttendance() {
+    public ResponseEntity<List<AsistenciaRespuesta>> getAllAttendance() {
         return ResponseEntity.ok(attendanceService.getAllAttendance());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AttendanceResponse> getById(@PathVariable Long id) {
+    public ResponseEntity<AsistenciaRespuesta> getById(@PathVariable Long id) {
         return ResponseEntity.ok(attendanceService.getAttendanceById(id));
     }
 
-    @GetMapping("/member/{memberId}")
-    public ResponseEntity<List<AttendanceResponse>> getByMember(@PathVariable Long memberId) {
-        return ResponseEntity.ok(attendanceService.getAttendanceByMember(memberId));
+    @GetMapping("/miembro/{miembroId}")
+    public ResponseEntity<List<AsistenciaRespuesta>> getByMember(@PathVariable Long miembroId) {
+        return ResponseEntity.ok(attendanceService.getAttendanceByMember(miembroId));
     }
 
-    @PostMapping("/checkin")
-    public ResponseEntity<AttendanceResponse> checkIn(@Valid @RequestBody CheckInRequest request) {
+    @PostMapping("/entrada")
+    public ResponseEntity<AsistenciaRespuesta> checkIn(@Valid @RequestBody RegistroEntradaRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(attendanceService.checkIn(request));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AttendanceResponse> updateAttendance(@PathVariable Long id,
-                                                                @Valid @RequestBody UpdateAttendanceRequest request) {
+    public ResponseEntity<AsistenciaRespuesta> updateAttendance(@PathVariable Long id,
+                                                                @Valid @RequestBody ActualizarAsistenciaRequest request) {
         return ResponseEntity.ok(attendanceService.updateAttendance(id, request));
     }
 

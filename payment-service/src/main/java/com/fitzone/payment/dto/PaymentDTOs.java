@@ -9,46 +9,46 @@ import java.time.LocalDateTime;
 public class PaymentDTOs {
 
     @Data @Builder @NoArgsConstructor @AllArgsConstructor
-    public static class CreatePaymentRequest {
-        @NotNull(message = "Member ID is required")
-        private Long memberId;
+    public static class CrearPagoRequest {
+        @NotNull(message = "El ID del miembro es obligatorio")
+        private Long miembroId;
 
-        @NotNull(message = "Plan ID is required")
+        @NotNull(message = "El ID del plan es obligatorio")
         private Long planId;
 
-        @NotNull(message = "Amount is required")
+        @NotNull(message = "El monto es obligatorio")
         @DecimalMin(value = "0.01")
-        private BigDecimal amount;
+        private BigDecimal monto;
 
-        @NotNull(message = "Payment method is required")
-        private Payment.PaymentMethod paymentMethod;
+        @NotNull(message = "El método de pago es obligatorio")
+        private Payment.MetodoPago metodoPago;
 
-        private String notes;
+        private String notas;
     }
 
     @Data @Builder @NoArgsConstructor @AllArgsConstructor
-    public static class UpdatePaymentRequest {
-        private Payment.PaymentStatus status;
-        private Payment.PaymentMethod paymentMethod;
-        private String notes;
+    public static class ActualizarPagoRequest {
+        private Payment.EstadoPago estado;
+        private Payment.MetodoPago metodoPago;
+        private String notas;
     }
 
     @Data @Builder @NoArgsConstructor @AllArgsConstructor
-    public static class PaymentResponse {
+    public static class PagoRespuesta {
         private Long id;
-        private Long memberId;
+        private Long miembroId;
         private Long planId;
-        private BigDecimal amount;
-        private String paymentMethod;
-        private String status;
-        private LocalDateTime paymentDate;
-        private String notes;
+        private BigDecimal monto;
+        private String metodoPago;
+        private String estado;
+        private LocalDateTime fechaPago;
+        private String notas;
     }
 
     @Data @Builder @NoArgsConstructor @AllArgsConstructor
-    public static class PaymentEvent {
-        private Long memberId;
+    public static class EventoPago {
+        private Long miembroId;
         private Long planId;
-        private String eventType;
+        private String tipoEvento;
     }
 }

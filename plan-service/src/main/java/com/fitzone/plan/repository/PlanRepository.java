@@ -7,5 +7,5 @@ import java.util.List;
 
 @Repository
 public interface PlanRepository extends JpaRepository<Plan, Long> {
-    List<Plan> findByActiveTrue();
+    List<Plan> findByActivoTrue();
 }

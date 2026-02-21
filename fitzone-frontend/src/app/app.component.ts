@@ -25,31 +25,31 @@ import { filter } from 'rxjs/operators';
 
           <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item mb-1">
-              <a routerLink="/dashboard" routerLinkActive="active"
+              <a routerLink="/panel" routerLinkActive="active"
                  class="nav-link text-white d-flex align-items-center gap-2">
-                <i class="bi bi-speedometer2"></i> Dashboard
+                <i class="bi bi-speedometer2"></i> Panel
               </a>
             </li>
             <li class="nav-item mb-1">
-              <a routerLink="/members" routerLinkActive="active"
+              <a routerLink="/miembros" routerLinkActive="active"
                  class="nav-link text-white d-flex align-items-center gap-2">
                 <i class="bi bi-people"></i> Miembros
               </a>
             </li>
             <li class="nav-item mb-1">
-              <a routerLink="/plans" routerLinkActive="active"
+              <a routerLink="/planes" routerLinkActive="active"
                  class="nav-link text-white d-flex align-items-center gap-2">
                 <i class="bi bi-card-list"></i> Planes
               </a>
             </li>
             <li class="nav-item mb-1">
-              <a routerLink="/attendance" routerLinkActive="active"
+              <a routerLink="/asistencia" routerLinkActive="active"
                  class="nav-link text-white d-flex align-items-center gap-2">
                 <i class="bi bi-calendar-check"></i> Asistencia
               </a>
             </li>
             <li class="nav-item mb-1">
-              <a routerLink="/payments" routerLinkActive="active"
+              <a routerLink="/pagos" routerLinkActive="active"
                  class="nav-link text-white d-flex align-items-center gap-2">
                 <i class="bi bi-credit-card"></i> Pagos
               </a>

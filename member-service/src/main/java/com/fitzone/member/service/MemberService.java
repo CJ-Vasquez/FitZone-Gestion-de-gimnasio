@@ -17,48 +17,48 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public List<MemberResponse> getAllMembers() {
+    public List<MiembroRespuesta> getAllMembers() {
         return memberRepository.findAll().stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
     }
 
-    public MemberResponse getMemberById(Long id) {
+    public MiembroRespuesta getMemberById(Long id) {
         Member member = memberRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Member not found with id: " + id));
+                .orElseThrow(() -> new RuntimeException("Miembro no encontrado con id: " + id));
         return mapToResponse(member);
     }
 
-    public MemberResponse createMember(CreateMemberRequest request) {
+    public MiembroRespuesta createMember(CrearMiembroRequest request) {
         if (memberRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("Email already registered");
+            throw new RuntimeException("Email ya registrado");
         }
         if (memberRepository.existsByDni(request.getDni())) {
-            throw new RuntimeException("DNI already registered");
+            throw new RuntimeException("DNI ya registrado");
         }
 
         Member member = Member.builder()
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
+                .nombre(request.getNombre())
+                .apellido(request.getApellido())
                 .email(request.getEmail())
-                .phone(request.getPhone())
+                .telefono(request.getTelefono())
                 .dni(request.getDni())
                 .planId(request.getPlanId())
-                .status(Member.Status.PENDING)
+                .estado(Member.Estado.PENDIENTE)
                 .build();
 
         return mapToResponse(memberRepository.save(member));
     }
 
-    public MemberResponse updateMember(Long id, UpdateMemberRequest request) {
+    public MiembroRespuesta updateMember(Long id, ActualizarMiembroRequest request) {
         Member member = memberRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Member not found with id: " + id));
+                .orElseThrow(() -> new RuntimeException("Miembro no encontrado con id: " + id));
 
-        if (request.getFirstName() != null) member.setFirstName(request.getFirstName());
-        if (request.getLastName() != null) member.setLastName(request.getLastName());
+        if (request.getNombre() != null) member.setNombre(request.getNombre());
+        if (request.getApellido() != null) member.setApellido(request.getApellido());
         if (request.getEmail() != null) member.setEmail(request.getEmail());
-        if (request.getPhone() != null) member.setPhone(request.getPhone());
-        if (request.getStatus() != null) member.setStatus(request.getStatus());
+        if (request.getTelefono() != null) member.setTelefono(request.getTelefono());
+        if (request.getEstado() != null) member.setEstado(request.getEstado());
         if (request.getPlanId() != null) member.setPlanId(request.getPlanId());
 
         return mapToResponse(memberRepository.save(member));
@@ -66,33 +66,33 @@ public class MemberService {
 
     public void deleteMember(Long id) {
         if (!memberRepository.existsById(id)) {
-            throw new RuntimeException("Member not found with id: " + id);
+            throw new RuntimeException("Miembro no encontrado con id: " + id);
         }
         memberRepository.deleteById(id);
     }
 
-    public void activateMembershipFromPayment(PaymentEvent event) {
-        log.info("Activating membership for member {} with plan {}", event.getMemberId(), event.getPlanId());
-        memberRepository.findById(event.getMemberId()).ifPresent(member -> {
-            member.setStatus(Member.Status.ACTIVE);
+    public void activateMembershipFromPayment(EventoPago event) {
+        log.info("Activando membresía para miembro {} con plan {}", event.getMiembroId(), event.getPlanId());
+        memberRepository.findById(event.getMiembroId()).ifPresent(member -> {
+            member.setEstado(Member.Estado.ACTIVO);
             member.setPlanId(event.getPlanId());
             memberRepository.save(member);
-            log.info("Member {} activated successfully", event.getMemberId());
+            log.info("Miembro {} activado exitosamente", event.getMiembroId());
         });
     }
 
-    private MemberResponse mapToResponse(Member member) {
-        return MemberResponse.builder()
+    private MiembroRespuesta mapToResponse(Member member) {
+        return MiembroRespuesta.builder()
                 .id(member.getId())
-                .firstName(member.getFirstName())
-                .lastName(member.getLastName())
+                .nombre(member.getNombre())
+                .apellido(member.getApellido())
                 .email(member.getEmail())
-                .phone(member.getPhone())
+                .telefono(member.getTelefono())
                 .dni(member.getDni())
-                .status(member.getStatus().name())
+                .estado(member.getEstado().name())
                 .planId(member.getPlanId())
-                .registeredAt(member.getRegisteredAt())
-                .updatedAt(member.getUpdatedAt())
+                .fechaRegistro(member.getFechaRegistro())
+                .fechaActualizacion(member.getFechaActualizacion())
                 .build();
     }
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AttendanceService } from '../../core/services/api.services';
-import { Attendance } from '../../core/models/models';
+import { AsistenciaService } from '../../core/services/api.services';
+import { Asistencia } from '../../core/models/models';
 
 @Component({
   selector: 'app-attendance',
@@ -16,7 +16,7 @@ import { Attendance } from '../../core/models/models';
           <p class="text-muted mb-0">Registro de entradas y salidas</p>
         </div>
         <button class="btn btn-warning" (click)="openModal()">
-          <i class="bi bi-plus-lg me-2"></i>Registrar Check-in
+          <i class="bi bi-plus-lg me-2"></i>Registrar Entrada
         </button>
       </div>
 
@@ -28,17 +28,17 @@ import { Attendance } from '../../core/models/models';
           <table *ngIf="!loading" class="table table-hover mb-0">
             <thead class="table-dark">
               <tr>
-                <th>#</th><th>Miembro ID</th><th>Check-in</th><th>Check-out</th><th>Minutos</th><th>Observación</th><th>Acciones</th>
+                <th>#</th><th>Miembro ID</th><th>Entrada</th><th>Salida</th><th>Tiempo</th><th>Observación</th><th>Acciones</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let a of attendance">
+              <tr *ngFor="let a of asistencias">
                 <td>{{ a.id }}</td>
-                <td><span class="badge bg-primary">ID: {{ a.memberId }}</span></td>
-                <td>{{ a.checkIn | date:'dd/MM/yyyy HH:mm' }}</td>
-                <td>{{ a.checkOut ? (a.checkOut | date:'dd/MM/yyyy HH:mm') : '—' }}</td>
-                <td>{{ a.minutesSpent ? formatMinutes(a.minutesSpent) : '—' }}</td>
-                <td>{{ a.observation || '—' }}</td>
+                <td><span class="badge bg-primary">ID: {{ a.miembroId }}</span></td>
+                <td>{{ a.entrada | date:'dd/MM/yyyy HH:mm' }}</td>
+                <td>{{ a.salida ? (a.salida | date:'dd/MM/yyyy HH:mm') : '—' }}</td>
+                <td>{{ a.minutosEnLocal ? formatMinutes(a.minutosEnLocal) : '—' }}</td>
+                <td>{{ a.observacion || '—' }}</td>
                 <td>
                   <button class="btn btn-sm btn-outline-primary me-1" (click)="openModal(a)">
                     <i class="bi bi-pencil"></i>
@@ -48,7 +48,7 @@ import { Attendance } from '../../core/models/models';
                   </button>
                 </td>
               </tr>
-              <tr *ngIf="attendance.length === 0">
+              <tr *ngIf="asistencias.length === 0">
                 <td colspan="7" class="text-center text-muted py-4">No hay registros de asistencia</td>
               </tr>
             </tbody>
@@ -62,22 +62,22 @@ import { Attendance } from '../../core/models/models';
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header bg-warning">
-            <h5 class="modal-title">{{ editMode ? 'Editar Registro' : 'Nuevo Check-in' }}</h5>
+            <h5 class="modal-title">{{ editMode ? 'Editar Registro' : 'Nueva Entrada' }}</h5>
             <button type="button" class="btn-close" (click)="closeModal()"></button>
           </div>
           <div class="modal-body">
             <form (ngSubmit)="saveAttendance()">
               <div class="mb-3" *ngIf="!editMode">
                 <label class="form-label">ID del Miembro *</label>
-                <input type="number" class="form-control" [(ngModel)]="form.memberId" name="memberId" required>
+                <input type="number" class="form-control" [(ngModel)]="form.miembroId" name="miembroId" required>
               </div>
               <div class="mb-3">
                 <label class="form-label">Observación</label>
-                <input class="form-control" [(ngModel)]="form.observation" name="observation">
+                <input class="form-control" [(ngModel)]="form.observacion" name="observacion">
               </div>
               <div class="mb-3" *ngIf="editMode">
-                <label class="form-label">Check-out</label>
-                <input type="datetime-local" class="form-control" [(ngModel)]="form.checkOut" name="checkOut">
+                <label class="form-label">Salida</label>
+                <input type="datetime-local" class="form-control" [(ngModel)]="form.salida" name="salida">
               </div>
               <div class="modal-footer px-0 pb-0">
                 <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
@@ -91,7 +91,7 @@ import { Attendance } from '../../core/models/models';
   `
 })
 export class AttendanceComponent implements OnInit {
-  attendance: Attendance[] = [];
+  asistencias: Asistencia[] = [];
   loading = true;
   showModal = false;
   editMode = false;
@@ -99,19 +99,19 @@ export class AttendanceComponent implements OnInit {
   message = '';
   isError = false;
   currentId: number | null = null;
-  form: Partial<Attendance> = {};
+  form: Partial<Asistencia> = {};
 
-  constructor(private attendanceService: AttendanceService) {}
+  constructor(private asistenciaService: AsistenciaService) {}
   ngOnInit() { this.load(); }
 
   load() {
-    this.attendanceService.getAll().subscribe({
-      next: d => { this.attendance = d; this.loading = false; },
+    this.asistenciaService.getAll().subscribe({
+      next: d => { this.asistencias = d; this.loading = false; },
       error: () => this.loading = false
     });
   }
 
-  openModal(a?: Attendance) {
+  openModal(a?: Asistencia) {
     this.editMode = !!a;
     this.currentId = a?.id || null;
     this.form = a ? { ...a } : {};
@@ -122,8 +122,8 @@ export class AttendanceComponent implements OnInit {
   saveAttendance() {
     this.saving = true;
     const obs = this.editMode
-      ? this.attendanceService.update(this.currentId!, this.form)
-      : this.attendanceService.checkIn({ memberId: this.form.memberId!, observation: this.form.observation });
+      ? this.asistenciaService.update(this.currentId!, this.form)
+      : this.asistenciaService.checkIn({ miembroId: this.form.miembroId!, observacion: this.form.observacion });
     obs.subscribe({
       next: () => { this.saving = false; this.closeModal(); this.load(); this.showMessage('Guardado correctamente', false); },
       error: err => { this.saving = false; this.showMessage(err.error?.message || 'Error', true); }
@@ -132,7 +132,7 @@ export class AttendanceComponent implements OnInit {
 
   deleteAttendance(id: number) {
     if (!confirm('¿Eliminar este registro?')) return;
-    this.attendanceService.delete(id).subscribe({
+    this.asistenciaService.delete(id).subscribe({
       next: () => { this.load(); this.showMessage('Eliminado', false); },
       error: () => this.showMessage('Error al eliminar', true)
     });

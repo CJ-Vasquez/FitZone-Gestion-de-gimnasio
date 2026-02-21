@@ -17,28 +17,28 @@ spring:
         - id: member-service
           uri: lb://member-service
           predicates:
-            - Path=/members/**
+            - Path=/miembros/**
           filters:
             - AuthenticationFilter
 
         - id: plan-service
           uri: lb://plan-service
           predicates:
-            - Path=/plans/**
+            - Path=/planes/**
           filters:
             - AuthenticationFilter
 
         - id: attendance-service
           uri: lb://attendance-service
           predicates:
-            - Path=/attendance/**
+            - Path=/asistencia/**
           filters:
             - AuthenticationFilter
 
         - id: payment-service
           uri: lb://payment-service
           predicates:
-            - Path=/payments/**
+            - Path=/pagos/**
           filters:
             - AuthenticationFilter
 

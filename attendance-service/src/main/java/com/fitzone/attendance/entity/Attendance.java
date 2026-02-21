@@ -12,15 +12,15 @@ public class Attendance {
     private Long id;
 
     @Column(name = "member_id", nullable = false)
-    private Long memberId;
+    private Long miembroId;
 
     @Column(name = "check_in", nullable = false)
     @Builder.Default
-    private LocalDateTime checkIn = LocalDateTime.now();
+    private LocalDateTime entrada = LocalDateTime.now();
 
     @Column(name = "check_out")
-    private LocalDateTime checkOut;
+    private LocalDateTime salida;
 
-    @Column(length = 255)
-    private String observation;
+    @Column(name = "observation", length = 255)
+    private String observacion;
 }

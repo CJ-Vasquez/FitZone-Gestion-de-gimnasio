@@ -11,30 +11,30 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/members")
+@RequestMapping("/miembros")
 @RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService memberService;
 
     @GetMapping
-    public ResponseEntity<List<MemberResponse>> getAllMembers() {
+    public ResponseEntity<List<MiembroRespuesta>> getAllMembers() {
         return ResponseEntity.ok(memberService.getAllMembers());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MemberResponse> getMemberById(@PathVariable Long id) {
+    public ResponseEntity<MiembroRespuesta> getMemberById(@PathVariable Long id) {
         return ResponseEntity.ok(memberService.getMemberById(id));
     }
 
     @PostMapping
-    public ResponseEntity<MemberResponse> createMember(@Valid @RequestBody CreateMemberRequest request) {
+    public ResponseEntity<MiembroRespuesta> createMember(@Valid @RequestBody CrearMiembroRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(memberService.createMember(request));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MemberResponse> updateMember(@PathVariable Long id,
-                                                        @Valid @RequestBody UpdateMemberRequest request) {
+    public ResponseEntity<MiembroRespuesta> updateMember(@PathVariable Long id,
+                                                        @Valid @RequestBody ActualizarMiembroRequest request) {
         return ResponseEntity.ok(memberService.updateMember(id, request));
     }
 

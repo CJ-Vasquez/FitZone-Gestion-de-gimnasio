@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MemberService } from '../../core/services/api.services';
-import { Member } from '../../core/models/models';
+import { MiembroService } from '../../core/services/api.services';
+import { Miembro } from '../../core/models/models';
 
 @Component({
   selector: 'app-members',
@@ -40,16 +40,16 @@ import { Member } from '../../core/models/models';
             <tbody>
               <tr *ngFor="let m of members">
                 <td class="text-muted">{{ m.id }}</td>
-                <td><strong>{{ m.firstName }} {{ m.lastName }}</strong></td>
+                <td><strong>{{ m.nombre }} {{ m.apellido }}</strong></td>
                 <td>{{ m.email }}</td>
                 <td>{{ m.dni }}</td>
-                <td>{{ m.phone || '—' }}</td>
+                <td>{{ m.telefono || '—' }}</td>
                 <td>
                   <span class="badge" [ngClass]="{
-                    'bg-success': m.status === 'ACTIVE',
-                    'bg-warning text-dark': m.status === 'PENDING',
-                    'bg-danger': m.status === 'INACTIVE'
-                  }">{{ m.status }}</span>
+                    'bg-success': m.estado === 'ACTIVO',
+                    'bg-warning text-dark': m.estado === 'PENDIENTE',
+                    'bg-danger': m.estado === 'INACTIVO'
+                  }">{{ m.estado }}</span>
                 </td>
                 <td>
                   <button class="btn btn-sm btn-outline-primary me-1" (click)="openModal(m)">
@@ -84,11 +84,11 @@ import { Member } from '../../core/models/models';
               <div class="row g-3">
                 <div class="col-md-6">
                   <label class="form-label">Nombres *</label>
-                  <input class="form-control" [(ngModel)]="form.firstName" name="firstName" required>
+                  <input class="form-control" [(ngModel)]="form.nombre" name="nombre" required>
                 </div>
                 <div class="col-md-6">
                   <label class="form-label">Apellidos *</label>
-                  <input class="form-control" [(ngModel)]="form.lastName" name="lastName" required>
+                  <input class="form-control" [(ngModel)]="form.apellido" name="apellido" required>
                 </div>
                 <div class="col-md-6">
                   <label class="form-label">Email *</label>
@@ -100,14 +100,14 @@ import { Member } from '../../core/models/models';
                 </div>
                 <div class="col-md-6">
                   <label class="form-label">Teléfono</label>
-                  <input class="form-control" [(ngModel)]="form.phone" name="phone">
+                  <input class="form-control" [(ngModel)]="form.telefono" name="telefono">
                 </div>
                 <div class="col-md-6" *ngIf="editMode">
                   <label class="form-label">Estado</label>
-                  <select class="form-select" [(ngModel)]="form.status" name="status">
-                    <option value="ACTIVE">ACTIVE</option>
-                    <option value="INACTIVE">INACTIVE</option>
-                    <option value="PENDING">PENDING</option>
+                  <select class="form-select" [(ngModel)]="form.estado" name="estado">
+                    <option value="ACTIVO">ACTIVO</option>
+                    <option value="INACTIVO">INACTIVO</option>
+                    <option value="PENDIENTE">PENDIENTE</option>
                   </select>
                 </div>
               </div>
@@ -126,7 +126,7 @@ import { Member } from '../../core/models/models';
   `
 })
 export class MembersComponent implements OnInit {
-  members: Member[] = [];
+  members: Miembro[] = [];
   loading = true;
   showModal = false;
   editMode = false;
@@ -134,21 +134,21 @@ export class MembersComponent implements OnInit {
   message = '';
   isError = false;
   currentId: number | null = null;
-  form: Partial<Member> = {};
+  form: Partial<Miembro> = {};
 
-  constructor(private memberService: MemberService) {}
+  constructor(private miembroService: MiembroService) {}
 
   ngOnInit() { this.loadMembers(); }
 
   loadMembers() {
     this.loading = true;
-    this.memberService.getAll().subscribe({
+    this.miembroService.getAll().subscribe({
       next: data => { this.members = data; this.loading = false; },
       error: () => { this.loading = false; this.showMessage('Error al cargar miembros', true); }
     });
   }
 
-  openModal(member?: Member) {
+  openModal(member?: Miembro) {
     this.editMode = !!member;
     this.currentId = member?.id || null;
     this.form = member ? { ...member } : {};
@@ -160,8 +160,8 @@ export class MembersComponent implements OnInit {
   saveMember() {
     this.saving = true;
     const obs = this.editMode
-      ? this.memberService.update(this.currentId!, this.form)
-      : this.memberService.create(this.form as Member);
+      ? this.miembroService.update(this.currentId!, this.form)
+      : this.miembroService.create(this.form as Miembro);
 
     obs.subscribe({
       next: () => {
@@ -179,7 +179,7 @@ export class MembersComponent implements OnInit {
 
   deleteMember(id: number) {
     if (!confirm('¿Eliminar este miembro?')) return;
-    this.memberService.delete(id).subscribe({
+    this.miembroService.delete(id).subscribe({
       next: () => { this.loadMembers(); this.showMessage('Miembro eliminado', false); },
       error: () => this.showMessage('Error al eliminar', true)
     });

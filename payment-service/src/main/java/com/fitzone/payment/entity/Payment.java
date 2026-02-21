@@ -13,35 +13,35 @@ public class Payment {
     private Long id;
 
     @Column(name = "member_id", nullable = false)
-    private Long memberId;
+    private Long miembroId;
 
     @Column(name = "plan_id", nullable = false)
     private Long planId;
 
-    @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal amount;
+    @Column(name = "amount", nullable = false, precision = 10, scale = 2)
+    private BigDecimal monto;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "payment_method", nullable = false, length = 30)
-    private PaymentMethod paymentMethod;
+    private MetodoPago metodoPago;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
+    @Column(name = "status", nullable = false, length = 20)
     @Builder.Default
-    private PaymentStatus status = PaymentStatus.PENDING;
+    private EstadoPago estado = EstadoPago.PENDIENTE;
 
     @Column(name = "payment_date")
     @Builder.Default
-    private LocalDateTime paymentDate = LocalDateTime.now();
+    private LocalDateTime fechaPago = LocalDateTime.now();
 
-    @Column(length = 255)
-    private String notes;
+    @Column(name = "notes", length = 255)
+    private String notas;
 
-    public enum PaymentMethod {
-        CASH, CARD, TRANSFER, YAPE, PLIN
+    public enum MetodoPago {
+        EFECTIVO, TARJETA, TRANSFERENCIA, YAPE, PLIN
     }
 
-    public enum PaymentStatus {
-        PENDING, CONFIRMED, CANCELLED
+    public enum EstadoPago {
+        PENDIENTE, CONFIRMADO, CANCELADO
     }
 }

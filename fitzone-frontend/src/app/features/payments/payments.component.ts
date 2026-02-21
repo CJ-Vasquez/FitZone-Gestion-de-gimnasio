@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { PaymentService } from '../../core/services/api.services';
-import { Payment } from '../../core/models/models';
+import { PagoService } from '../../core/services/api.services';
+import { Pago } from '../../core/models/models';
 
 @Component({
   selector: 'app-payments',
@@ -32,20 +32,20 @@ import { Payment } from '../../core/models/models';
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let p of payments">
+              <tr *ngFor="let p of pagos">
                 <td>{{ p.id }}</td>
-                <td><span class="badge bg-primary">ID: {{ p.memberId }}</span></td>
+                <td><span class="badge bg-primary">ID: {{ p.miembroId }}</span></td>
                 <td><span class="badge bg-info text-dark">Plan: {{ p.planId }}</span></td>
-                <td class="fw-bold text-success">S/. {{ p.amount }}</td>
-                <td>{{ p.paymentMethod }}</td>
+                <td class="fw-bold text-success">S/. {{ p.monto }}</td>
+                <td>{{ p.metodoPago }}</td>
                 <td>
                   <span class="badge" [ngClass]="{
-                    'bg-success': p.status === 'CONFIRMED',
-                    'bg-warning text-dark': p.status === 'PENDING',
-                    'bg-danger': p.status === 'CANCELLED'
-                  }">{{ p.status }}</span>
+                    'bg-success': p.estado === 'CONFIRMADO',
+                    'bg-warning text-dark': p.estado === 'PENDIENTE',
+                    'bg-danger': p.estado === 'CANCELADO'
+                  }">{{ p.estado }}</span>
                 </td>
-                <td>{{ p.paymentDate | date:'dd/MM/yyyy' }}</td>
+                <td>{{ p.fechaPago | date:'dd/MM/yyyy' }}</td>
                 <td>
                   <button class="btn btn-sm btn-outline-primary me-1" (click)="openModal(p)">
                     <i class="bi bi-pencil"></i>
@@ -55,7 +55,7 @@ import { Payment } from '../../core/models/models';
                   </button>
                 </td>
               </tr>
-              <tr *ngIf="payments.length === 0">
+              <tr *ngIf="pagos.length === 0">
                 <td colspan="8" class="text-center text-muted py-4">No hay pagos registrados</td>
               </tr>
             </tbody>
@@ -81,7 +81,7 @@ import { Payment } from '../../core/models/models';
               <div class="row g-3" *ngIf="!editMode">
                 <div class="col-6">
                   <label class="form-label">ID del Miembro *</label>
-                  <input type="number" class="form-control" [(ngModel)]="form.memberId" name="memberId" required>
+                  <input type="number" class="form-control" [(ngModel)]="form.miembroId" name="miembroId" required>
                 </div>
                 <div class="col-6">
                   <label class="form-label">ID del Plan *</label>
@@ -89,36 +89,36 @@ import { Payment } from '../../core/models/models';
                 </div>
                 <div class="col-6">
                   <label class="form-label">Monto (S/.) *</label>
-                  <input type="number" step="0.01" class="form-control" [(ngModel)]="form.amount" name="amount" required>
+                  <input type="number" step="0.01" class="form-control" [(ngModel)]="form.monto" name="monto" required>
                 </div>
                 <div class="col-6">
                   <label class="form-label">Método de Pago *</label>
-                  <select class="form-select" [(ngModel)]="form.paymentMethod" name="paymentMethod" required>
-                    <option value="CASH">Efectivo</option>
-                    <option value="CARD">Tarjeta</option>
-                    <option value="TRANSFER">Transferencia</option>
+                  <select class="form-select" [(ngModel)]="form.metodoPago" name="metodoPago" required>
+                    <option value="EFECTIVO">Efectivo</option>
+                    <option value="TARJETA">Tarjeta</option>
+                    <option value="TRANSFERENCIA">Transferencia</option>
                     <option value="YAPE">Yape</option>
                     <option value="PLIN">Plin</option>
                   </select>
                 </div>
                 <div class="col-12">
                   <label class="form-label">Notas</label>
-                  <input class="form-control" [(ngModel)]="form.notes" name="notes">
+                  <input class="form-control" [(ngModel)]="form.notas" name="notas">
                 </div>
               </div>
 
               <div *ngIf="editMode">
                 <div class="mb-3">
                   <label class="form-label">Estado</label>
-                  <select class="form-select" [(ngModel)]="form.status" name="status">
-                    <option value="CONFIRMED">CONFIRMED</option>
-                    <option value="PENDING">PENDING</option>
-                    <option value="CANCELLED">CANCELLED</option>
+                  <select class="form-select" [(ngModel)]="form.estado" name="estado">
+                    <option value="CONFIRMADO">CONFIRMADO</option>
+                    <option value="PENDIENTE">PENDIENTE</option>
+                    <option value="CANCELADO">CANCELADO</option>
                   </select>
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Notas</label>
-                  <input class="form-control" [(ngModel)]="form.notes" name="notes">
+                  <input class="form-control" [(ngModel)]="form.notas" name="notas">
                 </div>
               </div>
 
@@ -137,7 +137,7 @@ import { Payment } from '../../core/models/models';
   `
 })
 export class PaymentsComponent implements OnInit {
-  payments: Payment[] = [];
+  pagos: Pago[] = [];
   loading = true;
   showModal = false;
   editMode = false;
@@ -145,22 +145,22 @@ export class PaymentsComponent implements OnInit {
   message = '';
   isError = false;
   currentId: number | null = null;
-  form: Partial<Payment> = {};
+  form: Partial<Pago> = {};
 
-  constructor(private paymentService: PaymentService) {}
+  constructor(private pagoService: PagoService) {}
   ngOnInit() { this.load(); }
 
   load() {
-    this.paymentService.getAll().subscribe({
-      next: d => { this.payments = d; this.loading = false; },
+    this.pagoService.getAll().subscribe({
+      next: d => { this.pagos = d; this.loading = false; },
       error: () => this.loading = false
     });
   }
 
-  openModal(p?: Payment) {
+  openModal(p?: Pago) {
     this.editMode = !!p;
     this.currentId = p?.id || null;
-    this.form = p ? { ...p } : { paymentMethod: 'CASH' };
+    this.form = p ? { ...p } : { metodoPago: 'EFECTIVO' };
     this.showModal = true;
   }
   closeModal() { this.showModal = false; }
@@ -168,8 +168,8 @@ export class PaymentsComponent implements OnInit {
   savePayment() {
     this.saving = true;
     const obs = this.editMode
-      ? this.paymentService.update(this.currentId!, this.form)
-      : this.paymentService.create(this.form as Payment);
+      ? this.pagoService.update(this.currentId!, this.form)
+      : this.pagoService.create(this.form as Pago);
     obs.subscribe({
       next: () => { this.saving = false; this.closeModal(); this.load(); this.showMessage('Pago guardado. Membresía activada via RabbitMQ.', false); },
       error: err => { this.saving = false; this.showMessage(err.error?.message || 'Error', true); }
@@ -178,7 +178,7 @@ export class PaymentsComponent implements OnInit {
 
   deletePayment(id: number) {
     if (!confirm('¿Eliminar este pago?')) return;
-    this.paymentService.delete(id).subscribe({
+    this.pagoService.delete(id).subscribe({
       next: () => { this.load(); this.showMessage('Pago eliminado', false); },
       error: () => this.showMessage('Error al eliminar', true)
     });

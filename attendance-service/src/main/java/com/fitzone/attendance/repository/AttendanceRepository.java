@@ -7,6 +7,6 @@ import java.util.List;
 
 @Repository
 public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
-    List<Attendance> findByMemberId(Long memberId);
-    List<Attendance> findByMemberIdOrderByCheckInDesc(Long memberId);
+    List<Attendance> findByMiembroId(Long miembroId);
+    List<Attendance> findByMiembroIdOrderByEntradaDesc(Long miembroId);
 }

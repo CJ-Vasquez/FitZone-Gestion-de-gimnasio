@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MemberService, PlanService, AttendanceService, PaymentService } from '../../core/services/api.services';
+import { MiembroService, PlanService, AsistenciaService, PagoService } from '../../core/services/api.services';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { AuthService } from '../../core/services/auth.service';
       <!-- Header -->
       <div class="mb-4">
         <h2 class="fw-bold text-dark mb-1">
-          <i class="bi bi-speedometer2 me-2 text-primary"></i>Dashboard
+          <i class="bi bi-speedometer2 me-2 text-primary"></i>Panel
         </h2>
         <p class="text-muted mb-0">Bienvenido, <strong>{{ authService.getUsername() }}</strong> — Vista general del sistema FitZone</p>
       </div>
@@ -104,7 +104,7 @@ import { AuthService } from '../../core/services/auth.service';
             <div class="col-md-4">
               <div class="d-flex align-items-center gap-2 mb-2">
                 <span class="badge bg-success">Activo</span>
-                <strong>Member Service</strong>
+                <strong>Miembro Service</strong>
                 <small class="text-muted">:8082</small>
               </div>
               <div class="d-flex align-items-center gap-2 mb-2">
@@ -114,14 +114,14 @@ import { AuthService } from '../../core/services/auth.service';
               </div>
               <div class="d-flex align-items-center gap-2 mb-2">
                 <span class="badge bg-success">Activo</span>
-                <strong>Attendance Service</strong>
+                <strong>Asistencia Service</strong>
                 <small class="text-muted">:8084</small>
               </div>
             </div>
             <div class="col-md-4">
               <div class="d-flex align-items-center gap-2 mb-2">
                 <span class="badge bg-success">Activo</span>
-                <strong>Payment Service</strong>
+                <strong>Pago Service</strong>
                 <small class="text-muted">:8085</small>
               </div>
               <div class="d-flex align-items-center gap-2 mb-2">
@@ -149,16 +149,16 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    private memberService: MemberService,
+    private miembroService: MiembroService,
     private planService: PlanService,
-    private attendanceService: AttendanceService,
-    private paymentService: PaymentService
+    private asistenciaService: AsistenciaService,
+    private pagoService: PagoService
   ) {}
 
   ngOnInit() {
-    this.memberService.getAll().subscribe({ next: data => this.totalMembers = data.length, error: () => {} });
+    this.miembroService.getAll().subscribe({ next: data => this.totalMembers = data.length, error: () => {} });
     this.planService.getAll().subscribe({ next: data => this.totalPlans = data.length, error: () => {} });
-    this.attendanceService.getAll().subscribe({ next: data => this.totalAttendance = data.length, error: () => {} });
-    this.paymentService.getAll().subscribe({ next: data => this.totalPayments = data.length, error: () => {} });
+    this.asistenciaService.getAll().subscribe({ next: data => this.totalAttendance = data.length, error: () => {} });
+    this.pagoService.getAll().subscribe({ next: data => this.totalPayments = data.length, error: () => {} });
   }
 }

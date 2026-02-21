@@ -17,20 +17,20 @@ public class AuthDTOs {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class RegisterRequest {
-        @NotBlank(message = "Username is required")
+    public static class RegistroRequest {
+        @NotBlank(message = "El usuario es obligatorio")
         @Size(min = 3, max = 50)
         private String username;
 
-        @NotBlank(message = "Email is required")
-        @Email(message = "Invalid email format")
+        @NotBlank(message = "El email es obligatorio")
+        @Email(message = "Formato de email inválido")
         private String email;
 
-        @NotBlank(message = "Password is required")
-        @Size(min = 6, message = "Password must be at least 6 characters")
+        @NotBlank(message = "La contraseña es obligatoria")
+        @Size(min = 6, message = "La contraseña debe tener al menos 6 caracteres")
         private String password;
 
-        private User.Role role = User.Role.MEMBER;
+        private User.Rol role = User.Rol.MIEMBRO;
     }
 
     @Data
@@ -38,10 +38,10 @@ public class AuthDTOs {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class LoginRequest {
-        @NotBlank(message = "Username is required")
+        @NotBlank(message = "El usuario es obligatorio")
         private String username;
 
-        @NotBlank(message = "Password is required")
+        @NotBlank(message = "La contraseña es obligatoria")
         private String password;
     }
 
@@ -49,7 +49,7 @@ public class AuthDTOs {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class AuthResponse {
+    public static class AuthRespuesta {
         private String token;
         private String refreshToken;
         private String username;
@@ -62,24 +62,24 @@ public class AuthDTOs {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class UserResponse {
+    public static class UsuarioRespuesta {
         private Long id;
         private String username;
         private String email;
         private String role;
-        private Boolean enabled;
-        private LocalDateTime createdAt;
+        private Boolean habilitado;
+        private LocalDateTime fechaCreacion;
     }
 
     @Data
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class UpdateUserRequest {
-        @Email(message = "Invalid email format")
+    public static class ActualizarUsuarioRequest {
+        @Email(message = "Formato de email inválido")
         private String email;
-        private User.Role role;
-        private Boolean enabled;
+        private User.Rol role;
+        private Boolean habilitado;
     }
 
     @Data

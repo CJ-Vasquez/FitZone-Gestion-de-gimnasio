@@ -9,65 +9,65 @@ import java.time.LocalDateTime;
 public class MemberDTOs {
 
     @Data @Builder @NoArgsConstructor @AllArgsConstructor
-    public static class CreateMemberRequest {
-        @NotBlank(message = "First name is required")
+    public static class CrearMiembroRequest {
+        @NotBlank(message = "El nombre es obligatorio")
         @Size(max = 100)
-        private String firstName;
+        private String nombre;
 
-        @NotBlank(message = "Last name is required")
+        @NotBlank(message = "El apellido es obligatorio")
         @Size(max = 100)
-        private String lastName;
+        private String apellido;
 
-        @NotBlank(message = "Email is required")
-        @Email(message = "Invalid email")
+        @NotBlank(message = "El email es obligatorio")
+        @Email(message = "Email inválido")
         private String email;
 
         @Size(max = 15)
-        private String phone;
+        private String telefono;
 
-        @NotBlank(message = "DNI is required")
-        @Size(min = 8, max = 8, message = "DNI must be 8 characters")
+        @NotBlank(message = "El DNI es obligatorio")
+        @Size(min = 8, max = 8, message = "El DNI debe tener 8 caracteres")
         private String dni;
 
         private Long planId;
     }
 
     @Data @Builder @NoArgsConstructor @AllArgsConstructor
-    public static class UpdateMemberRequest {
+    public static class ActualizarMiembroRequest {
         @Size(max = 100)
-        private String firstName;
+        private String nombre;
 
         @Size(max = 100)
-        private String lastName;
+        private String apellido;
 
         @Email
         private String email;
 
         @Size(max = 15)
-        private String phone;
+        private String telefono;
 
-        private Member.Status status;
+        private Member.Estado estado;
         private Long planId;
     }
 
     @Data @Builder @NoArgsConstructor @AllArgsConstructor
-    public static class MemberResponse {
+    public static class MiembroRespuesta {
         private Long id;
-        private String firstName;
-        private String lastName;
+        private String nombre;
+        private String apellido;
         private String email;
-        private String phone;
+        private String telefono;
         private String dni;
-        private String status;
+        private String estado;
         private Long planId;
-        private LocalDateTime registeredAt;
-        private LocalDateTime updatedAt;
+        private LocalDateTime fechaRegistro;
+        private LocalDateTime fechaActualizacion;
     }
 
     @Data @Builder @NoArgsConstructor @AllArgsConstructor
-    public static class PaymentEvent {
-        private Long memberId;
+    public static class EventoPago {
+        private Long miembroId;
         private Long planId;
-        private String eventType;
+        private String tipoEvento;
     }
 }

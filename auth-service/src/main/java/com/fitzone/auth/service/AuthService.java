@@ -22,19 +22,19 @@ public class AuthService {
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
 
-    public AuthResponse register(RegisterRequest request) {
+    public AuthRespuesta register(RegistroRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
-            throw new RuntimeException("Username already exists");
+            throw new RuntimeException("El usuario ya existe");
         }
         if (userRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("Email already exists");
+            throw new RuntimeException("El email ya existe");
         }
 
         User user = User.builder()
                 .username(request.getUsername())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(request.getRole() != null ? request.getRole() : User.Role.MEMBER)
+                .rol(request.getRole() != null ? request.getRole() : User.Rol.MIEMBRO)
                 .build();
 
         userRepository.save(user);
@@ -42,94 +42,94 @@ public class AuthService {
         String token = jwtUtil.generateToken(user);
         String refreshToken = jwtUtil.generateRefreshToken(user);
 
-        return AuthResponse.builder()
+        return AuthRespuesta.builder()
                 .token(token)
                 .refreshToken(refreshToken)
                 .username(user.getUsername())
                 .email(user.getEmail())
-                .role(user.getRole().name())
-                .message("User registered successfully")
+                .role(user.getRol().name())
+                .message("Usuario registrado exitosamente")
                 .build();
     }
 
-    public AuthResponse login(LoginRequest request) {
+    public AuthRespuesta login(LoginRequest request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
         );
 
         User user = userRepository.findByUsername(request.getUsername())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         String token = jwtUtil.generateToken(user);
         String refreshToken = jwtUtil.generateRefreshToken(user);
 
-        return AuthResponse.builder()
+        return AuthRespuesta.builder()
                 .token(token)
                 .refreshToken(refreshToken)
                 .username(user.getUsername())
                 .email(user.getEmail())
-                .role(user.getRole().name())
-                .message("Login successful")
+                .role(user.getRol().name())
+                .message("Inicio de sesión exitoso")
                 .build();
     }
 
-    public AuthResponse refresh(RefreshRequest request) {
+    public AuthRespuesta refresh(RefreshRequest request) {
         String username = jwtUtil.extractUsername(request.getRefreshToken());
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         String newToken = jwtUtil.generateToken(user);
         String newRefreshToken = jwtUtil.generateRefreshToken(user);
 
-        return AuthResponse.builder()
+        return AuthRespuesta.builder()
                 .token(newToken)
                 .refreshToken(newRefreshToken)
                 .username(user.getUsername())
                 .email(user.getEmail())
-                .role(user.getRole().name())
-                .message("Token refreshed")
+                .role(user.getRol().name())
+                .message("Token actualizado")
                 .build();
     }
 
-    public List<UserResponse> getAllUsers() {
+    public List<UsuarioRespuesta> getAllUsers() {
         return userRepository.findAll().stream()
-                .map(this::mapToUserResponse)
+                .map(this::mapToUsuarioRespuesta)
                 .collect(Collectors.toList());
     }
 
-    public UserResponse getUserById(Long id) {
+    public UsuarioRespuesta getUserById(Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
-        return mapToUserResponse(user);
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con id: " + id));
+        return mapToUsuarioRespuesta(user);
     }
 
-    public UserResponse updateUser(Long id, UpdateUserRequest request) {
+    public UsuarioRespuesta updateUser(Long id, ActualizarUsuarioRequest request) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con id: " + id));
 
         if (request.getEmail() != null) user.setEmail(request.getEmail());
-        if (request.getRole() != null) user.setRole(request.getRole());
-        if (request.getEnabled() != null) user.setEnabled(request.getEnabled());
+        if (request.getRole() != null) user.setRol(request.getRole());
+        if (request.getHabilitado() != null) user.setHabilitado(request.getHabilitado());
 
         userRepository.save(user);
-        return mapToUserResponse(user);
+        return mapToUsuarioRespuesta(user);
     }
 
     public void deleteUser(Long id) {
         if (!userRepository.existsById(id)) {
-            throw new RuntimeException("User not found with id: " + id);
+            throw new RuntimeException("Usuario no encontrado con id: " + id);
         }
         userRepository.deleteById(id);
     }
 
-    private UserResponse mapToUserResponse(User user) {
-        return UserResponse.builder()
+    private UsuarioRespuesta mapToUsuarioRespuesta(User user) {
+        return UsuarioRespuesta.builder()
                 .id(user.getId())
                 .username(user.getUsername())
                 .email(user.getEmail())
-                .role(user.getRole().name())
-                .enabled(user.getEnabled())
-                .createdAt(user.getCreatedAt())
+                .role(user.getRol().name())
+                .habilitado(user.getHabilitado())
+                .fechaCreacion(user.getFechaCreacion())
                 .build();
     }
 }

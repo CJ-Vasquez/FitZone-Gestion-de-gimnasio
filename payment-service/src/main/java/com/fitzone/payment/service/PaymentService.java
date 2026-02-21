@@ -20,86 +20,86 @@ public class PaymentService {
     private final PaymentRepository paymentRepository;
     private final RabbitTemplate rabbitTemplate;
 
-    public List<PaymentResponse> getAllPayments() {
-        return paymentRepository.findAll().stream().map(this::mapToResponse).collect(Collectors.toList());
+    public List<PagoRespuesta> obtenerTodosLosPagos() {
+        return paymentRepository.findAll().stream().map(this::mapearARespuesta).collect(Collectors.toList());
     }
 
-    public List<PaymentResponse> getPaymentsByMember(Long memberId) {
-        return paymentRepository.findByMemberIdOrderByPaymentDateDesc(memberId).stream()
-                .map(this::mapToResponse).collect(Collectors.toList());
+    public List<PagoRespuesta> obtenerPagosPorMiembro(Long miembroId) {
+        return paymentRepository.findByMiembroIdOrderByFechaPagoDesc(miembroId).stream()
+                .map(this::mapearARespuesta).collect(Collectors.toList());
     }
 
-    public PaymentResponse getPaymentById(Long id) {
-        Payment payment = paymentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Payment not found with id: " + id));
-        return mapToResponse(payment);
+    public PagoRespuesta obtenerPagoPorId(Long id) {
+        Payment pago = paymentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pago no encontrado con id: " + id));
+        return mapearARespuesta(pago);
     }
 
-    public PaymentResponse createPayment(CreatePaymentRequest request) {
-        Payment payment = Payment.builder()
-                .memberId(request.getMemberId())
+    public PagoRespuesta crearPago(CrearPagoRequest request) {
+        Payment pago = Payment.builder()
+                .miembroId(request.getMiembroId())
                 .planId(request.getPlanId())
-                .amount(request.getAmount())
-                .paymentMethod(request.getPaymentMethod())
-                .status(Payment.PaymentStatus.CONFIRMED)
-                .notes(request.getNotes())
+                .monto(request.getMonto())
+                .metodoPago(request.getMetodoPago())
+                .estado(Payment.EstadoPago.CONFIRMADO)
+                .notas(request.getNotas())
                 .build();
 
-        Payment saved = paymentRepository.save(payment);
+        Payment guardado = paymentRepository.save(pago);
 
-        // Publish event to RabbitMQ to activate membership
-        PaymentEvent event = PaymentEvent.builder()
-                .memberId(saved.getMemberId())
-                .planId(saved.getPlanId())
-                .eventType("PAYMENT_CONFIRMED")
+        // Publicar evento en RabbitMQ para activar la membresía
+        EventoPago evento = EventoPago.builder()
+                .miembroId(guardado.getMiembroId())
+                .planId(guardado.getPlanId())
+                .tipoEvento("PAGO_CONFIRMADO")
                 .build();
 
-        log.info("Publishing payment event: {}", event);
+        log.info("Publicando evento de pago: {}", evento);
         rabbitTemplate.convertAndSend(
                 RabbitMQConfig.PAYMENT_EXCHANGE,
                 RabbitMQConfig.PAYMENT_ROUTING_KEY,
-                event
+                evento
         );
 
-        return mapToResponse(saved);
+        return mapearARespuesta(guardado);
     }
 
-    public PaymentResponse updatePayment(Long id, UpdatePaymentRequest request) {
-        Payment payment = paymentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Payment not found with id: " + id));
+    public PagoRespuesta actualizarPago(Long id, ActualizarPagoRequest request) {
+        Payment pago = paymentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pago no encontrado con id: " + id));
 
-        if (request.getStatus() != null) {
-            payment.setStatus(request.getStatus());
-            // If confirmed via update, also publish event
-            if (request.getStatus() == Payment.PaymentStatus.CONFIRMED) {
-                PaymentEvent event = PaymentEvent.builder()
-                        .memberId(payment.getMemberId())
-                        .planId(payment.getPlanId())
-                        .eventType("PAYMENT_CONFIRMED")
+        if (request.getEstado() != null) {
+            pago.setEstado(request.getEstado());
+            // Si se confirma mediante actualización, también publicar evento
+            if (request.getEstado() == Payment.EstadoPago.CONFIRMADO) {
+                EventoPago evento = EventoPago.builder()
+                        .miembroId(pago.getMiembroId())
+                        .planId(pago.getPlanId())
+                        .tipoEvento("PAGO_CONFIRMADO")
                         .build();
                 rabbitTemplate.convertAndSend(
                         RabbitMQConfig.PAYMENT_EXCHANGE,
                         RabbitMQConfig.PAYMENT_ROUTING_KEY,
-                        event
+                        evento
                 );
             }
         }
-        if (request.getPaymentMethod() != null) payment.setPaymentMethod(request.getPaymentMethod());
-        if (request.getNotes() != null) payment.setNotes(request.getNotes());
+        if (request.getMetodoPago() != null) pago.setMetodoPago(request.getMetodoPago());
+        if (request.getNotas() != null) pago.setNotas(request.getNotas());
 
-        return mapToResponse(paymentRepository.save(payment));
+        return mapearARespuesta(paymentRepository.save(pago));
     }
 
-    public void deletePayment(Long id) {
-        if (!paymentRepository.existsById(id)) throw new RuntimeException("Payment not found with id: " + id);
+    public void eliminarPago(Long id) {
+        if (!paymentRepository.existsById(id)) throw new RuntimeException("Pago no encontrado con id: " + id);
         paymentRepository.deleteById(id);
     }
 
-    private PaymentResponse mapToResponse(Payment p) {
-        return PaymentResponse.builder()
-                .id(p.getId()).memberId(p.getMemberId()).planId(p.getPlanId())
-                .amount(p.getAmount()).paymentMethod(p.getPaymentMethod().name())
-                .status(p.getStatus().name()).paymentDate(p.getPaymentDate()).notes(p.getNotes())
+    private PagoRespuesta mapearARespuesta(Payment p) {
+        return PagoRespuesta.builder()
+                .id(p.getId()).miembroId(p.getMiembroId()).planId(p.getPlanId())
+                .monto(p.getMonto()).metodoPago(p.getMetodoPago().name())
+                .estado(p.getEstado().name()).fechaPago(p.getFechaPago()).notas(p.getNotas())
                 .build();
     }
 }

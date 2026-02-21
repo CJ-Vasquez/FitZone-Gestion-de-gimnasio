@@ -1,7 +1,7 @@
 {
   "info": {
-    "name": "FitZone API Collection",
-    "description": "Colección completa de endpoints REST para el sistema FitZone",
+    "name": "FitZone API - Coleccion Completa",
+    "description": "Coleccion completa de endpoints REST para el sistema FitZone - Gestion de Gimnasio",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -10,19 +10,19 @@
   ],
   "item": [
     {
-      "name": "🔐 Auth Service",
+      "name": "Autenticacion",
       "item": [
         {
-          "name": "Register User",
+          "name": "Registrar Usuario",
           "request": {
             "method": "POST",
             "url": "{{baseUrl}}/auth/register",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"username\": \"testuser\",\n  \"email\": \"test@fitzone.pe\",\n  \"password\": \"test123\",\n  \"role\": \"MEMBER\"\n}" }
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"testuser\",\n  \"email\": \"test@fitzone.pe\",\n  \"password\": \"test123\",\n  \"role\": \"MIEMBRO\"\n}" }
           }
         },
         {
-          "name": "Login",
+          "name": "Iniciar Sesion",
           "event": [{ "listen": "test", "script": { "exec": ["var res = pm.response.json();", "pm.collectionVariables.set('token', res.token);"] } }],
           "request": {
             "method": "POST",
@@ -32,7 +32,7 @@
           }
         },
         {
-          "name": "Get All Users",
+          "name": "Obtener Todos los Usuarios",
           "request": {
             "method": "GET",
             "url": "{{baseUrl}}/auth/users",
@@ -40,16 +40,16 @@
           }
         },
         {
-          "name": "Update User",
+          "name": "Actualizar Usuario",
           "request": {
             "method": "PUT",
             "url": "{{baseUrl}}/auth/users/1",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"role\": \"TRAINER\",\n  \"enabled\": true\n}" }
+            "body": { "mode": "raw", "raw": "{\n  \"role\": \"ENTRENADOR\",\n  \"habilitado\": true\n}" }
           }
         },
         {
-          "name": "Delete User",
+          "name": "Eliminar Usuario",
           "request": {
             "method": "DELETE",
             "url": "{{baseUrl}}/auth/users/2",
@@ -59,188 +59,188 @@
       ]
     },
     {
-      "name": "👥 Member Service",
+      "name": "Miembros",
       "item": [
         {
-          "name": "Get All Members",
+          "name": "Obtener Todos los Miembros",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/members",
+            "url": "{{baseUrl}}/miembros",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
           }
         },
         {
-          "name": "Get Member by ID",
+          "name": "Obtener Miembro por ID",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/members/1",
+            "url": "{{baseUrl}}/miembros/1",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
           }
         },
         {
-          "name": "Create Member",
+          "name": "Crear Miembro",
           "request": {
             "method": "POST",
-            "url": "{{baseUrl}}/members",
+            "url": "{{baseUrl}}/miembros",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"firstName\": \"Carlos\",\n  \"lastName\": \"Mendoza\",\n  \"email\": \"carlos.mendoza@email.com\",\n  \"phone\": \"999888777\",\n  \"dni\": \"55667788\",\n  \"planId\": 1\n}" }
+            "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Carlos\",\n  \"apellido\": \"Mendoza\",\n  \"email\": \"carlos.mendoza@email.com\",\n  \"telefono\": \"999888777\",\n  \"dni\": \"55667788\",\n  \"planId\": 1\n}" }
           }
         },
         {
-          "name": "Update Member",
+          "name": "Actualizar Miembro",
           "request": {
             "method": "PUT",
-            "url": "{{baseUrl}}/members/1",
+            "url": "{{baseUrl}}/miembros/1",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"phone\": \"911222333\",\n  \"status\": \"ACTIVE\"\n}" }
+            "body": { "mode": "raw", "raw": "{\n  \"telefono\": \"911222333\",\n  \"estado\": \"ACTIVO\"\n}" }
           }
         },
         {
-          "name": "Delete Member",
+          "name": "Eliminar Miembro",
           "request": {
             "method": "DELETE",
-            "url": "{{baseUrl}}/members/3",
+            "url": "{{baseUrl}}/miembros/3",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
           }
         }
       ]
     },
     {
-      "name": "📋 Plan Service",
+      "name": "Planes",
       "item": [
         {
-          "name": "Get All Plans",
+          "name": "Obtener Todos los Planes",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/plans",
+            "url": "{{baseUrl}}/planes",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
           }
         },
         {
-          "name": "Get Active Plans",
+          "name": "Obtener Planes Activos",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/plans?activeOnly=true",
+            "url": "{{baseUrl}}/planes?soloActivos=true",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
           }
         },
         {
-          "name": "Create Plan",
+          "name": "Crear Plan",
           "request": {
             "method": "POST",
-            "url": "{{baseUrl}}/plans",
+            "url": "{{baseUrl}}/planes",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Plan Premium\",\n  \"description\": \"Acceso completo + entrenador personal\",\n  \"price\": 200.00,\n  \"durationDays\": 30,\n  \"active\": true\n}" }
+            "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Plan Premium\",\n  \"descripcion\": \"Acceso completo + entrenador personal\",\n  \"precio\": 200.00,\n  \"duracionDias\": 30,\n  \"activo\": true\n}" }
           }
         },
         {
-          "name": "Update Plan",
+          "name": "Actualizar Plan",
           "request": {
             "method": "PUT",
-            "url": "{{baseUrl}}/plans/1",
+            "url": "{{baseUrl}}/planes/1",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"price\": 85.00,\n  \"active\": true\n}" }
+            "body": { "mode": "raw", "raw": "{\n  \"precio\": 85.00,\n  \"activo\": true\n}" }
           }
         },
         {
-          "name": "Delete Plan",
+          "name": "Eliminar Plan",
           "request": {
             "method": "DELETE",
-            "url": "{{baseUrl}}/plans/4",
+            "url": "{{baseUrl}}/planes/4",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
           }
         }
       ]
     },
     {
-      "name": "📅 Attendance Service",
+      "name": "Asistencia",
       "item": [
         {
-          "name": "Get All Attendance",
+          "name": "Obtener Toda la Asistencia",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/attendance",
+            "url": "{{baseUrl}}/asistencia",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
           }
         },
         {
-          "name": "Get Attendance by Member",
+          "name": "Obtener Asistencia por Miembro",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/attendance/member/1",
+            "url": "{{baseUrl}}/asistencia/miembro/1",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
           }
         },
         {
-          "name": "Check In",
+          "name": "Registrar Entrada",
           "request": {
             "method": "POST",
-            "url": "{{baseUrl}}/attendance/checkin",
+            "url": "{{baseUrl}}/asistencia/entrada",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"memberId\": 1,\n  \"observation\": \"Sesión de cardio\"\n}" }
+            "body": { "mode": "raw", "raw": "{\n  \"miembroId\": 1,\n  \"observacion\": \"Sesion de cardio\"\n}" }
           }
         },
         {
-          "name": "Update Attendance (Check-out)",
+          "name": "Actualizar Asistencia (Salida)",
           "request": {
             "method": "PUT",
-            "url": "{{baseUrl}}/attendance/1",
+            "url": "{{baseUrl}}/asistencia/1",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"checkOut\": \"2026-03-15T18:30:00\",\n  \"observation\": \"Sesión completada\"\n}" }
+            "body": { "mode": "raw", "raw": "{\n  \"salida\": \"2026-03-15T18:30:00\",\n  \"observacion\": \"Sesion completada\"\n}" }
           }
         },
         {
-          "name": "Delete Attendance",
+          "name": "Eliminar Asistencia",
           "request": {
             "method": "DELETE",
-            "url": "{{baseUrl}}/attendance/1",
+            "url": "{{baseUrl}}/asistencia/1",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
           }
         }
       ]
     },
     {
-      "name": "💳 Payment Service",
+      "name": "Pagos",
       "item": [
         {
-          "name": "Get All Payments",
+          "name": "Obtener Todos los Pagos",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/payments",
+            "url": "{{baseUrl}}/pagos",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
           }
         },
         {
-          "name": "Get Payments by Member",
+          "name": "Obtener Pagos por Miembro",
           "request": {
             "method": "GET",
-            "url": "{{baseUrl}}/payments/member/1",
+            "url": "{{baseUrl}}/pagos/miembro/1",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
           }
         },
         {
-          "name": "Register Payment (triggers RabbitMQ)",
+          "name": "Registrar Pago (dispara RabbitMQ)",
           "request": {
             "method": "POST",
-            "url": "{{baseUrl}}/payments",
+            "url": "{{baseUrl}}/pagos",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"memberId\": 2,\n  \"planId\": 1,\n  \"amount\": 80.00,\n  \"paymentMethod\": \"YAPE\",\n  \"notes\": \"Pago mensual plan básico\"\n}" }
+            "body": { "mode": "raw", "raw": "{\n  \"miembroId\": 2,\n  \"planId\": 1,\n  \"monto\": 80.00,\n  \"metodoPago\": \"YAPE\",\n  \"notas\": \"Pago mensual plan basico\"\n}" }
           }
         },
         {
-          "name": "Update Payment Status",
+          "name": "Actualizar Estado de Pago",
           "request": {
             "method": "PUT",
-            "url": "{{baseUrl}}/payments/1",
+            "url": "{{baseUrl}}/pagos/1",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }, { "key": "Content-Type", "value": "application/json" }],
-            "body": { "mode": "raw", "raw": "{\n  \"status\": \"CONFIRMED\",\n  \"notes\": \"Confirmado manualmente\"\n}" }
+            "body": { "mode": "raw", "raw": "{\n  \"estado\": \"CONFIRMADO\",\n  \"notas\": \"Confirmado manualmente\"\n}" }
           }
         },
         {
-          "name": "Delete Payment",
+          "name": "Eliminar Pago",
           "request": {
             "method": "DELETE",
-            "url": "{{baseUrl}}/payments/1",
+            "url": "{{baseUrl}}/pagos/1",
             "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }]
           }
         }

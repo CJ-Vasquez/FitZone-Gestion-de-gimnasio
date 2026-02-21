@@ -27,21 +27,21 @@ import { Plan } from '../../core/models/models';
           <div class="card border-0 shadow-sm h-100">
             <div class="card-header text-white fw-bold"
                  style="background: linear-gradient(135deg, #0f3460, #0d6efd);">
-              {{ p.name }}
-              <span class="badge float-end" [ngClass]="p.active ? 'bg-success' : 'bg-secondary'">
-                {{ p.active ? 'Activo' : 'Inactivo' }}
+              {{ p.nombre }}
+              <span class="badge float-end" [ngClass]="p.activo ? 'bg-success' : 'bg-secondary'">
+                {{ p.activo ? 'Activo' : 'Inactivo' }}
               </span>
             </div>
             <div class="card-body">
-              <p class="text-muted small">{{ p.description || 'Sin descripción' }}</p>
+              <p class="text-muted small">{{ p.descripcion || 'Sin descripción' }}</p>
               <div class="d-flex justify-content-between">
                 <div>
                   <div class="text-muted small">Precio</div>
-                  <div class="h4 fw-bold text-success">S/. {{ p.price }}</div>
+                  <div class="h4 fw-bold text-success">S/. {{ p.precio }}</div>
                 </div>
                 <div class="text-end">
                   <div class="text-muted small">Duración</div>
-                  <div class="h5 fw-bold">{{ p.durationDays }} días</div>
+                  <div class="h5 fw-bold">{{ p.duracionDias }} días</div>
                 </div>
               </div>
             </div>
@@ -73,25 +73,25 @@ import { Plan } from '../../core/models/models';
             <form (ngSubmit)="savePlan()">
               <div class="mb-3">
                 <label class="form-label">Nombre del Plan *</label>
-                <input class="form-control" [(ngModel)]="form.name" name="name" required>
+                <input class="form-control" [(ngModel)]="form.nombre" name="nombre" required>
               </div>
               <div class="mb-3">
                 <label class="form-label">Descripción</label>
-                <textarea class="form-control" [(ngModel)]="form.description" name="description" rows="2"></textarea>
+                <textarea class="form-control" [(ngModel)]="form.descripcion" name="descripcion" rows="2"></textarea>
               </div>
               <div class="row g-3">
                 <div class="col-6">
                   <label class="form-label">Precio (S/.) *</label>
-                  <input type="number" step="0.01" class="form-control" [(ngModel)]="form.price" name="price" required>
+                  <input type="number" step="0.01" class="form-control" [(ngModel)]="form.precio" name="precio" required>
                 </div>
                 <div class="col-6">
                   <label class="form-label">Duración (días) *</label>
-                  <input type="number" class="form-control" [(ngModel)]="form.durationDays" name="durationDays" required>
+                  <input type="number" class="form-control" [(ngModel)]="form.duracionDias" name="duracionDias" required>
                 </div>
               </div>
               <div class="form-check mt-3">
-                <input type="checkbox" class="form-check-input" [(ngModel)]="form.active" name="active" id="active">
-                <label class="form-check-label" for="active">Plan Activo</label>
+                <input type="checkbox" class="form-check-input" [(ngModel)]="form.activo" name="activo" id="activo">
+                <label class="form-check-label" for="activo">Plan Activo</label>
               </div>
               <div class="modal-footer px-0 pb-0 mt-3">
                 <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
@@ -116,7 +116,7 @@ export class PlansComponent implements OnInit {
   message = '';
   isError = false;
   currentId: number | null = null;
-  form: Partial<Plan> = { active: true };
+  form: Partial<Plan> = { activo: true };
 
   constructor(private planService: PlanService) {}
   ngOnInit() { this.loadPlans(); }
@@ -131,7 +131,7 @@ export class PlansComponent implements OnInit {
   openModal(plan?: Plan) {
     this.editMode = !!plan;
     this.currentId = plan?.id || null;
-    this.form = plan ? { ...plan } : { active: true };
+    this.form = plan ? { ...plan } : { activo: true };
     this.showModal = true;
   }
 
