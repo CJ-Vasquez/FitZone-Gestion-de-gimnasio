@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -60,9 +60,17 @@ import { AuthService } from '../../core/services/auth.service';
               </a>
             </div>
           </div>
-          <div class="col-lg-5 d-none d-lg-block text-center">
-            <div class="hero-icon">
-              <i class="bi bi-pc-display-horizontal"></i>
+          <div class="col-lg-5 d-none d-lg-block">
+            <div class="carousel-3d">
+              <div class="carousel-scene">
+                <div class="carousel-track" [style.transform]="'rotateY(' + currentAngle + 'deg)'">
+                  <div class="carousel-card" *ngFor="let img of carouselImages; let i = index"
+                       [style.transform]="'rotateY(' + (i * 90) + 'deg) translateZ(250px)'">
+                    <img [src]="img.url" [alt]="img.label">
+                    <div class="carousel-label">{{ img.label }}</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -240,9 +248,55 @@ import { AuthService } from '../../core/services/auth.service';
       background: #212529;
     }
 
-    .hero-icon {
-      font-size: 8rem;
-      color: rgba(255,255,255,0.08);
+    .carousel-3d {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 400px;
+    }
+
+    .carousel-scene {
+      width: 260px;
+      height: 340px;
+      perspective: 800px;
+    }
+
+    .carousel-track {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .carousel-card {
+      position: absolute;
+      width: 260px;
+      height: 340px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .carousel-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .carousel-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 8px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.85));
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: 0.5px;
     }
 
     .modulo-card {
@@ -279,13 +333,22 @@ import { AuthService } from '../../core/services/auth.service';
     }
   `]
 })
-export class LandingComponent {
+export class LandingComponent implements OnInit, OnDestroy {
   showLoginModal = false;
   menuAbierto = false;
   credentials = { username: '', password: '' };
   loading = false;
   errorMsg = '';
   showPassword = false;
+  currentAngle = 0;
+  private carouselInterval: any;
+
+  carouselImages = [
+    { url: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=500&fit=crop', label: 'Equipamiento' },
+    { url: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=400&h=500&fit=crop', label: 'Entrenamiento' },
+    { url: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=500&fit=crop', label: 'Comunidad' },
+    { url: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=400&h=500&fit=crop', label: 'Resultados' }
+  ];
 
   modulos = [
     {
@@ -311,6 +374,16 @@ export class LandingComponent {
   ];
 
   constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit() {
+    this.carouselInterval = setInterval(() => {
+      this.currentAngle -= 90;
+    }, 3000);
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.carouselInterval);
+  }
 
   cerrarModal() {
     this.showLoginModal = false;

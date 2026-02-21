@@ -2,14 +2,15 @@ import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './core/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule],
   template: `
-    <div *ngIf="authService.isLoggedIn(); else loginLayout">
+    <div *ngIf="authService.isLoggedIn() && !isLandingPage; else loginLayout">
       <!-- Sidebar Layout -->
       <div class="d-flex" style="min-height: 100vh;">
         <!-- Sidebar -->
@@ -85,7 +86,16 @@ import { Router } from '@angular/router';
   `]
 })
 export class AppComponent {
-  constructor(public authService: AuthService, private router: Router) {}
+  isLandingPage = false;
+
+  constructor(public authService: AuthService, private router: Router) {
+    this.router.events.pipe(
+      filter((e): e is NavigationEnd => e instanceof NavigationEnd)
+    ).subscribe(e => {
+      this.isLandingPage = e.urlAfterRedirects === '/';
+    });
+  }
+
   logout() {
     this.authService.logout();
     this.router.navigate(['/']);

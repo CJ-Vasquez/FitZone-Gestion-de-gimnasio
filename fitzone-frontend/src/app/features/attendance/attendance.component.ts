@@ -37,7 +37,7 @@ import { Attendance } from '../../core/models/models';
                 <td><span class="badge bg-primary">ID: {{ a.memberId }}</span></td>
                 <td>{{ a.checkIn | date:'dd/MM/yyyy HH:mm' }}</td>
                 <td>{{ a.checkOut ? (a.checkOut | date:'dd/MM/yyyy HH:mm') : '—' }}</td>
-                <td>{{ a.minutesSpent ? a.minutesSpent + ' min' : '—' }}</td>
+                <td>{{ a.minutesSpent ? formatMinutes(a.minutesSpent) : '—' }}</td>
                 <td>{{ a.observation || '—' }}</td>
                 <td>
                   <button class="btn btn-sm btn-outline-primary me-1" (click)="openModal(a)">
@@ -136,6 +136,18 @@ export class AttendanceComponent implements OnInit {
       next: () => { this.load(); this.showMessage('Eliminado', false); },
       error: () => this.showMessage('Error al eliminar', true)
     });
+  }
+
+  formatMinutes(total: number): string {
+    if (total < 60) return total + ' min';
+    const days = Math.floor(total / 1440);
+    const hours = Math.floor((total % 1440) / 60);
+    const mins = total % 60;
+    let result = '';
+    if (days > 0) result += days + 'd ';
+    if (hours > 0) result += hours + 'h ';
+    if (mins > 0) result += mins + 'min';
+    return result.trim();
   }
 
   showMessage(msg: string, isError: boolean) {
