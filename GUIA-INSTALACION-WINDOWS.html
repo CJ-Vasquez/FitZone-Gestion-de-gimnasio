@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitZone - Guia de Instalacion en Windows</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a1a2e;
+            line-height: 1.7;
+            background: #f8f9fa;
+            font-size: 14px;
+        }
+
+        @media print {
+            body { background: white; font-size: 12px; }
+            .page-break { page-break-before: always; }
+            .no-print { display: none; }
+            .container { box-shadow: none !important; }
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        }
+
+        /* PORTADA */
+        .cover {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: white;
+            padding: 80px 60px;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .cover h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+
+        .cover .subtitle {
+            font-size: 20px;
+            font-weight: 300;
+            color: #a8a8d8;
+            margin-bottom: 40px;
+        }
+
+        .cover .guide-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #7c7cf7;
+            border: 2px solid #7c7cf7;
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .cover .info {
+            font-size: 14px;
+            color: #8888bb;
+            margin-top: 20px;
+        }
+
+        /* CONTENIDO */
+        .content {
+            padding: 50px 60px;
+        }
+
+        h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #302b63;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 3px solid #7c7cf7;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2 .step-num {
+            background: #302b63;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #444;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 12px;
+            color: #444;
+        }
+
+        /* TABLAS */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0 20px;
+            font-size: 13px;
+        }
+
+        th {
+            background: #302b63;
+            color: white;
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 9px 14px;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        tr:nth-child(even) { background: #f8f9ff; }
+
+        /* CODIGO */
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: #f0f0f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: #d63384;
+        }
+
+        pre {
+            font-family: 'JetBrains Mono', monospace;
+            background: #1a1a2e;
+            color: #e8e8e8;
+            padding: 18px 22px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 12px 0 18px;
+            font-size: 12.5px;
+            line-height: 1.6;
+        }
+
+        pre .comment { color: #6a6a8a; }
+        pre .cmd { color: #7cf77c; }
+        pre .url { color: #7cc8f7; }
+        pre .flag { color: #f7c87c; }
+
+        /* ALERTAS */
+        .alert {
+            padding: 14px 18px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 13px;
+        }
+
+        .alert-info {
+            background: #e8f4fd;
+            border-left: 4px solid #3498db;
+            color: #1a5276;
+        }
+
+        .alert-warning {
+            background: #fef9e7;
+            border-left: 4px solid #f39c12;
+            color: #7d6608;
+        }
+
+        .alert-success {
+            background: #eafaf1;
+            border-left: 4px solid #27ae60;
+            color: #1e8449;
+        }
+
+        .alert-danger {
+            background: #fdedec;
+            border-left: 4px solid #e74c3c;
+            color: #922b21;
+        }
+
+        /* LISTAS */
+        ol, ul {
+            margin: 10px 0 15px 25px;
+            color: #444;
+        }
+
+        li { margin-bottom: 8px; }
+
+        /* DIAGRAMA */
+        .diagram {
+            background: #f8f9ff;
+            border: 2px solid #e0e0f0;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            line-height: 1.5;
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        /* CHECKLIST */
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 8px 0 8px 30px;
+            position: relative;
+        }
+
+        .checklist li::before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            font-size: 18px;
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #302b63;
+            color: #a8a8d8;
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+        }
+
+        /* INDICE */
+        .toc {
+            background: #f8f9ff;
+            border-radius: 10px;
+            padding: 25px 30px;
+            margin: 20px 0 30px;
+        }
+
+        .toc h3 {
+            margin-top: 0;
+            color: #302b63;
+        }
+
+        .toc ol {
+            margin-bottom: 0;
+        }
+
+        .toc li {
+            margin-bottom: 6px;
+        }
+
+        .toc a {
+            color: #302b63;
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            color: #7c7cf7;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .badge-required { background: #fdedec; color: #e74c3c; }
+        .badge-optional { background: #eafaf1; color: #27ae60; }
+
+        .screenshot-placeholder {
+            background: #f0f0f5;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            color: #888;
+            margin: 15px 0;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== PORTADA ==================== -->
+<div class="container">
+    <div class="cover">
+        <h1>FITZONE</h1>
+        <p class="subtitle">Sistema de Gestion de Gimnasio</p>
+        <p class="guide-title">Guia de Instalacion y Ejecucion en Windows</p>
+        <p class="info">
+            Microservicios Spring Boot + Angular 17 + PostgreSQL + RabbitMQ<br>
+            Version 1.0 — Febrero 2026
+        </p>
+    </div>
+
+    <div class="content">
+
+        <!-- INDICE -->
+        <div class="toc">
+            <h3>Indice</h3>
+            <ol>
+                <li><a href="#prereq">Requisitos Previos</a></li>
+                <li><a href="#java">Instalar Java JDK 21</a></li>
+                <li><a href="#maven">Instalar Apache Maven</a></li>
+                <li><a href="#node">Instalar Node.js 18+</a></li>
+                <li><a href="#postgres">Instalar y Configurar PostgreSQL</a></li>
+                <li><a href="#rabbitmq">Instalar RabbitMQ</a></li>
+                <li><a href="#db">Crear las Bases de Datos</a></li>
+                <li><a href="#frontend">Instalar Dependencias del Frontend</a></li>
+                <li><a href="#run">Ejecutar el Proyecto (Manual)</a></li>
+                <li><a href="#bat">Ejecutar con Script Automatico (.bat)</a></li>
+                <li><a href="#verify">Verificar que Todo Funcione</a></li>
+                <li><a href="#troubleshoot">Solucion de Problemas</a></li>
+            </ol>
+        </div>
+
+        <!-- ==================== REQUISITOS ==================== -->
+        <h2 id="prereq"><span class="step-num">1</span> Requisitos Previos</h2>
+
+        <p>Antes de comenzar, necesitas instalar las siguientes herramientas en tu computadora con Windows 10/11:</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Software</th>
+                    <th>Version</th>
+                    <th>Para que sirve</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Java JDK</strong></td>
+                    <td>21 o superior</td>
+                    <td>Ejecutar los microservicios Spring Boot</td>
+                    <td><span class="badge badge-required">Requerido</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Apache Maven</strong></td>
+                    <td>3.9+</td>
+                    <td>Compilar y ejecutar los proyectos Java</td>
+                    <td><span class="badge badge-required">Requerido</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Node.js</strong></td>
+                    <td>18 o 20</td>
+                    <td>Ejecutar el frontend Angular</td>
+                    <td><span class="badge badge-required">Requerido</span></td>
+                </tr>
+                <tr>
+                    <td><strong>PostgreSQL</strong></td>
+                    <td>15 o 16</td>
+                    <td>Base de datos para los microservicios</td>
+                    <td><span class="badge badge-required">Requerido</span></td>
+                </tr>
+                <tr>
+                    <td><strong>RabbitMQ</strong></td>
+                    <td>3.x</td>
+                    <td>Mensajeria asincrona (pagos)</td>
+                    <td><span class="badge badge-required">Requerido</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Git</strong></td>
+                    <td>Cualquiera</td>
+                    <td>Clonar el repositorio</td>
+                    <td><span class="badge badge-optional">Opcional</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="alert alert-info">
+            <strong>Nota:</strong> Si ya tienes alguno de estos instalado, puedes saltar al siguiente paso. Verifica con los comandos de verificacion al final de cada seccion.
+        </div>
+
+        <!-- ==================== JAVA ==================== -->
+        <div class="page-break"></div>
+        <h2 id="java"><span class="step-num">2</span> Instalar Java JDK 21</h2>
+
+        <ol>
+            <li>Ir a <code>https://adoptium.net/</code></li>
+            <li>Descargar <strong>Temurin JDK 21</strong> para Windows x64 (.msi)</li>
+            <li>Ejecutar el instalador:
+                <ul>
+                    <li>Marcar la opcion <strong>"Set JAVA_HOME variable"</strong></li>
+                    <li>Marcar <strong>"Add to PATH"</strong></li>
+                </ul>
+            </li>
+            <li>Completar la instalacion</li>
+        </ol>
+
+        <h3>Verificar instalacion</h3>
+        <p>Abrir <strong>CMD</strong> o <strong>PowerShell</strong> y ejecutar:</p>
+        <pre><span class="cmd">java -version</span>
+
+<span class="comment">// Resultado esperado:</span>
+openjdk version "21.0.x" 2024-xx-xx
+OpenJDK Runtime Environment Temurin-21...</pre>
+
+        <div class="alert alert-warning">
+            <strong>Importante:</strong> Si el comando no se reconoce, cierra y vuelve a abrir la terminal. Si aun no funciona, agrega manualmente la ruta de Java al PATH del sistema.
+        </div>
+
+        <!-- ==================== MAVEN ==================== -->
+        <h2 id="maven"><span class="step-num">3</span> Instalar Apache Maven</h2>
+
+        <ol>
+            <li>Ir a <code>https://maven.apache.org/download.cgi</code></li>
+            <li>Descargar <strong>apache-maven-3.9.x-bin.zip</strong></li>
+            <li>Descomprimir en <code>C:\maven</code></li>
+            <li>Configurar variables de entorno:
+                <ul>
+                    <li>Abrir: <strong>Inicio</strong> > buscar <strong>"Variables de entorno"</strong></li>
+                    <li>En <strong>Variables del sistema</strong>, editar <strong>Path</strong></li>
+                    <li>Agregar: <code>C:\maven\apache-maven-3.9.x\bin</code></li>
+                    <li>Crear variable <code>MAVEN_HOME</code> = <code>C:\maven\apache-maven-3.9.x</code></li>
+                </ul>
+            </li>
+        </ol>
+
+        <h3>Verificar instalacion</h3>
+        <pre><span class="cmd">mvn -version</span>
+
+<span class="comment">// Resultado esperado:</span>
+Apache Maven 3.9.x
+Java version: 21.0.x</pre>
+
+        <!-- ==================== NODE ==================== -->
+        <h2 id="node"><span class="step-num">4</span> Instalar Node.js 18+</h2>
+
+        <ol>
+            <li>Ir a <code>https://nodejs.org/</code></li>
+            <li>Descargar la version <strong>LTS (18.x o 20.x)</strong></li>
+            <li>Ejecutar el instalador con las opciones por defecto</li>
+            <li>Marcar <strong>"Automatically install the necessary tools"</strong> si aparece</li>
+        </ol>
+
+        <h3>Verificar instalacion</h3>
+        <pre><span class="cmd">node -v</span>       <span class="comment">// Debe mostrar v18.x.x o v20.x.x</span>
+<span class="cmd">npm -v</span>        <span class="comment">// Debe mostrar 9.x.x o 10.x.x</span></pre>
+
+        <div class="alert alert-danger">
+            <strong>No usar Node 22+:</strong> Angular 17 no es compatible con Node.js 22 o superior. Usa la version 18 o 20 LTS.
+        </div>
+
+        <!-- ==================== POSTGRESQL ==================== -->
+        <div class="page-break"></div>
+        <h2 id="postgres"><span class="step-num">5</span> Instalar y Configurar PostgreSQL</h2>
+
+        <ol>
+            <li>Ir a <code>https://www.postgresql.org/download/windows/</code></li>
+            <li>Descargar el instalador de <strong>EDB</strong> (version 15 o 16)</li>
+            <li>Ejecutar el instalador:
+                <ul>
+                    <li>Puerto: <strong>5432</strong> (por defecto)</li>
+                    <li>Password del superusuario: <strong><code>postgres</code></strong></li>
+                    <li>Locale: Default</li>
+                </ul>
+            </li>
+            <li>Marcar <strong>"Stack Builder"</strong> no es necesario, puedes desmarcarlo</li>
+            <li>Completar la instalacion</li>
+        </ol>
+
+        <div class="alert alert-danger">
+            <strong>MUY IMPORTANTE:</strong> El password del usuario <code>postgres</code> DEBE ser <strong><code>postgres</code></strong>. Los microservicios estan configurados para conectarse con ese password. Si usas otro, tendras que modificar todos los archivos <code>application.yml</code> de cada servicio.
+        </div>
+
+        <h3>Agregar psql al PATH (opcional pero recomendado)</h3>
+        <ol>
+            <li>Agregar a la variable PATH: <code>C:\Program Files\PostgreSQL\16\bin</code></li>
+        </ol>
+
+        <h3>Verificar instalacion</h3>
+        <pre><span class="cmd">psql -U postgres -h localhost</span>
+<span class="comment">// Ingresa el password: postgres</span>
+<span class="comment">// Si ves el prompt "postgres=#" funciono correctamente</span>
+<span class="comment">// Escribe \q para salir</span></pre>
+
+        <!-- ==================== RABBITMQ ==================== -->
+        <h2 id="rabbitmq"><span class="step-num">6</span> Instalar RabbitMQ</h2>
+
+        <h3>6.1 Instalar Erlang (prerequisito de RabbitMQ)</h3>
+        <ol>
+            <li>Ir a <code>https://www.erlang.org/downloads</code></li>
+            <li>Descargar el instalador para Windows (64-bit)</li>
+            <li>Instalar con opciones por defecto</li>
+        </ol>
+
+        <h3>6.2 Instalar RabbitMQ</h3>
+        <ol>
+            <li>Ir a <code>https://www.rabbitmq.com/install-windows.html</code></li>
+            <li>Descargar el instalador (.exe)</li>
+            <li>Instalar con opciones por defecto</li>
+            <li>RabbitMQ se inicia automaticamente como servicio de Windows</li>
+        </ol>
+
+        <h3>6.3 Habilitar panel de administracion (opcional)</h3>
+        <p>Abrir <strong>CMD como Administrador</strong>:</p>
+        <pre><span class="cmd">rabbitmq-plugins enable rabbitmq_management</span></pre>
+        <p>Luego puedes acceder al panel en: <code>http://localhost:15672</code><br>
+        Usuario: <code>guest</code> / Password: <code>guest</code></p>
+
+        <h3>Verificar que RabbitMQ esta corriendo</h3>
+        <pre><span class="cmd">rabbitmqctl status</span>
+<span class="comment">// Debe mostrar informacion del nodo RabbitMQ</span></pre>
+
+        <!-- ==================== BASES DE DATOS ==================== -->
+        <div class="page-break"></div>
+        <h2 id="db"><span class="step-num">7</span> Crear las Bases de Datos</h2>
+
+        <p>El proyecto usa <strong>5 bases de datos independientes</strong> (una por microservicio):</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Base de Datos</th>
+                    <th>Microservicio</th>
+                    <th>Contenido</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><code>fitzone_auth</code></td><td>Auth Service</td><td>Usuarios y credenciales</td></tr>
+                <tr><td><code>fitzone_members</code></td><td>Member Service</td><td>Miembros del gimnasio</td></tr>
+                <tr><td><code>fitzone_plans</code></td><td>Plan Service</td><td>Planes de membresia</td></tr>
+                <tr><td><code>fitzone_attendance</code></td><td>Attendance Service</td><td>Registros de asistencia</td></tr>
+                <tr><td><code>fitzone_payments</code></td><td>Payment Service</td><td>Pagos realizados</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Opcion A: Ejecutar el script SQL automatico</h3>
+        <p>Abrir CMD y navegar a la carpeta del proyecto:</p>
+        <pre><span class="cmd">cd C:\ruta\al\proyecto\fitzone</span>
+<span class="cmd">psql -U postgres -h localhost -f sql\init.sql</span>
+<span class="comment">// Ingresa el password: postgres</span></pre>
+
+        <p>Este script crea las 5 bases de datos, las tablas, e inserta datos de prueba (3 miembros, 4 planes, 1 usuario admin).</p>
+
+        <h3>Opcion B: Crear manualmente</h3>
+        <pre><span class="cmd">psql -U postgres -h localhost</span>
+
+<span class="comment">-- Dentro de psql ejecutar:</span>
+CREATE DATABASE fitzone_auth;
+CREATE DATABASE fitzone_members;
+CREATE DATABASE fitzone_plans;
+CREATE DATABASE fitzone_attendance;
+CREATE DATABASE fitzone_payments;
+\q</pre>
+
+        <div class="alert alert-info">
+            <strong>Nota:</strong> Si usas la Opcion B, las tablas se crearan automaticamente al iniciar los microservicios (gracias a Spring JPA con <code>ddl-auto: update</code>), pero no tendras datos de prueba.
+        </div>
+
+        <!-- ==================== FRONTEND DEPS ==================== -->
+        <h2 id="frontend"><span class="step-num">8</span> Instalar Dependencias del Frontend</h2>
+
+        <p>Abrir CMD y navegar a la carpeta del frontend:</p>
+        <pre><span class="cmd">cd C:\ruta\al\proyecto\fitzone\fitzone-frontend</span>
+<span class="cmd">npm install</span></pre>
+
+        <p>Esto descargara todas las librerias de Angular (~200 MB). Solo es necesario hacerlo una vez.</p>
+
+        <div class="alert alert-info">
+            <strong>Si sale error de permisos:</strong> Ejecutar CMD como Administrador.
+        </div>
+
+        <!-- ==================== EJECUTAR MANUAL ==================== -->
+        <div class="page-break"></div>
+        <h2 id="run"><span class="step-num">9</span> Ejecutar el Proyecto (Manual)</h2>
+
+        <div class="alert alert-warning">
+            <strong>Importante:</strong> Los servicios deben iniciarse EN ORDEN. Eureka primero, luego los microservicios, luego el Gateway, y finalmente el Frontend. Cada servicio necesita su propia ventana de CMD.
+        </div>
+
+        <h3>Paso 1: Iniciar Eureka Server (ventana CMD #1)</h3>
+        <pre><span class="cmd">cd C:\ruta\al\proyecto\fitzone\eureka-server</span>
+<span class="cmd">mvn spring-boot:run</span>
+
+<span class="comment">// Esperar hasta ver: "Started EurekaServerApplication"</span>
+<span class="comment">// Verificar en: http://localhost:8761</span></pre>
+
+        <h3>Paso 2: Iniciar Auth Service (ventana CMD #2)</h3>
+        <pre><span class="cmd">cd C:\ruta\al\proyecto\fitzone\auth-service</span>
+<span class="cmd">mvn spring-boot:run</span>
+
+<span class="comment">// Esperar hasta ver: "Started AuthServiceApplication"</span></pre>
+
+        <h3>Paso 3: Iniciar Member Service (ventana CMD #3)</h3>
+        <pre><span class="cmd">cd C:\ruta\al\proyecto\fitzone\member-service</span>
+<span class="cmd">mvn spring-boot:run</span></pre>
+
+        <h3>Paso 4: Iniciar Plan Service (ventana CMD #4)</h3>
+        <pre><span class="cmd">cd C:\ruta\al\proyecto\fitzone\plan-service</span>
+<span class="cmd">mvn spring-boot:run</span></pre>
+
+        <h3>Paso 5: Iniciar Attendance Service (ventana CMD #5)</h3>
+        <pre><span class="cmd">cd C:\ruta\al\proyecto\fitzone\attendance-service</span>
+<span class="cmd">mvn spring-boot:run</span></pre>
+
+        <h3>Paso 6: Iniciar Payment Service (ventana CMD #6)</h3>
+        <pre><span class="cmd">cd C:\ruta\al\proyecto\fitzone\payment-service</span>
+<span class="cmd">mvn spring-boot:run</span></pre>
+
+        <h3>Paso 7: Iniciar API Gateway (ventana CMD #7)</h3>
+        <pre><span class="cmd">cd C:\ruta\al\proyecto\fitzone\api-gateway</span>
+<span class="cmd">mvn spring-boot:run</span>
+
+<span class="comment">// Esperar hasta ver: "Started ApiGatewayApplication"</span></pre>
+
+        <h3>Paso 8: Iniciar Frontend Angular (ventana CMD #8)</h3>
+        <pre><span class="cmd">cd C:\ruta\al\proyecto\fitzone\fitzone-frontend</span>
+<span class="cmd">npx ng serve --open</span>
+
+<span class="comment">// Se abrira automaticamente el navegador en http://localhost:4200</span></pre>
+
+        <!-- ==================== SCRIPT AUTOMATICO ==================== -->
+        <div class="page-break"></div>
+        <h2 id="bat"><span class="step-num">10</span> Ejecutar con Script Automatico (.bat)</h2>
+
+        <p>En lugar de abrir 8 terminales manualmente, puedes usar el script automatico:</p>
+
+        <ol>
+            <li>Navegar a la carpeta del proyecto: <code>C:\ruta\al\proyecto\fitzone\</code></li>
+            <li>Hacer <strong>doble clic</strong> en <code>ejecutar.bat</code></li>
+            <li>El script:
+                <ul>
+                    <li>Verifica que Java, Maven y Node estan instalados</li>
+                    <li>Crea las bases de datos si no existen</li>
+                    <li>Ejecuta el script SQL de inicializacion</li>
+                    <li>Inicia los 7 servicios backend en orden</li>
+                    <li>Inicia el frontend Angular</li>
+                    <li>Abre el navegador automaticamente</li>
+                </ul>
+            </li>
+            <li>Cuando quieras detener todo, presiona <strong>cualquier tecla</strong> en la ventana principal</li>
+        </ol>
+
+        <div class="alert alert-success">
+            <strong>Consejo:</strong> El script tarda aproximadamente 2 minutos en levantar todos los servicios. Espera a ver el mensaje "FITZONE INICIADO CORRECTAMENTE" antes de usar la aplicacion.
+        </div>
+
+        <h3>Que veras al ejecutar el script:</h3>
+        <pre><span class="comment">============================================================</span>
+<span class="comment">   FITZONE - SISTEMA DE GESTION DE GIMNASIO</span>
+<span class="comment">   Iniciando todos los servicios...</span>
+<span class="comment">============================================================</span>
+
+<span class="cmd">[OK]</span> Java encontrado
+<span class="cmd">[OK]</span> Maven encontrado
+<span class="cmd">[OK]</span> Node.js encontrado
+<span class="cmd">[OK]</span> PostgreSQL verificado
+<span class="cmd">[OK]</span> Bases de datos creadas
+
+<span class="cmd">[1/7]</span> Iniciando Eureka Server (puerto 8761)...
+<span class="cmd">[2/7]</span> Iniciando Auth Service (puerto 8081)...
+<span class="cmd">[3/7]</span> Iniciando Member Service (puerto 8082)...
+<span class="cmd">[4/7]</span> Iniciando Plan Service (puerto 8083)...
+<span class="cmd">[5/7]</span> Iniciando Attendance Service (puerto 8084)...
+<span class="cmd">[6/7]</span> Iniciando Payment Service (puerto 8085)...
+<span class="cmd">[7/7]</span> Iniciando API Gateway (puerto 8080)...
+
+<span class="comment">============================================================</span>
+<span class="cmd">   FITZONE INICIADO CORRECTAMENTE</span>
+<span class="comment">============================================================</span>
+
+   Eureka Dashboard:  <span class="url">http://localhost:8761</span>
+   API Gateway:       <span class="url">http://localhost:8080</span>
+   Frontend:          <span class="url">http://localhost:4200</span>
+
+   Usuario: <span class="flag">admin</span> / Password: <span class="flag">admin123</span></pre>
+
+        <!-- ==================== VERIFICAR ==================== -->
+        <div class="page-break"></div>
+        <h2 id="verify"><span class="step-num">11</span> Verificar que Todo Funcione</h2>
+
+        <h3>11.1 Verificar Eureka Dashboard</h3>
+        <p>Abrir en el navegador: <code>http://localhost:8761</code></p>
+        <p>Deberias ver 6 servicios registrados:</p>
+        <table>
+            <thead>
+                <tr><th>Servicio</th><th>Puerto</th><th>Estado esperado</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>API-GATEWAY</td><td>8080</td><td>UP</td></tr>
+                <tr><td>AUTH-SERVICE</td><td>8081</td><td>UP</td></tr>
+                <tr><td>MEMBER-SERVICE</td><td>8082</td><td>UP</td></tr>
+                <tr><td>PLAN-SERVICE</td><td>8083</td><td>UP</td></tr>
+                <tr><td>ATTENDANCE-SERVICE</td><td>8084</td><td>UP</td></tr>
+                <tr><td>PAYMENT-SERVICE</td><td>8085</td><td>UP</td></tr>
+            </tbody>
+        </table>
+
+        <h3>11.2 Verificar el Frontend</h3>
+        <p>Abrir: <code>http://localhost:4200</code></p>
+        <p>Deberia mostrar la landing page con el carrusel 3D de imagenes fitness.</p>
+
+        <h3>11.3 Probar Login</h3>
+        <ol>
+            <li>Hacer clic en <strong>"Iniciar Sesion"</strong></li>
+            <li>Ingresar: Usuario <code>admin</code> / Password <code>admin123</code></li>
+            <li>Deberia redirigir al Dashboard/Panel</li>
+        </ol>
+
+        <h3>11.4 Probar cada modulo</h3>
+        <ul class="checklist">
+            <li><strong>Miembros:</strong> Ir a la seccion Miembros, verificar que aparecen 3 miembros de prueba</li>
+            <li><strong>Planes:</strong> Ir a Planes, verificar los 4 planes precargados</li>
+            <li><strong>Asistencia:</strong> Registrar una nueva entrada (check-in)</li>
+            <li><strong>Pagos:</strong> Registrar un pago y verificar que el miembro se active automaticamente</li>
+        </ul>
+
+        <h3>11.5 Probar endpoints con Postman (opcional)</h3>
+        <ol>
+            <li>Importar la coleccion: <code>postman/FitZone.postman_collection.json</code></li>
+            <li>Ejecutar primero <strong>"Iniciar Sesion"</strong> - el token se guarda automaticamente</li>
+            <li>Probar los demas endpoints que usaran el token guardado</li>
+        </ol>
+
+        <!-- ==================== TROUBLESHOOT ==================== -->
+        <div class="page-break"></div>
+        <h2 id="troubleshoot"><span class="step-num">12</span> Solucion de Problemas</h2>
+
+        <h3>Error: "java no se reconoce como comando"</h3>
+        <div class="alert alert-info">
+            <strong>Solucion:</strong> Agregar Java al PATH del sistema. Buscar "Variables de entorno" en Inicio, editar la variable PATH y agregar la ruta <code>C:\Program Files\Eclipse Adoptium\jdk-21.x.x\bin</code>. Reiniciar la terminal.
+        </div>
+
+        <h3>Error: "mvn no se reconoce como comando"</h3>
+        <div class="alert alert-info">
+            <strong>Solucion:</strong> Agregar Maven al PATH. Editar PATH y agregar <code>C:\maven\apache-maven-3.9.x\bin</code>. Crear variable de entorno <code>MAVEN_HOME</code>. Reiniciar la terminal.
+        </div>
+
+        <h3>Error: Puerto ya en uso (Address already in use)</h3>
+        <div class="alert alert-info">
+            <strong>Solucion:</strong> Otro programa esta usando ese puerto. Ejecutar en CMD:
+            <pre style="background:#1a1a2e;margin-top:10px"><span class="cmd">netstat -ano | findstr :8080</span>
+<span class="cmd">taskkill /PID [numero_pid] /F</span></pre>
+            Reemplazar <code>[numero_pid]</code> con el numero que aparece en la ultima columna.
+        </div>
+
+        <h3>Error: No puede conectar a la base de datos</h3>
+        <div class="alert alert-info">
+            <strong>Solucion:</strong>
+            <ol>
+                <li>Verificar que PostgreSQL esta corriendo: Buscar "Servicios" en Inicio, buscar "postgresql" y asegurar que este en estado "Ejecutando"</li>
+                <li>Verificar que el password es <code>postgres</code></li>
+                <li>Verificar que las bases de datos existen: <code>psql -U postgres -l</code></li>
+            </ol>
+        </div>
+
+        <h3>Error: Connection refused en RabbitMQ</h3>
+        <div class="alert alert-info">
+            <strong>Solucion:</strong> Verificar que RabbitMQ esta corriendo. Buscar "Servicios" en Inicio, buscar "RabbitMQ" y asegurar que este en estado "Ejecutando". Si no aparece, reinstalar RabbitMQ.
+        </div>
+
+        <h3>Error: Login devuelve 403 Forbidden</h3>
+        <div class="alert alert-info">
+            <strong>Solucion:</strong> El hash del password en la base de datos no coincide. Registrar un nuevo usuario via la API:
+            <pre style="background:#1a1a2e;margin-top:10px"><span class="comment">En Postman o navegador, hacer POST a:</span>
+<span class="url">http://localhost:8080/auth/register</span>
+
+<span class="comment">Body (JSON):</span>
+{
+  "username": "admin2",
+  "email": "admin2@fitzone.pe",
+  "password": "admin123",
+  "role": "ADMIN"
+}</pre>
+            Luego usar <code>admin2 / admin123</code> para el login.
+        </div>
+
+        <h3>El frontend carga pero no muestra datos</h3>
+        <div class="alert alert-info">
+            <strong>Solucion:</strong> El API Gateway probablemente no esta corriendo. Verificar que <code>http://localhost:8080/actuator/health</code> devuelve <code>{"status":"UP"}</code>. Si no responde, iniciar el Gateway.
+        </div>
+
+        <h3>Angular muestra errores de compilacion</h3>
+        <div class="alert alert-info">
+            <strong>Solucion:</strong> Eliminar <code>node_modules</code> y reinstalar:
+            <pre style="background:#1a1a2e;margin-top:10px"><span class="cmd">cd fitzone-frontend</span>
+<span class="cmd">rmdir /s /q node_modules</span>
+<span class="cmd">npm install</span>
+<span class="cmd">npx ng serve</span></pre>
+        </div>
+
+        <!-- ==================== RESUMEN PUERTOS ==================== -->
+        <h2 style="border-bottom-color: #27ae60;">Resumen de Puertos y URLs</h2>
+
+        <div class="diagram">┌─────────────────────────────────────────────────────────────┐
+│                    FITZONE - MAPA DE SERVICIOS              │
+├─────────────────┬──────────┬────────────────────────────────┤
+│ Servicio        │ Puerto   │ URL                            │
+├─────────────────┼──────────┼────────────────────────────────┤
+│ Frontend        │ 4200     │ http://localhost:4200           │
+│ API Gateway     │ 8080     │ http://localhost:8080           │
+│ Eureka          │ 8761     │ http://localhost:8761           │
+│ Auth Service    │ 8081     │ http://localhost:8081/auth      │
+│ Member Service  │ 8082     │ http://localhost:8082/miembros  │
+│ Plan Service    │ 8083     │ http://localhost:8083/planes    │
+│ Attendance Svc  │ 8084     │ http://localhost:8084/asistencia│
+│ Payment Service │ 8085     │ http://localhost:8085/pagos     │
+│ PostgreSQL      │ 5432     │ localhost:5432                  │
+│ RabbitMQ        │ 5672     │ localhost:5672                  │
+│ RabbitMQ Panel  │ 15672    │ http://localhost:15672          │
+└─────────────────┴──────────┴────────────────────────────────┘
+
+Credenciales:
+  App:        admin / admin123
+  PostgreSQL: postgres / postgres
+  RabbitMQ:   guest / guest</div>
+
+    </div>
+
+    <div class="footer">
+        FitZone - Sistema de Gestion de Gimnasio | Guia de Instalacion en Windows | 2026
+    </div>
+</div>
+
+</body>
+</html>

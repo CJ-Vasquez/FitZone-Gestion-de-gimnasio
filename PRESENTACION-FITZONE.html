@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitZone - Presentacion</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap');
+
+        :root {
+            --purple: #8b5cf6;
+            --blue: #3b82f6;
+            --green: #10b981;
+            --orange: #f59e0b;
+            --pink: #ec4899;
+            --red: #ef4444;
+            --cyan: #06b6d4;
+            --dark: #0f172a;
+            --darker: #020617;
+            --card-bg: rgba(255,255,255,0.04);
+            --card-border: rgba(255,255,255,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--darker);
+            color: #e2e8f0;
+            overflow: hidden;
+        }
+
+        /* ===== SLIDES ===== */
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .slide.active { display: block; }
+
+        /* ===== PRINT / PDF ===== */
+        @media print {
+            body { overflow: visible; }
+            .slide {
+                display: block !important;
+                width: 297mm; height: 210mm;
+                page-break-after: always;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .slide:last-child { page-break-after: avoid; }
+            .nav-bar { display: none !important; }
+        }
+        @page { size: A4 landscape; margin: 0; }
+
+        /* ===== DECORATIVOS ===== */
+        .orb {
+            position: absolute; border-radius: 50%;
+            filter: blur(120px); opacity: 0.12; pointer-events: none;
+        }
+        .orb-1 { width: 500px; height: 500px; background: var(--purple); top: -150px; right: -100px; }
+        .orb-2 { width: 400px; height: 400px; background: var(--blue); bottom: -100px; left: -80px; }
+        .orb-3 { width: 350px; height: 350px; background: var(--cyan); top: 30%; left: 60%; }
+        .orb-4 { width: 300px; height: 300px; background: var(--pink); bottom: 10%; right: 5%; }
+
+        .slide-inner {
+            position: relative; z-index: 2;
+            width: 100%; height: 100%;
+            padding: 50px 70px 70px;
+            display: flex; flex-direction: column;
+        }
+
+        /* ===== HEADER DE SLIDE ===== */
+        .slide-header {
+            display: flex; align-items: center; gap: 16px;
+            margin-bottom: 30px;
+        }
+        .slide-tag {
+            background: linear-gradient(135deg, var(--purple), var(--blue));
+            color: white; font-size: 12px; font-weight: 700;
+            padding: 6px 16px; border-radius: 20px;
+            text-transform: uppercase; letter-spacing: 1.5px;
+        }
+        .slide-label {
+            font-size: 13px; color: #64748b; font-weight: 500;
+        }
+
+        .slide-title {
+            font-size: 40px; font-weight: 800; line-height: 1.15;
+            margin-bottom: 8px; color: white;
+        }
+        .slide-desc {
+            font-size: 16px; color: #94a3b8; line-height: 1.6;
+            max-width: 700px; margin-bottom: 25px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--purple), var(--blue), var(--cyan));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ===== LAYOUTS ===== */
+        .two-col { display: flex; gap: 50px; flex: 1; align-items: stretch; }
+        .col { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+
+        .three-col { display: flex; gap: 20px; flex: 1; }
+        .three-col .col { flex: 1; }
+
+        .content-area { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px; padding: 24px;
+            backdrop-filter: blur(10px);
+        }
+        .card h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: white; }
+        .card p { font-size: 13px; color: #94a3b8; line-height: 1.6; }
+
+        .card-grid { display: grid; gap: 16px; }
+        .g2 { grid-template-columns: 1fr 1fr; }
+        .g3 { grid-template-columns: 1fr 1fr 1fr; }
+
+        .mini-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px; padding: 16px 18px;
+        }
+
+        /* ===== SERVICE CARD ===== */
+        .svc-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px; padding: 20px;
+            display: flex; flex-direction: column; gap: 10px;
+            flex: 1;
+        }
+        .svc-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px;
+        }
+        .svc-card h4 { font-size: 15px; font-weight: 700; color: white; margin: 0; }
+        .svc-card .svc-port {
+            font-family: 'Fira Code', monospace; font-size: 11px;
+            color: #64748b; background: rgba(0,0,0,0.3);
+            padding: 2px 8px; border-radius: 6px; display: inline-block;
+            margin-top: -4px; width: fit-content;
+        }
+        .svc-card .svc-desc { font-size: 12px; color: #94a3b8; line-height: 1.5; }
+        .svc-endpoints {
+            background: rgba(0,0,0,0.25); border-radius: 8px;
+            padding: 10px 12px; font-family: 'Fira Code', monospace;
+            font-size: 11px; line-height: 1.8; color: #64748b;
+        }
+        .m-get { color: var(--green); font-weight: 700; }
+        .m-post { color: var(--blue); font-weight: 700; }
+        .m-put { color: var(--orange); font-weight: 700; }
+        .m-del { color: var(--pink); font-weight: 700; }
+
+        /* ===== CODE BOX ===== */
+        .code-box {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 14px; padding: 24px 28px;
+            font-family: 'Fira Code', monospace;
+            font-size: 13px; line-height: 1.7;
+            white-space: pre; color: #94a3b8;
+            overflow: hidden;
+        }
+        .c-purple { color: var(--purple); } .c-blue { color: var(--blue); }
+        .c-green { color: var(--green); }   .c-orange { color: var(--orange); }
+        .c-pink { color: var(--pink); }     .c-cyan { color: var(--cyan); }
+        .c-white { color: white; }          .c-dim { color: #475569; }
+
+        /* ===== FLOW STEPS ===== */
+        .flow {
+            display: flex; flex-direction: column; gap: 14px;
+        }
+        .flow-item {
+            display: flex; align-items: flex-start; gap: 16px;
+        }
+        .flow-dot {
+            width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; font-weight: 800; color: white;
+            background: linear-gradient(135deg, var(--purple), var(--blue));
+        }
+        .flow-content { padding-top: 4px; }
+        .flow-content strong { color: white; font-weight: 600; }
+        .flow-content p { font-size: 13.5px; color: #94a3b8; line-height: 1.5; }
+
+        /* ===== VISUAL FLOW (horizontal) ===== */
+        .h-flow {
+            display: flex; align-items: center; justify-content: center;
+            gap: 0; margin: 20px 0;
+        }
+        .h-flow-box {
+            background: var(--card-bg); border: 1px solid var(--card-border);
+            border-radius: 14px; padding: 20px 24px; text-align: center;
+            min-width: 180px;
+        }
+        .h-flow-box h5 { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+        .h-flow-box p { font-size: 11px; color: #94a3b8; line-height: 1.5; }
+        .h-flow-arrow {
+            width: 60px; display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .h-flow-arrow svg { width: 50px; height: 20px; }
+
+        /* ===== PILLS ===== */
+        .pill-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 10px 0; }
+        .pill {
+            display: flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 16px; border-radius: 25px;
+            font-size: 13px; font-weight: 500;
+        }
+        .pill-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+        /* ===== BULLET LIST ===== */
+        .blist { list-style: none; padding: 0; margin: 10px 0; }
+        .blist li {
+            padding: 7px 0 7px 24px; position: relative;
+            font-size: 14px; color: #cbd5e1; line-height: 1.5;
+        }
+        .blist li::before {
+            content: ""; position: absolute; left: 0; top: 14px;
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--purple);
+        }
+        .blist li strong { color: white; }
+
+        /* ===== STAT BOXES ===== */
+        .stat-row { display: flex; gap: 14px; margin: 15px 0; }
+        .stat {
+            background: var(--card-bg); border: 1px solid var(--card-border);
+            border-radius: 12px; padding: 14px 20px; text-align: center; flex: 1;
+        }
+        .stat-num { font-size: 28px; font-weight: 800; }
+        .stat-label { font-size: 11px; color: #64748b; margin-top: 2px; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* ===== FOOTER ===== */
+        .slide-footer {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            padding: 16px 70px; display: flex;
+            justify-content: space-between; align-items: center;
+            z-index: 10;
+        }
+        .slide-footer .logo {
+            font-size: 13px; font-weight: 700; color: #334155;
+            letter-spacing: 3px;
+        }
+        .slide-footer .page {
+            font-size: 13px; color: #334155; font-weight: 500;
+        }
+
+        /* ===== NAV BAR ===== */
+        .nav-bar {
+            position: fixed; bottom: 24px; left: 50%;
+            transform: translateX(-50%); z-index: 1000;
+            display: flex; gap: 8px; align-items: center;
+            background: rgba(15,23,42,0.85);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 16px; border-radius: 40px;
+            backdrop-filter: blur(20px);
+        }
+        .nav-bar button {
+            background: rgba(255,255,255,0.08); border: none;
+            color: white; padding: 8px 20px; border-radius: 20px;
+            cursor: pointer; font-family: 'Poppins'; font-size: 13px;
+            font-weight: 500; transition: all 0.2s;
+        }
+        .nav-bar button:hover { background: var(--purple); }
+        .nav-bar .counter { color: #64748b; font-size: 13px; padding: 0 8px; }
+        .nav-bar .pdf-btn { background: rgba(139,92,246,0.2); color: var(--purple); }
+        .nav-bar .pdf-btn:hover { background: var(--purple); color: white; }
+
+        .progress {
+            position: fixed; top: 0; left: 0; height: 3px;
+            background: linear-gradient(90deg, var(--purple), var(--blue), var(--cyan));
+            z-index: 1000; transition: width 0.4s ease;
+        }
+
+        /* ===== BACKGROUNDS ===== */
+        .bg-1 { background: linear-gradient(160deg, #020617, #0f172a, #1e1b4b); }
+        .bg-2 { background: linear-gradient(160deg, #020617, #0c1322, #172554); }
+        .bg-3 { background: linear-gradient(160deg, #020617, #0f172a, #14532d20); }
+        .bg-4 { background: linear-gradient(160deg, #020617, #1e1b4b, #0f172a); }
+        .bg-5 { background: linear-gradient(160deg, #020617, #172554, #0f172a); }
+        .bg-6 { background: linear-gradient(160deg, #020617, #431407, #0f172a); }
+        .bg-7 { background: linear-gradient(160deg, #020617, #831843, #0f172a); }
+        .bg-8 { background: linear-gradient(160deg, #020617, #1e1b4b, #172554); }
+
+        /* ===== TABLA ===== */
+        .styled-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .styled-table th {
+            text-align: left; padding: 10px 14px; font-weight: 600;
+            color: var(--purple); border-bottom: 2px solid rgba(139,92,246,0.2);
+            font-size: 12px; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .styled-table td {
+            padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.04);
+            color: #cbd5e1;
+        }
+        .styled-table code {
+            font-family: 'Fira Code', monospace; font-size: 12px;
+            background: rgba(0,0,0,0.3); padding: 2px 8px; border-radius: 4px;
+            color: var(--green);
+        }
+
+        /* ===== COVER ===== */
+        .cover-center {
+            flex: 1; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; text-align: center;
+        }
+        .cover-logo {
+            font-size: 80px; font-weight: 900; letter-spacing: 8px;
+            background: linear-gradient(135deg, #a78bfa, #60a5fa, #34d399);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
+        }
+        .cover-subtitle {
+            font-size: 22px; font-weight: 300; color: #64748b;
+            margin-bottom: 50px;
+        }
+        .cover-divider {
+            width: 60px; height: 3px; border-radius: 2px;
+            background: linear-gradient(90deg, var(--purple), var(--blue));
+            margin: 0 auto 30px;
+        }
+
+        /* ===== COMPARE BOXES ===== */
+        .compare { display: flex; gap: 24px; }
+        .compare-box {
+            flex: 1; border-radius: 16px; padding: 28px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+        }
+        .compare-box h4 {
+            font-size: 16px; font-weight: 700; margin-bottom: 14px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .compare-box .icon-circle {
+            width: 32px; height: 32px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="progress" id="progressBar"></div>
+
+<!-- ======================== SLIDE 1: PORTADA ======================== -->
+<div class="slide bg-1 active" id="s1">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="slide-inner">
+        <div class="cover-center">
+            <div class="cover-logo">FITZONE</div>
+            <div class="cover-subtitle">Sistema de Gestion de Gimnasio</div>
+            <div class="cover-divider"></div>
+
+            <div class="pill-row" style="justify-content:center;margin-bottom:40px;">
+                <span class="pill"><span class="pill-dot" style="background:#6db33f;"></span> Spring Boot 3.2</span>
+                <span class="pill"><span class="pill-dot" style="background:#dd0031;"></span> Angular 17</span>
+                <span class="pill"><span class="pill-dot" style="background:#336791;"></span> PostgreSQL</span>
+                <span class="pill"><span class="pill-dot" style="background:#ff6600;"></span> RabbitMQ</span>
+                <span class="pill"><span class="pill-dot" style="background:#f89820;"></span> Java 21</span>
+            </div>
+
+            <div class="stat-row" style="max-width:600px;">
+                <div class="stat">
+                    <div class="stat-num" style="color:var(--purple);">5</div>
+                    <div class="stat-label">Microservicios</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num" style="color:var(--blue);">5</div>
+                    <div class="stat-label">Bases de Datos</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num" style="color:var(--green);">24</div>
+                    <div class="stat-label">Endpoints REST</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num" style="color:var(--orange);">6</div>
+                    <div class="stat-label">Vistas Angular</div>
+                </div>
+            </div>
+
+            <p style="color:#475569;font-size:14px;margin-top:30px;">Arquitectura de Microservicios &nbsp;|&nbsp; Febrero 2026</p>
+        </div>
+    </div>
+    <div class="slide-footer"><span class="logo">FITZONE</span><span class="page">1 / 8</span></div>
+</div>
+
+<!-- ======================== SLIDE 2: PROBLEMA ======================== -->
+<div class="slide bg-2" id="s2">
+    <div class="orb orb-4"></div>
+    <div class="slide-inner">
+        <div class="slide-header">
+            <span class="slide-tag">Contexto</span>
+            <span class="slide-label">Motivacion del proyecto</span>
+        </div>
+        <div class="slide-title">Por que <span class="gradient-text">Microservicios</span>?</div>
+        <div class="slide-desc">Un gimnasio maneja multiples procesos: miembros, planes, pagos y asistencia. Necesitamos que cada modulo sea independiente, escalable y resiliente.</div>
+
+        <div class="compare" style="flex:1;">
+            <div class="compare-box" style="border-top:3px solid var(--red);">
+                <h4>
+                    <span class="icon-circle" style="background:rgba(239,68,68,0.15);color:var(--red);">X</span>
+                    Monolito Tradicional
+                </h4>
+                <div class="code-box" style="font-size:12px;padding:16px 20px;margin-bottom:14px;">
+<span class="c-dim">┌───────────────────────┐</span>
+<span class="c-pink">│    UNA APLICACION     │</span>
+<span class="c-dim">│  ┌─────┐ ┌─────┐     │</span>
+<span class="c-dim">│  │Auth │ │Pagos│     │</span>
+<span class="c-dim">│  └─────┘ └─────┘     │</span>
+<span class="c-dim">│  ┌─────┐ ┌─────┐     │</span>
+<span class="c-dim">│  │Memb.│ │Asist│     │</span>
+<span class="c-dim">│  └─────┘ └─────┘     │</span>
+<span class="c-dim">│       ┌──────┐       │</span>
+<span class="c-orange">│       │ 1 BD │</span><span class="c-dim">       │</span>
+<span class="c-dim">│       └──────┘       │</span>
+<span class="c-dim">└───────────────────────┘</span></div>
+                <ul class="blist">
+                    <li>Un fallo <strong style="color:var(--red);">tumba todo</strong> el sistema</li>
+                    <li>Cambiar un modulo requiere <strong>re-desplegar todo</strong></li>
+                    <li>No se puede escalar por partes</li>
+                    <li>Todo el equipo en un <strong>solo repositorio</strong></li>
+                </ul>
+            </div>
+
+            <div class="compare-box" style="border-top:3px solid var(--green);">
+                <h4>
+                    <span class="icon-circle" style="background:rgba(16,185,129,0.15);color:var(--green);">✓</span>
+                    Microservicios (Nuestra solucion)
+                </h4>
+                <div class="code-box" style="font-size:12px;padding:16px 20px;margin-bottom:14px;">
+<span class="c-green">┌─────┐  ┌─────┐  ┌─────┐</span>
+<span class="c-green">│Auth │  │Memb.│  │Plan │</span>
+<span class="c-green">└──┬──┘  └──┬──┘  └──┬──┘</span>
+<span class="c-orange">┌──┴──┐  ┌──┴──┐  ┌──┴──┐</span>
+<span class="c-orange">│ BD1 │  │ BD2 │  │ BD3 │</span>
+<span class="c-orange">└─────┘  └─────┘  └─────┘</span>
+<span class="c-green">┌─────┐  ┌─────┐</span>
+<span class="c-green">│Asist│  │Pago │</span>
+<span class="c-green">└──┬──┘  └──┬──┘</span>
+<span class="c-orange">┌──┴──┐  ┌──┴──┐</span>
+<span class="c-orange">│ BD4 │  │ BD5 │</span>
+<span class="c-orange">└─────┘  └─────┘</span></div>
+                <ul class="blist">
+                    <li>Si pagos falla, <strong style="color:var(--green);">la asistencia sigue</strong></li>
+                    <li>Cada servicio se <strong>escala independiente</strong></li>
+                    <li><strong>5 bases de datos</strong> aisladas (sin acoplamiento)</li>
+                    <li>Equipos trabajan <strong>en paralelo</strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer"><span class="logo">FITZONE</span><span class="page">2 / 8</span></div>
+</div>
+
+<!-- ======================== SLIDE 3: ARQUITECTURA ======================== -->
+<div class="slide bg-3" id="s3">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="slide-inner">
+        <div class="slide-header">
+            <span class="slide-tag">Arquitectura</span>
+            <span class="slide-label">Vision general del sistema</span>
+        </div>
+        <div class="slide-title">Como se conecta <span class="gradient-text">todo el sistema</span></div>
+
+        <div class="content-area" style="justify-content:center;">
+            <div class="code-box" style="font-size:13.5px;line-height:1.55;padding:30px 40px;max-width:100%;">
+<span class="c-dim">                         ┌────────────────────────┐</span>
+<span class="c-cyan">                         │    🌐  FRONTEND        │</span>
+<span class="c-dim">                         │    Angular 17  :4200   │</span>
+<span class="c-dim">                         └───────────┬────────────┘</span>
+<span class="c-dim">                                     │</span>
+<span class="c-purple">                         ┌───────────▼────────────┐</span>
+<span class="c-purple">                         │   🚪  API GATEWAY      │</span>
+<span class="c-purple">                         │   Spring Cloud  :8080  │</span>
+<span class="c-purple">                         │   JWT Filter + CORS    │</span>
+<span class="c-purple">                         └───────────┬────────────┘</span>
+<span class="c-dim">                ┌───────────┬────────┼────────┬───────────┐</span>
+<span class="c-dim">                │           │        │        │           │</span>
+<span class="c-blue">          ┌─────▼────┐┌────▼─────┐┌▼─────┐┌─▼──────┐┌──▼───────┐</span>
+<span class="c-blue">          │ 🔐 AUTH  ││ 👥 MEMB. ││ 📋   ││ 📅     ││ 💳       │</span>
+<span class="c-blue">          │  :8081   ││  :8082   ││ PLAN ││ ASIST. ││  PAGO    │</span>
+<span class="c-blue">          │          ││          ││:8083 ││ :8084  ││  :8085   │</span>
+<span class="c-blue">          └────┬─────┘└────┬─────┘└──┬───┘└──┬─────┘└────┬─────┘</span>
+<span class="c-orange">          ┌────▼─────┐┌────▼─────┐┌──▼───┐┌──▼─────┐┌────▼─────┐</span>
+<span class="c-orange">          │  BD auth ││ BD memb. ││BD    ││BD      ││BD        │</span>
+<span class="c-orange">          │ Postgres ││ Postgres ││plans ││attend. ││payments  │</span>
+<span class="c-orange">          └──────────┘└──────────┘└──────┘└────────┘└──────────┘</span>
+
+<span class="c-green">    🔍 EUREKA SERVER :8761</span><span class="c-dim">               </span><span class="c-pink">🐰 RABBITMQ :5672</span>
+<span class="c-dim">    Service Discovery                    Mensajeria Asincrona</span>
+<span class="c-dim">    (registro dinamico)                  (Payment → Member)</span></div>
+
+            <div style="display:flex;gap:14px;margin-top:20px;">
+                <div class="mini-card" style="flex:1;padding:12px 16px;border-left:3px solid var(--cyan);">
+                    <p style="font-size:12px;margin:0;"><strong style="color:var(--cyan);">Frontend</strong> solo habla con el Gateway (:8080), nunca directo a los servicios</p>
+                </div>
+                <div class="mini-card" style="flex:1;padding:12px 16px;border-left:3px solid var(--green);">
+                    <p style="font-size:12px;margin:0;"><strong style="color:var(--green);">Eureka</strong> permite descubrimiento dinamico — sin hardcodear IPs</p>
+                </div>
+                <div class="mini-card" style="flex:1;padding:12px 16px;border-left:3px solid var(--orange);">
+                    <p style="font-size:12px;margin:0;"><strong style="color:var(--orange);">Cada servicio</strong> tiene su propia BD PostgreSQL (Database per Service)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer"><span class="logo">FITZONE</span><span class="page">3 / 8</span></div>
+</div>
+
+<!-- ======================== SLIDE 4: MICROSERVICIOS ======================== -->
+<div class="slide bg-4" id="s4">
+    <div class="orb orb-3"></div>
+    <div class="slide-inner">
+        <div class="slide-header">
+            <span class="slide-tag">Backend</span>
+            <span class="slide-label">Detalle de cada servicio</span>
+        </div>
+        <div class="slide-title">Los 5 <span class="gradient-text">Microservicios</span></div>
+        <div class="slide-desc" style="margin-bottom:20px;">Cada servicio sigue el patron: <strong style="color:white;">Controller → Service → Repository → Database</strong></div>
+
+        <div style="display:flex;gap:14px;flex:1;">
+            <div class="svc-card" style="border-top:3px solid var(--purple);">
+                <div class="svc-icon" style="background:rgba(139,92,246,0.12);">🔐</div>
+                <h4>Autenticacion</h4>
+                <span class="svc-port">:8081  /auth</span>
+                <p class="svc-desc">Registro, login, tokens JWT, gestion de usuarios y roles</p>
+                <div class="svc-endpoints">
+<span class="m-post">POST</span> /auth/register
+<span class="m-post">POST</span> /auth/login
+<span class="m-get">GET</span>  /auth/users
+<span class="m-put">PUT</span>  /auth/users/{id}
+<span class="m-del">DEL</span>  /auth/users/{id}</div>
+                <p style="font-size:10px;color:#475569;margin-top:auto;">Roles: ADMIN, ENTRENADOR, MIEMBRO</p>
+            </div>
+
+            <div class="svc-card" style="border-top:3px solid var(--blue);">
+                <div class="svc-icon" style="background:rgba(59,130,246,0.12);">👥</div>
+                <h4>Miembros</h4>
+                <span class="svc-port">:8082  /miembros</span>
+                <p class="svc-desc">CRUD de clientes del gimnasio, estados, DNI, planes</p>
+                <div class="svc-endpoints">
+<span class="m-get">GET</span>  /miembros
+<span class="m-get">GET</span>  /miembros/{id}
+<span class="m-post">POST</span> /miembros
+<span class="m-put">PUT</span>  /miembros/{id}
+<span class="m-del">DEL</span>  /miembros/{id}</div>
+                <p style="font-size:10px;color:#475569;margin-top:auto;">Estados: ACTIVO, INACTIVO, PENDIENTE</p>
+            </div>
+
+            <div class="svc-card" style="border-top:3px solid var(--green);">
+                <div class="svc-icon" style="background:rgba(16,185,129,0.12);">📋</div>
+                <h4>Planes</h4>
+                <span class="svc-port">:8083  /planes</span>
+                <p class="svc-desc">Membresias con precios, duracion y estado activo/inactivo</p>
+                <div class="svc-endpoints">
+<span class="m-get">GET</span>  /planes
+<span class="m-get">GET</span>  /planes?soloActivos
+<span class="m-post">POST</span> /planes
+<span class="m-put">PUT</span>  /planes/{id}
+<span class="m-del">DEL</span>  /planes/{id}</div>
+                <p style="font-size:10px;color:#475569;margin-top:auto;">Ej: Plan Basico S/80, Plan Plus S/120</p>
+            </div>
+
+            <div class="svc-card" style="border-top:3px solid var(--orange);">
+                <div class="svc-icon" style="background:rgba(245,158,11,0.12);">📅</div>
+                <h4>Asistencia</h4>
+                <span class="svc-port">:8084  /asistencia</span>
+                <p class="svc-desc">Check-in/out, calculo de minutos en local, observaciones</p>
+                <div class="svc-endpoints">
+<span class="m-get">GET</span>  /asistencia
+<span class="m-get">GET</span>  /asistencia/miembro/{id}
+<span class="m-post">POST</span> /asistencia/entrada
+<span class="m-put">PUT</span>  /asistencia/{id}
+<span class="m-del">DEL</span>  /asistencia/{id}</div>
+                <p style="font-size:10px;color:#475569;margin-top:auto;">Calcula automatico: minutosEnLocal</p>
+            </div>
+
+            <div class="svc-card" style="border-top:3px solid var(--pink);">
+                <div class="svc-icon" style="background:rgba(236,72,153,0.12);">💳</div>
+                <h4>Pagos</h4>
+                <span class="svc-port">:8085  /pagos</span>
+                <p class="svc-desc">Pagos con metodos peruanos, evento RabbitMQ al confirmar</p>
+                <div class="svc-endpoints">
+<span class="m-get">GET</span>  /pagos
+<span class="m-get">GET</span>  /pagos/miembro/{id}
+<span class="m-post">POST</span> /pagos
+<span class="m-put">PUT</span>  /pagos/{id}
+<span class="m-del">DEL</span>  /pagos/{id}</div>
+                <p style="font-size:10px;color:#475569;margin-top:auto;">EFECTIVO, TARJETA, YAPE, PLIN</p>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer"><span class="logo">FITZONE</span><span class="page">4 / 8</span></div>
+</div>
+
+<!-- ======================== SLIDE 5: JWT ======================== -->
+<div class="slide bg-5" id="s5">
+    <div class="orb orb-1"></div>
+    <div class="slide-inner">
+        <div class="slide-header">
+            <span class="slide-tag">Seguridad</span>
+            <span class="slide-label">Autenticacion y autorizacion</span>
+        </div>
+        <div class="slide-title">Flujo de Autenticacion <span class="gradient-text">JWT</span></div>
+
+        <div class="two-col" style="gap:40px;">
+            <div class="col">
+                <div class="slide-desc" style="font-size:14px;">JSON Web Token permite autenticacion <strong style="color:white;">stateless</strong> — el Gateway valida tokens sin consultar la BD.</div>
+
+                <div class="flow">
+                    <div class="flow-item">
+                        <div class="flow-dot">1</div>
+                        <div class="flow-content">
+                            <p><strong>Login:</strong> POST /auth/login con username + password</p>
+                        </div>
+                    </div>
+                    <div class="flow-item">
+                        <div class="flow-dot">2</div>
+                        <div class="flow-content">
+                            <p><strong>Auth Service</strong> valida con BCrypt y genera token (24h)</p>
+                        </div>
+                    </div>
+                    <div class="flow-item">
+                        <div class="flow-dot">3</div>
+                        <div class="flow-content">
+                            <p><strong>Frontend</strong> almacena token en localStorage</p>
+                        </div>
+                    </div>
+                    <div class="flow-item">
+                        <div class="flow-dot">4</div>
+                        <div class="flow-content">
+                            <p><strong>Interceptor Angular</strong> agrega header Authorization automaticamente</p>
+                        </div>
+                    </div>
+                    <div class="flow-item">
+                        <div class="flow-dot">5</div>
+                        <div class="flow-content">
+                            <p><strong>Gateway Filter</strong> valida firma HMAC-SHA256 sin tocar la BD</p>
+                        </div>
+                    </div>
+                    <div class="flow-item">
+                        <div class="flow-dot">6</div>
+                        <div class="flow-content">
+                            <p><strong>Redirige</strong> al microservicio con header X-Username</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col" style="gap:16px;">
+                <div class="card" style="border-left:3px solid var(--purple);">
+                    <h4 style="font-size:14px;color:var(--purple);">Estructura del Token JWT</h4>
+                    <div class="code-box" style="padding:14px 18px;font-size:12px;margin-top:10px;">
+<span class="c-blue">HEADER:</span>
+<span class="c-dim">{</span> <span class="c-white">"alg"</span>: <span class="c-green">"HS256"</span>, <span class="c-white">"typ"</span>: <span class="c-green">"JWT"</span> <span class="c-dim">}</span>
+
+<span class="c-green">PAYLOAD:</span>
+<span class="c-dim">{</span>
+  <span class="c-white">"sub"</span>:  <span class="c-green">"admin"</span>,
+  <span class="c-white">"role"</span>: <span class="c-green">"ROLE_ADMIN"</span>,
+  <span class="c-white">"iat"</span>:  <span class="c-orange">1708000000</span>,
+  <span class="c-white">"exp"</span>:  <span class="c-orange">1708086400</span>
+<span class="c-dim">}</span>
+
+<span class="c-orange">SIGNATURE:</span>
+<span class="c-dim">HMACSHA256(header + payload,</span>
+           <span class="c-pink">SECRET_KEY</span><span class="c-dim">)</span></div>
+                </div>
+
+                <div class="card" style="border-left:3px solid var(--green);">
+                    <h4 style="font-size:14px;color:var(--green);">Triple Capa de Seguridad</h4>
+                    <div style="display:flex;gap:10px;margin-top:10px;">
+                        <div class="mini-card" style="flex:1;text-align:center;padding:12px;">
+                            <p style="font-size:20px;margin-bottom:4px;">🛡️</p>
+                            <p style="font-size:11px;color:#94a3b8;"><strong style="color:white;">Angular</strong><br>AuthGuard</p>
+                        </div>
+                        <div class="mini-card" style="flex:1;text-align:center;padding:12px;">
+                            <p style="font-size:20px;margin-bottom:4px;">🚪</p>
+                            <p style="font-size:11px;color:#94a3b8;"><strong style="color:white;">Gateway</strong><br>JWT Filter</p>
+                        </div>
+                        <div class="mini-card" style="flex:1;text-align:center;padding:12px;">
+                            <p style="font-size:20px;margin-bottom:4px;">🔒</p>
+                            <p style="font-size:11px;color:#94a3b8;"><strong style="color:white;">Servicio</strong><br>Security</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer"><span class="logo">FITZONE</span><span class="page">5 / 8</span></div>
+</div>
+
+<!-- ======================== SLIDE 6: RABBITMQ ======================== -->
+<div class="slide bg-6" id="s6">
+    <div class="orb orb-4"></div>
+    <div class="orb orb-2"></div>
+    <div class="slide-inner">
+        <div class="slide-header">
+            <span class="slide-tag">Eventos</span>
+            <span class="slide-label">Comunicacion asincrona</span>
+        </div>
+        <div class="slide-title">Pagos + <span class="gradient-text">RabbitMQ</span></div>
+        <div class="slide-desc">Cuando se confirma un pago, el servicio de pagos publica un evento. El servicio de miembros lo consume y activa la membresia automaticamente.</div>
+
+        <div class="content-area" style="gap:20px;">
+            <!-- FLOW VISUAL -->
+            <div class="h-flow" style="margin:10px 0 20px;">
+                <div class="h-flow-box" style="border-top:3px solid var(--pink);">
+                    <h5 style="color:var(--pink);">💳 Payment Service</h5>
+                    <p style="margin:8px 0 4px;"><strong style="color:white;">1.</strong> Crea pago</p>
+                    <p><strong style="color:white;">2.</strong> Estado: CONFIRMADO</p>
+                    <p style="margin-top:6px;color:var(--purple);font-size:10px;font-weight:600;">Publica EventoPago ──▶</p>
+                </div>
+
+                <div class="h-flow-arrow">
+                    <svg viewBox="0 0 50 20"><path d="M0 10 L40 10 M35 4 L42 10 L35 16" stroke="#a78bfa" stroke-width="2" fill="none"/></svg>
+                </div>
+
+                <div class="h-flow-box" style="border-top:3px solid var(--orange);background:rgba(245,158,11,0.05);">
+                    <h5 style="color:var(--orange);">🐰 RabbitMQ</h5>
+                    <p style="margin:6px 0;"><strong style="color:white;">Exchange:</strong> fitzone.exchange</p>
+                    <p><strong style="color:white;">Queue:</strong> payment.confirmed</p>
+                    <p style="margin-top:4px;font-size:10px;">Topic Exchange + Durable Queue</p>
+                </div>
+
+                <div class="h-flow-arrow">
+                    <svg viewBox="0 0 50 20"><path d="M0 10 L40 10 M35 4 L42 10 L35 16" stroke="#a78bfa" stroke-width="2" fill="none"/></svg>
+                </div>
+
+                <div class="h-flow-box" style="border-top:3px solid var(--blue);">
+                    <h5 style="color:var(--blue);">👥 Member Service</h5>
+                    <p style="margin:8px 0 4px;"><strong style="color:white;">3.</strong> @RabbitListener</p>
+                    <p><strong style="color:white;">4.</strong> Estado → ACTIVO</p>
+                    <p style="margin-top:6px;color:var(--green);font-size:10px;font-weight:600;">Membresia activada ✓</p>
+                </div>
+            </div>
+
+            <!-- DETALLE -->
+            <div style="display:flex;gap:16px;">
+                <div class="card" style="flex:1;border-left:3px solid var(--orange);">
+                    <h4 style="color:var(--orange);font-size:14px;">EventoPago (mensaje JSON)</h4>
+                    <div class="code-box" style="padding:14px 18px;font-size:13px;margin-top:10px;">
+<span class="c-dim">{</span>
+  <span class="c-blue">"miembroId"</span>:   <span class="c-orange">2</span>,
+  <span class="c-blue">"planId"</span>:      <span class="c-orange">1</span>,
+  <span class="c-blue">"tipoEvento"</span>:  <span class="c-green">"PAGO_CONFIRMADO"</span>
+<span class="c-dim">}</span></div>
+                </div>
+
+                <div class="card" style="flex:1;border-left:3px solid var(--purple);">
+                    <h4 style="color:var(--purple);font-size:14px;">Por que RabbitMQ y no HTTP directo?</h4>
+                    <table class="styled-table" style="margin-top:10px;">
+                        <tr><th style="width:35%;">Aspecto</th><th>HTTP</th><th>RabbitMQ</th></tr>
+                        <tr><td style="color:white;">Acoplamiento</td><td style="color:var(--red);">Fuerte</td><td style="color:var(--green);">Debil</td></tr>
+                        <tr><td style="color:white;">Si el destino cae</td><td style="color:var(--red);">Falla</td><td style="color:var(--green);">Espera en cola</td></tr>
+                        <tr><td style="color:white;">Escalabilidad</td><td style="color:var(--orange);">1 a 1</td><td style="color:var(--green);">N consumidores</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer"><span class="logo">FITZONE</span><span class="page">6 / 8</span></div>
+</div>
+
+<!-- ======================== SLIDE 7: FRONTEND ======================== -->
+<div class="slide bg-7" id="s7">
+    <div class="orb orb-3"></div>
+    <div class="slide-inner">
+        <div class="slide-header">
+            <span class="slide-tag">Frontend</span>
+            <span class="slide-label">Interfaz de usuario</span>
+        </div>
+        <div class="slide-title">Angular 17 + <span class="gradient-text">Bootstrap 5</span></div>
+
+        <div class="two-col" style="gap:40px;">
+            <div class="col" style="gap:16px;">
+                <div class="slide-desc" style="font-size:14px;margin-bottom:10px;">SPA (Single Page Application) con componentes standalone, rutas protegidas, y comunicacion reactiva con el backend.</div>
+
+                <div class="card" style="border-left:3px solid var(--pink);">
+                    <h4 style="font-size:14px;color:var(--pink);">Caracteristicas Implementadas</h4>
+                    <ul class="blist" style="margin:8px 0 0;">
+                        <li><strong>Standalone Components</strong> — Sin NgModule (Angular 17)</li>
+                        <li><strong>Lazy Loading</strong> — Cada ruta carga bajo demanda</li>
+                        <li><strong>HTTP Interceptor</strong> — Inyecta JWT automaticamente</li>
+                        <li><strong>Route Guards</strong> — canActivate protege rutas</li>
+                        <li><strong>RxJS Observables</strong> — Datos reactivos del backend</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="border-left:3px solid var(--cyan);">
+                    <h4 style="font-size:14px;color:var(--cyan);">Flujo de una peticion</h4>
+                    <div class="code-box" style="padding:12px 16px;font-size:12px;margin-top:8px;">
+<span class="c-pink">Componente</span> llama al <span class="c-blue">Servicio</span>
+    ↓
+<span class="c-blue">HttpClient</span> crea peticion HTTP
+    ↓
+<span class="c-purple">Interceptor</span> agrega <span class="c-green">Bearer token</span>
+    ↓
+<span class="c-orange">Gateway :8080</span> valida JWT
+    ↓
+<span class="c-green">Microservicio</span> responde JSON
+    ↓
+<span class="c-pink">Componente</span> renderiza los datos</div>
+                </div>
+            </div>
+
+            <div class="col" style="gap:16px;">
+                <div class="card">
+                    <h4 style="font-size:14px;">Estructura del Proyecto</h4>
+                    <div class="code-box" style="padding:16px 20px;font-size:12.5px;margin-top:10px;">
+<span class="c-purple">src/app/</span>
+<span class="c-dim">│</span>
+<span class="c-dim">├──</span> app.component.ts       <span class="c-green">← Layout principal</span>
+<span class="c-dim">├──</span> app.routes.ts           <span class="c-green">← 6 rutas definidas</span>
+<span class="c-dim">│</span>
+<span class="c-dim">├──</span> <span class="c-blue">core/</span>
+<span class="c-dim">│   ├──</span> guards/auth.guard     <span class="c-orange">← Proteccion rutas</span>
+<span class="c-dim">│   ├──</span> interceptors/auth     <span class="c-orange">← JWT automatico</span>
+<span class="c-dim">│   ├──</span> models/models.ts      <span class="c-orange">← Interfaces TS</span>
+<span class="c-dim">│   └──</span> services/
+<span class="c-dim">│       ├──</span> auth.service       <span class="c-orange">← Login/Logout</span>
+<span class="c-dim">│       └──</span> api.services       <span class="c-orange">← 4 servicios API</span>
+<span class="c-dim">│</span>
+<span class="c-dim">└──</span> <span class="c-pink">features/</span>
+<span class="c-dim">    ├──</span> landing/              <span class="c-cyan">← Pagina publica</span>
+<span class="c-dim">    ├──</span> dashboard/            <span class="c-cyan">← Panel principal</span>
+<span class="c-dim">    ├──</span> members/              <span class="c-cyan">← CRUD miembros</span>
+<span class="c-dim">    ├──</span> plans/                <span class="c-cyan">← CRUD planes</span>
+<span class="c-dim">    ├──</span> attendance/           <span class="c-cyan">← Asistencia</span>
+<span class="c-dim">    └──</span> payments/             <span class="c-cyan">← Pagos</span></div>
+                </div>
+
+                <div class="stat-row" style="margin:0;">
+                    <div class="stat">
+                        <div class="stat-num" style="color:var(--purple);font-size:24px;">5</div>
+                        <div class="stat-label">Rutas Protegidas</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-num" style="color:var(--blue);font-size:24px;">4</div>
+                        <div class="stat-label">Servicios API</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-num" style="color:var(--green);font-size:24px;">6</div>
+                        <div class="stat-label">Componentes</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer"><span class="logo">FITZONE</span><span class="page">7 / 8</span></div>
+</div>
+
+<!-- ======================== SLIDE 8: CIERRE ======================== -->
+<div class="slide bg-8" id="s8">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-4"></div>
+    <div class="slide-inner">
+        <div class="slide-header">
+            <span class="slide-tag">Resumen</span>
+            <span class="slide-label">Patrones y conclusiones</span>
+        </div>
+        <div class="slide-title">Patrones <span class="gradient-text">Implementados</span></div>
+
+        <div class="content-area" style="gap:24px;">
+            <div class="card-grid g3">
+                <div class="card" style="text-align:center;padding:24px 20px;">
+                    <div style="font-size:36px;margin-bottom:10px;">🏗️</div>
+                    <h4>Microservicios</h4>
+                    <p>5 servicios independientes, cada uno con su base de datos propia</p>
+                </div>
+                <div class="card" style="text-align:center;padding:24px 20px;">
+                    <div style="font-size:36px;margin-bottom:10px;">🚪</div>
+                    <h4>API Gateway</h4>
+                    <p>Punto unico de entrada con filtro JWT y balanceo de carga</p>
+                </div>
+                <div class="card" style="text-align:center;padding:24px 20px;">
+                    <div style="font-size:36px;margin-bottom:10px;">🔍</div>
+                    <h4>Service Discovery</h4>
+                    <p>Eureka registra servicios automaticamente al iniciar</p>
+                </div>
+                <div class="card" style="text-align:center;padding:24px 20px;">
+                    <div style="font-size:36px;margin-bottom:10px;">📨</div>
+                    <h4>Event-Driven</h4>
+                    <p>RabbitMQ para comunicacion desacoplada entre servicios</p>
+                </div>
+                <div class="card" style="text-align:center;padding:24px 20px;">
+                    <div style="font-size:36px;margin-bottom:10px;">🔒</div>
+                    <h4>JWT Stateless</h4>
+                    <p>Autenticacion sin estado con tokens firmados HMAC-SHA256</p>
+                </div>
+                <div class="card" style="text-align:center;padding:24px 20px;">
+                    <div style="font-size:36px;margin-bottom:10px;">🗄️</div>
+                    <h4>Database per Service</h4>
+                    <p>5 bases PostgreSQL aisladas evitando acoplamiento de datos</p>
+                </div>
+            </div>
+
+            <div style="text-align:center;margin-top:10px;">
+                <div class="cover-divider" style="margin:0 auto 16px;"></div>
+                <div style="font-size:48px;font-weight:900;background:linear-gradient(135deg,#a78bfa,#60a5fa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Gracias</div>
+                <p style="color:#64748b;margin-top:8px;font-size:18px;font-weight:300;">Preguntas?</p>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer"><span class="logo">FITZONE</span><span class="page">8 / 8</span></div>
+</div>
+
+<!-- ===== NAVIGATION ===== -->
+<div class="nav-bar">
+    <button onclick="prev()">◀ Anterior</button>
+    <span class="counter" id="counter">1 / 8</span>
+    <button onclick="next()">Siguiente ▶</button>
+    <button class="pdf-btn" onclick="window.print()">📄 Guardar PDF</button>
+</div>
+
+<script>
+let cur = 1;
+const tot = 8;
+
+function go(n) {
+    if (n < 1 || n > tot) return;
+    document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+    document.getElementById('s' + n).classList.add('active');
+    document.getElementById('counter').textContent = n + ' / ' + tot;
+    document.getElementById('progressBar').style.width = ((n/tot)*100) + '%';
+    cur = n;
+}
+function next() { go(cur + 1); }
+function prev() { go(cur - 1); }
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+    if (e.key === 'Home') go(1);
+    if (e.key === 'End') go(tot);
+    if (e.key === 'f' || e.key === 'F') {
+        if (document.fullscreenElement) document.exitFullscreen();
+        else document.documentElement.requestFullscreen();
+    }
+});
+
+let tx = 0;
+document.addEventListener('touchstart', e => tx = e.touches[0].clientX);
+document.addEventListener('touchend', e => {
+    const d = tx - e.changedTouches[0].clientX;
+    if (Math.abs(d) > 50) d > 0 ? next() : prev();
+});
+
+go(1);
+</script>
+
+</body>
+</html>
