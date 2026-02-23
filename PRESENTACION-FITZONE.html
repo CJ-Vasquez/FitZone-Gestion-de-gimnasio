@@ -68,32 +68,32 @@
         .slide-inner {
             position: relative; z-index: 2;
             width: 100%; height: 100%;
-            padding: 50px 70px 70px;
+            padding: 32px 56px 44px;
             display: flex; flex-direction: column;
         }
 
         /* ===== HEADER DE SLIDE ===== */
         .slide-header {
-            display: flex; align-items: center; gap: 16px;
-            margin-bottom: 30px;
+            display: flex; align-items: center; gap: 14px;
+            margin-bottom: 14px;
         }
         .slide-tag {
             background: linear-gradient(135deg, var(--purple), var(--blue));
-            color: white; font-size: 12px; font-weight: 700;
-            padding: 6px 16px; border-radius: 20px;
+            color: white; font-size: 11px; font-weight: 700;
+            padding: 5px 14px; border-radius: 20px;
             text-transform: uppercase; letter-spacing: 1.5px;
         }
         .slide-label {
-            font-size: 13px; color: #64748b; font-weight: 500;
+            font-size: 12px; color: #64748b; font-weight: 500;
         }
 
         .slide-title {
-            font-size: 40px; font-weight: 800; line-height: 1.15;
-            margin-bottom: 8px; color: white;
+            font-size: 36px; font-weight: 800; line-height: 1.15;
+            margin-bottom: 6px; color: white;
         }
         .slide-desc {
-            font-size: 16px; color: #94a3b8; line-height: 1.6;
-            max-width: 700px; margin-bottom: 25px;
+            font-size: 15px; color: #94a3b8; line-height: 1.6;
+            max-width: 800px; margin-bottom: 16px;
         }
 
         .gradient-text {
@@ -103,10 +103,10 @@
         }
 
         /* ===== LAYOUTS ===== */
-        .two-col { display: flex; gap: 50px; flex: 1; align-items: stretch; }
+        .two-col { display: flex; gap: 32px; flex: 1; align-items: stretch; }
         .col { flex: 1; display: flex; flex-direction: column; justify-content: center; }
 
-        .three-col { display: flex; gap: 20px; flex: 1; }
+        .three-col { display: flex; gap: 16px; flex: 1; }
         .three-col .col { flex: 1; }
 
         .content-area { flex: 1; display: flex; flex-direction: column; justify-content: center; }
@@ -115,47 +115,48 @@
         .card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 16px; padding: 24px;
+            border-radius: 14px; padding: 20px;
             backdrop-filter: blur(10px);
         }
-        .card h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: white; }
+        .card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: white; }
         .card p { font-size: 13px; color: #94a3b8; line-height: 1.6; }
 
-        .card-grid { display: grid; gap: 16px; }
+        .card-grid { display: grid; gap: 14px; }
         .g2 { grid-template-columns: 1fr 1fr; }
         .g3 { grid-template-columns: 1fr 1fr 1fr; }
 
         .mini-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 12px; padding: 16px 18px;
+            border-radius: 10px; padding: 14px 16px;
         }
 
         /* ===== SERVICE CARD ===== */
         .svc-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 16px; padding: 20px;
-            display: flex; flex-direction: column; gap: 10px;
+            border-radius: 14px; padding: 16px;
+            display: flex; flex-direction: column; gap: 8px;
             flex: 1;
         }
         .svc-icon {
-            width: 44px; height: 44px; border-radius: 12px;
+            width: 40px; height: 40px; border-radius: 10px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 22px;
+            font-size: 20px;
         }
         .svc-card h4 { font-size: 15px; font-weight: 700; color: white; margin: 0; }
         .svc-card .svc-port {
             font-family: 'Fira Code', monospace; font-size: 11px;
             color: #64748b; background: rgba(0,0,0,0.3);
             padding: 2px 8px; border-radius: 6px; display: inline-block;
-            margin-top: -4px; width: fit-content;
+            margin-top: -2px; width: fit-content;
         }
         .svc-card .svc-desc { font-size: 12px; color: #94a3b8; line-height: 1.5; }
         .svc-endpoints {
             background: rgba(0,0,0,0.25); border-radius: 8px;
             padding: 10px 12px; font-family: 'Fira Code', monospace;
             font-size: 11px; line-height: 1.8; color: #64748b;
+            flex: 1; white-space: pre;
         }
         .m-get { color: var(--green); font-weight: 700; }
         .m-post { color: var(--blue); font-weight: 700; }
@@ -166,7 +167,7 @@
         .code-box {
             background: rgba(0,0,0,0.4);
             border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 14px; padding: 24px 28px;
+            border-radius: 12px; padding: 20px 24px;
             font-family: 'Fira Code', monospace;
             font-size: 13px; line-height: 1.7;
             white-space: pre; color: #94a3b8;
@@ -179,38 +180,39 @@
 
         /* ===== FLOW STEPS ===== */
         .flow {
-            display: flex; flex-direction: column; gap: 14px;
+            display: flex; flex-direction: column; gap: 10px;
         }
         .flow-item {
-            display: flex; align-items: flex-start; gap: 16px;
+            display: flex; align-items: flex-start; gap: 14px;
         }
         .flow-dot {
-            width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+            width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
             display: flex; align-items: center; justify-content: center;
-            font-size: 14px; font-weight: 800; color: white;
+            font-size: 13px; font-weight: 800; color: white;
             background: linear-gradient(135deg, var(--purple), var(--blue));
         }
-        .flow-content { padding-top: 4px; }
+        .flow-content { padding-top: 3px; }
         .flow-content strong { color: white; font-weight: 600; }
-        .flow-content p { font-size: 13.5px; color: #94a3b8; line-height: 1.5; }
+        .flow-content p { font-size: 13px; color: #94a3b8; line-height: 1.4; }
 
         /* ===== VISUAL FLOW (horizontal) ===== */
         .h-flow {
-            display: flex; align-items: center; justify-content: center;
-            gap: 0; margin: 20px 0;
+            display: flex; align-items: stretch; justify-content: center;
+            gap: 0;
         }
         .h-flow-box {
             background: var(--card-bg); border: 1px solid var(--card-border);
-            border-radius: 14px; padding: 20px 24px; text-align: center;
-            min-width: 180px;
+            border-radius: 14px; padding: 24px 28px; text-align: center;
+            flex: 1; max-width: 320px;
+            display: flex; flex-direction: column; justify-content: center;
         }
-        .h-flow-box h5 { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
-        .h-flow-box p { font-size: 11px; color: #94a3b8; line-height: 1.5; }
+        .h-flow-box h5 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+        .h-flow-box p { font-size: 12px; color: #94a3b8; line-height: 1.5; }
         .h-flow-arrow {
-            width: 60px; display: flex; align-items: center; justify-content: center;
+            width: 70px; display: flex; align-items: center; justify-content: center;
             flex-shrink: 0;
         }
-        .h-flow-arrow svg { width: 50px; height: 20px; }
+        .h-flow-arrow svg { width: 55px; height: 20px; }
 
         /* ===== PILLS ===== */
         .pill-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 10px 0; }
@@ -224,20 +226,20 @@
         .pill-dot { width: 8px; height: 8px; border-radius: 50%; }
 
         /* ===== BULLET LIST ===== */
-        .blist { list-style: none; padding: 0; margin: 10px 0; }
+        .blist { list-style: none; padding: 0; margin: 8px 0; }
         .blist li {
-            padding: 7px 0 7px 24px; position: relative;
-            font-size: 14px; color: #cbd5e1; line-height: 1.5;
+            padding: 5px 0 5px 22px; position: relative;
+            font-size: 13.5px; color: #cbd5e1; line-height: 1.5;
         }
         .blist li::before {
-            content: ""; position: absolute; left: 0; top: 14px;
-            width: 8px; height: 8px; border-radius: 50%;
+            content: ""; position: absolute; left: 0; top: 12px;
+            width: 7px; height: 7px; border-radius: 50%;
             background: var(--purple);
         }
         .blist li strong { color: white; }
 
         /* ===== STAT BOXES ===== */
-        .stat-row { display: flex; gap: 14px; margin: 15px 0; }
+        .stat-row { display: flex; gap: 14px; margin: 12px 0; }
         .stat {
             background: var(--card-bg); border: 1px solid var(--card-border);
             border-radius: 12px; padding: 14px 20px; text-align: center; flex: 1;
@@ -248,16 +250,16 @@
         /* ===== FOOTER ===== */
         .slide-footer {
             position: absolute; bottom: 0; left: 0; right: 0;
-            padding: 16px 70px; display: flex;
+            padding: 12px 56px; display: flex;
             justify-content: space-between; align-items: center;
             z-index: 10;
         }
         .slide-footer .logo {
-            font-size: 13px; font-weight: 700; color: #334155;
+            font-size: 12px; font-weight: 700; color: #334155;
             letter-spacing: 3px;
         }
         .slide-footer .page {
-            font-size: 13px; color: #334155; font-weight: 500;
+            font-size: 12px; color: #334155; font-weight: 500;
         }
 
         /* ===== NAV BAR ===== */
@@ -308,11 +310,6 @@
             padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.04);
             color: #cbd5e1;
         }
-        .styled-table code {
-            font-family: 'Fira Code', monospace; font-size: 12px;
-            background: rgba(0,0,0,0.3); padding: 2px 8px; border-radius: 4px;
-            color: var(--green);
-        }
 
         /* ===== COVER ===== */
         .cover-center {
@@ -327,30 +324,76 @@
         }
         .cover-subtitle {
             font-size: 22px; font-weight: 300; color: #64748b;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
         .cover-divider {
             width: 60px; height: 3px; border-radius: 2px;
             background: linear-gradient(90deg, var(--purple), var(--blue));
-            margin: 0 auto 30px;
+            margin: 0 auto 24px;
         }
 
         /* ===== COMPARE BOXES ===== */
-        .compare { display: flex; gap: 24px; }
+        .compare { display: flex; gap: 20px; }
         .compare-box {
-            flex: 1; border-radius: 16px; padding: 28px;
+            flex: 1; border-radius: 14px; padding: 24px;
             background: var(--card-bg);
             border: 1px solid var(--card-border);
+            display: flex; flex-direction: column;
         }
         .compare-box h4 {
-            font-size: 16px; font-weight: 700; margin-bottom: 14px;
+            font-size: 15px; font-weight: 700; margin-bottom: 12px;
             display: flex; align-items: center; gap: 10px;
         }
         .compare-box .icon-circle {
-            width: 32px; height: 32px; border-radius: 50%;
+            width: 30px; height: 30px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-size: 14px;
+            font-size: 13px;
         }
+
+        /* ===== ARCHITECTURE NODES ===== */
+        .arch-container {
+            display: flex; flex-direction: column; align-items: center; gap: 0;
+            flex: 1; justify-content: center;
+        }
+        .arch-node {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px; padding: 12px 24px;
+            text-align: center; position: relative;
+        }
+        .arch-node h5 { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+        .arch-node p { font-size: 11px; color: #64748b; }
+        .arch-connector {
+            width: 2px; height: 20px;
+            background: rgba(255,255,255,0.1);
+        }
+        .arch-row {
+            display: flex; gap: 10px; justify-content: center; align-items: flex-start;
+        }
+        .arch-branch {
+            display: flex; flex-direction: column; align-items: center; gap: 0;
+        }
+        .arch-branch .arch-connector { height: 14px; }
+
+        /* ===== PATTERN GRID ===== */
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 16px;
+            flex: 1;
+        }
+        .pattern-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px; padding: 28px 24px;
+            text-align: center;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+        }
+        .pattern-card .icon { font-size: 40px; margin-bottom: 14px; }
+        .pattern-card h4 { font-size: 15px; font-weight: 700; color: white; margin-bottom: 8px; }
+        .pattern-card p { font-size: 12px; color: #94a3b8; line-height: 1.5; }
     </style>
 </head>
 <body>
@@ -368,7 +411,7 @@
             <div class="cover-subtitle">Sistema de Gestion de Gimnasio</div>
             <div class="cover-divider"></div>
 
-            <div class="pill-row" style="justify-content:center;margin-bottom:40px;">
+            <div class="pill-row" style="justify-content:center;margin-bottom:36px;">
                 <span class="pill"><span class="pill-dot" style="background:#6db33f;"></span> Spring Boot 3.2</span>
                 <span class="pill"><span class="pill-dot" style="background:#dd0031;"></span> Angular 17</span>
                 <span class="pill"><span class="pill-dot" style="background:#336791;"></span> PostgreSQL</span>
@@ -376,7 +419,7 @@
                 <span class="pill"><span class="pill-dot" style="background:#f89820;"></span> Java 21</span>
             </div>
 
-            <div class="stat-row" style="max-width:600px;">
+            <div class="stat-row" style="max-width:650px;">
                 <div class="stat">
                     <div class="stat-num" style="color:var(--purple);">5</div>
                     <div class="stat-label">Microservicios</div>
@@ -395,7 +438,7 @@
                 </div>
             </div>
 
-            <p style="color:#475569;font-size:14px;margin-top:30px;">Arquitectura de Microservicios &nbsp;|&nbsp; Febrero 2026</p>
+            <p style="color:#475569;font-size:14px;margin-top:28px;">Arquitectura de Microservicios &nbsp;|&nbsp; Febrero 2026</p>
         </div>
     </div>
     <div class="slide-footer"><span class="logo">FITZONE</span><span class="page">1 / 8</span></div>
@@ -418,20 +461,23 @@
                     <span class="icon-circle" style="background:rgba(239,68,68,0.15);color:var(--red);">X</span>
                     Monolito Tradicional
                 </h4>
-                <div class="code-box" style="font-size:12px;padding:16px 20px;margin-bottom:14px;">
-<span class="c-dim">┌───────────────────────┐</span>
-<span class="c-pink">│    UNA APLICACION     │</span>
-<span class="c-dim">│  ┌─────┐ ┌─────┐     │</span>
-<span class="c-dim">│  │Auth │ │Pagos│     │</span>
-<span class="c-dim">│  └─────┘ └─────┘     │</span>
-<span class="c-dim">│  ┌─────┐ ┌─────┐     │</span>
-<span class="c-dim">│  │Memb.│ │Asist│     │</span>
-<span class="c-dim">│  └─────┘ └─────┘     │</span>
-<span class="c-dim">│       ┌──────┐       │</span>
-<span class="c-orange">│       │ 1 BD │</span><span class="c-dim">       │</span>
-<span class="c-dim">│       └──────┘       │</span>
-<span class="c-dim">└───────────────────────┘</span></div>
-                <ul class="blist">
+                <div class="code-box" style="font-size:15px;padding:20px 28px;margin-bottom:14px;flex:1;overflow-y:auto;display:flex;flex-direction:column;justify-content:center;">
+<span class="c-dim">┌─────────────────────────────────┐</span>
+<span class="c-pink">│       UNA APLICACION            │</span>
+<span class="c-dim">│                                 │</span>
+<span class="c-dim">│  ┌────────┐   ┌────────┐       │</span>
+<span class="c-dim">│  │  Auth  │   │ Pagos  │       │</span>
+<span class="c-dim">│  └────────┘   └────────┘       │</span>
+<span class="c-dim">│                                 │</span>
+<span class="c-dim">│  ┌────────┐   ┌────────┐       │</span>
+<span class="c-dim">│  │ Memb.  │   │ Asist. │       │</span>
+<span class="c-dim">│  └────────┘   └────────┘       │</span>
+<span class="c-dim">│                                 │</span>
+<span class="c-dim">│       ┌──────────────┐         │</span>
+<span class="c-orange">│       │   1 sola BD   │</span><span class="c-dim">        │</span>
+<span class="c-dim">│       └──────────────┘         │</span>
+<span class="c-dim">└─────────────────────────────────┘</span></div>
+                <ul class="blist" style="margin-top:auto;">
                     <li>Un fallo <strong style="color:var(--red);">tumba todo</strong> el sistema</li>
                     <li>Cambiar un modulo requiere <strong>re-desplegar todo</strong></li>
                     <li>No se puede escalar por partes</li>
@@ -444,20 +490,21 @@
                     <span class="icon-circle" style="background:rgba(16,185,129,0.15);color:var(--green);">✓</span>
                     Microservicios (Nuestra solucion)
                 </h4>
-                <div class="code-box" style="font-size:12px;padding:16px 20px;margin-bottom:14px;">
-<span class="c-green">┌─────┐  ┌─────┐  ┌─────┐</span>
-<span class="c-green">│Auth │  │Memb.│  │Plan │</span>
-<span class="c-green">└──┬──┘  └──┬──┘  └──┬──┘</span>
-<span class="c-orange">┌──┴──┐  ┌──┴──┐  ┌──┴──┐</span>
-<span class="c-orange">│ BD1 │  │ BD2 │  │ BD3 │</span>
-<span class="c-orange">└─────┘  └─────┘  └─────┘</span>
-<span class="c-green">┌─────┐  ┌─────┐</span>
-<span class="c-green">│Asist│  │Pago │</span>
-<span class="c-green">└──┬──┘  └──┬──┘</span>
-<span class="c-orange">┌──┴──┐  ┌──┴──┐</span>
-<span class="c-orange">│ BD4 │  │ BD5 │</span>
-<span class="c-orange">└─────┘  └─────┘</span></div>
-                <ul class="blist">
+                <div class="code-box" style="font-size:15px;padding:20px 28px;margin-bottom:14px;flex:1;overflow-y:auto;display:flex;flex-direction:column;justify-content:center;">
+<span class="c-green">┌────────┐  ┌────────┐  ┌────────┐</span>
+<span class="c-green">│  Auth  │  │ Memb.  │  │  Plan  │</span>
+<span class="c-green">└───┬────┘  └───┬────┘  └───┬────┘</span>
+<span class="c-orange">┌───┴────┐  ┌───┴────┐  ┌───┴────┐</span>
+<span class="c-orange">│  BD 1  │  │  BD 2  │  │  BD 3  │</span>
+<span class="c-orange">└────────┘  └────────┘  └────────┘</span>
+
+<span class="c-green">┌────────┐  ┌────────┐</span>
+<span class="c-green">│ Asist. │  │  Pago  │</span>
+<span class="c-green">└───┬────┘  └───┬────┘</span>
+<span class="c-orange">┌───┴────┐  ┌───┴────┐</span>
+<span class="c-orange">│  BD 4  │  │  BD 5  │</span>
+<span class="c-orange">└────────┘  └────────┘</span></div>
+                <ul class="blist" style="margin-top:auto;">
                     <li>Si pagos falla, <strong style="color:var(--green);">la asistencia sigue</strong></li>
                     <li>Cada servicio se <strong>escala independiente</strong></li>
                     <li><strong>5 bases de datos</strong> aisladas (sin acoplamiento)</li>
@@ -480,43 +527,100 @@
         </div>
         <div class="slide-title">Como se conecta <span class="gradient-text">todo el sistema</span></div>
 
-        <div class="content-area" style="justify-content:center;">
-            <div class="code-box" style="font-size:13.5px;line-height:1.55;padding:30px 40px;max-width:100%;">
-<span class="c-dim">                         ┌────────────────────────┐</span>
-<span class="c-cyan">                         │    🌐  FRONTEND        │</span>
-<span class="c-dim">                         │    Angular 17  :4200   │</span>
-<span class="c-dim">                         └───────────┬────────────┘</span>
-<span class="c-dim">                                     │</span>
-<span class="c-purple">                         ┌───────────▼────────────┐</span>
-<span class="c-purple">                         │   🚪  API GATEWAY      │</span>
-<span class="c-purple">                         │   Spring Cloud  :8080  │</span>
-<span class="c-purple">                         │   JWT Filter + CORS    │</span>
-<span class="c-purple">                         └───────────┬────────────┘</span>
-<span class="c-dim">                ┌───────────┬────────┼────────┬───────────┐</span>
-<span class="c-dim">                │           │        │        │           │</span>
-<span class="c-blue">          ┌─────▼────┐┌────▼─────┐┌▼─────┐┌─▼──────┐┌──▼───────┐</span>
-<span class="c-blue">          │ 🔐 AUTH  ││ 👥 MEMB. ││ 📋   ││ 📅     ││ 💳       │</span>
-<span class="c-blue">          │  :8081   ││  :8082   ││ PLAN ││ ASIST. ││  PAGO    │</span>
-<span class="c-blue">          │          ││          ││:8083 ││ :8084  ││  :8085   │</span>
-<span class="c-blue">          └────┬─────┘└────┬─────┘└──┬───┘└──┬─────┘└────┬─────┘</span>
-<span class="c-orange">          ┌────▼─────┐┌────▼─────┐┌──▼───┐┌──▼─────┐┌────▼─────┐</span>
-<span class="c-orange">          │  BD auth ││ BD memb. ││BD    ││BD      ││BD        │</span>
-<span class="c-orange">          │ Postgres ││ Postgres ││plans ││attend. ││payments  │</span>
-<span class="c-orange">          └──────────┘└──────────┘└──────┘└────────┘└──────────┘</span>
-
-<span class="c-green">    🔍 EUREKA SERVER :8761</span><span class="c-dim">               </span><span class="c-pink">🐰 RABBITMQ :5672</span>
-<span class="c-dim">    Service Discovery                    Mensajeria Asincrona</span>
-<span class="c-dim">    (registro dinamico)                  (Payment → Member)</span></div>
-
-            <div style="display:flex;gap:14px;margin-top:20px;">
-                <div class="mini-card" style="flex:1;padding:12px 16px;border-left:3px solid var(--cyan);">
-                    <p style="font-size:12px;margin:0;"><strong style="color:var(--cyan);">Frontend</strong> solo habla con el Gateway (:8080), nunca directo a los servicios</p>
+        <div class="content-area" style="gap:16px;">
+            <!-- Visual Architecture -->
+            <div class="arch-container">
+                <!-- Frontend -->
+                <div class="arch-node" style="border-color:var(--cyan);min-width:280px;">
+                    <h5 style="color:var(--cyan);">🌐 FRONTEND</h5>
+                    <p>Angular 17 &nbsp;·&nbsp; :4200</p>
                 </div>
-                <div class="mini-card" style="flex:1;padding:12px 16px;border-left:3px solid var(--green);">
-                    <p style="font-size:12px;margin:0;"><strong style="color:var(--green);">Eureka</strong> permite descubrimiento dinamico — sin hardcodear IPs</p>
+                <div class="arch-connector"></div>
+
+                <!-- Gateway -->
+                <div class="arch-node" style="border-color:var(--purple);min-width:280px;background:rgba(139,92,246,0.06);">
+                    <h5 style="color:var(--purple);">🚪 API GATEWAY</h5>
+                    <p>Spring Cloud &nbsp;·&nbsp; :8080 &nbsp;·&nbsp; JWT Filter + CORS</p>
                 </div>
-                <div class="mini-card" style="flex:1;padding:12px 16px;border-left:3px solid var(--orange);">
-                    <p style="font-size:12px;margin:0;"><strong style="color:var(--orange);">Cada servicio</strong> tiene su propia BD PostgreSQL (Database per Service)</p>
+                <div class="arch-connector"></div>
+
+                <!-- 5 Services Row -->
+                <div class="arch-row">
+                    <div class="arch-branch">
+                        <div class="arch-node" style="border-color:var(--blue);min-width:160px;">
+                            <h5 style="color:var(--blue);">🔐 AUTH</h5>
+                            <p>:8081</p>
+                        </div>
+                        <div class="arch-connector" style="background:var(--orange);opacity:0.3;"></div>
+                        <div class="arch-node" style="border-color:var(--orange);min-width:160px;background:rgba(245,158,11,0.04);">
+                            <p style="font-size:10px;color:var(--orange);">BD auth · Postgres</p>
+                        </div>
+                    </div>
+                    <div class="arch-branch">
+                        <div class="arch-node" style="border-color:var(--blue);min-width:160px;">
+                            <h5 style="color:var(--blue);">👥 MEMB.</h5>
+                            <p>:8082</p>
+                        </div>
+                        <div class="arch-connector" style="background:var(--orange);opacity:0.3;"></div>
+                        <div class="arch-node" style="border-color:var(--orange);min-width:160px;background:rgba(245,158,11,0.04);">
+                            <p style="font-size:10px;color:var(--orange);">BD members · Postgres</p>
+                        </div>
+                    </div>
+                    <div class="arch-branch">
+                        <div class="arch-node" style="border-color:var(--blue);min-width:160px;">
+                            <h5 style="color:var(--blue);">📋 PLAN</h5>
+                            <p>:8083</p>
+                        </div>
+                        <div class="arch-connector" style="background:var(--orange);opacity:0.3;"></div>
+                        <div class="arch-node" style="border-color:var(--orange);min-width:160px;background:rgba(245,158,11,0.04);">
+                            <p style="font-size:10px;color:var(--orange);">BD plans · Postgres</p>
+                        </div>
+                    </div>
+                    <div class="arch-branch">
+                        <div class="arch-node" style="border-color:var(--blue);min-width:160px;">
+                            <h5 style="color:var(--blue);">📅 ASIST.</h5>
+                            <p>:8084</p>
+                        </div>
+                        <div class="arch-connector" style="background:var(--orange);opacity:0.3;"></div>
+                        <div class="arch-node" style="border-color:var(--orange);min-width:160px;background:rgba(245,158,11,0.04);">
+                            <p style="font-size:10px;color:var(--orange);">BD attendance · Postgres</p>
+                        </div>
+                    </div>
+                    <div class="arch-branch">
+                        <div class="arch-node" style="border-color:var(--blue);min-width:160px;">
+                            <h5 style="color:var(--blue);">💳 PAGO</h5>
+                            <p>:8085</p>
+                        </div>
+                        <div class="arch-connector" style="background:var(--orange);opacity:0.3;"></div>
+                        <div class="arch-node" style="border-color:var(--orange);min-width:160px;background:rgba(245,158,11,0.04);">
+                            <p style="font-size:10px;color:var(--orange);">BD payments · Postgres</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Infra Row -->
+                <div style="display:flex;gap:40px;margin-top:16px;">
+                    <div style="display:flex;align-items:center;gap:8px;">
+                        <span style="color:var(--green);font-size:14px;">🔍</span>
+                        <span style="font-size:12px;"><strong style="color:var(--green);">Eureka Server</strong> <span style="color:#64748b;">:8761 · Service Discovery</span></span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:8px;">
+                        <span style="color:var(--pink);font-size:14px;">🐰</span>
+                        <span style="font-size:12px;"><strong style="color:var(--pink);">RabbitMQ</strong> <span style="color:#64748b;">:5672 · Mensajeria Asincrona</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom notes -->
+            <div style="display:flex;gap:12px;">
+                <div class="mini-card" style="flex:1;padding:10px 14px;border-left:3px solid var(--cyan);">
+                    <p style="font-size:11px;margin:0;"><strong style="color:var(--cyan);">Frontend</strong> solo habla con el Gateway (:8080), nunca directo a los servicios</p>
+                </div>
+                <div class="mini-card" style="flex:1;padding:10px 14px;border-left:3px solid var(--green);">
+                    <p style="font-size:11px;margin:0;"><strong style="color:var(--green);">Eureka</strong> permite descubrimiento dinamico — sin hardcodear IPs</p>
+                </div>
+                <div class="mini-card" style="flex:1;padding:10px 14px;border-left:3px solid var(--orange);">
+                    <p style="font-size:11px;margin:0;"><strong style="color:var(--orange);">Cada servicio</strong> tiene su propia BD PostgreSQL (Database per Service)</p>
                 </div>
             </div>
         </div>
@@ -533,9 +637,9 @@
             <span class="slide-label">Detalle de cada servicio</span>
         </div>
         <div class="slide-title">Los 5 <span class="gradient-text">Microservicios</span></div>
-        <div class="slide-desc" style="margin-bottom:20px;">Cada servicio sigue el patron: <strong style="color:white;">Controller → Service → Repository → Database</strong></div>
+        <div class="slide-desc" style="margin-bottom:12px;">Cada servicio sigue el patron: <strong style="color:white;">Controller → Service → Repository → Database</strong></div>
 
-        <div style="display:flex;gap:14px;flex:1;">
+        <div style="display:flex;gap:12px;flex:1;">
             <div class="svc-card" style="border-top:3px solid var(--purple);">
                 <div class="svc-icon" style="background:rgba(139,92,246,0.12);">🔐</div>
                 <h4>Autenticacion</h4>
@@ -620,9 +724,9 @@
         </div>
         <div class="slide-title">Flujo de Autenticacion <span class="gradient-text">JWT</span></div>
 
-        <div class="two-col" style="gap:40px;">
-            <div class="col">
-                <div class="slide-desc" style="font-size:14px;">JSON Web Token permite autenticacion <strong style="color:white;">stateless</strong> — el Gateway valida tokens sin consultar la BD.</div>
+        <div class="two-col" style="gap:28px;">
+            <div class="col" style="gap:14px;">
+                <div class="slide-desc" style="font-size:13.5px;margin-bottom:0;">JSON Web Token permite autenticacion <strong style="color:white;">stateless</strong> — el Gateway valida tokens sin consultar la BD.</div>
 
                 <div class="flow">
                     <div class="flow-item">
@@ -662,12 +766,30 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="card" style="border-left:3px solid var(--green);margin-top:auto;">
+                    <h4 style="font-size:13px;color:var(--green);">Triple Capa de Seguridad</h4>
+                    <div style="display:flex;gap:8px;margin-top:8px;">
+                        <div class="mini-card" style="flex:1;text-align:center;padding:10px 8px;">
+                            <p style="font-size:18px;margin-bottom:3px;">🛡️</p>
+                            <p style="font-size:10px;color:#94a3b8;"><strong style="color:white;">Angular</strong><br>AuthGuard</p>
+                        </div>
+                        <div class="mini-card" style="flex:1;text-align:center;padding:10px 8px;">
+                            <p style="font-size:18px;margin-bottom:3px;">🚪</p>
+                            <p style="font-size:10px;color:#94a3b8;"><strong style="color:white;">Gateway</strong><br>JWT Filter</p>
+                        </div>
+                        <div class="mini-card" style="flex:1;text-align:center;padding:10px 8px;">
+                            <p style="font-size:18px;margin-bottom:3px;">🔒</p>
+                            <p style="font-size:10px;color:#94a3b8;"><strong style="color:white;">Servicio</strong><br>Security</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="col" style="gap:16px;">
-                <div class="card" style="border-left:3px solid var(--purple);">
+            <div class="col" style="gap:14px;">
+                <div class="card" style="border-left:3px solid var(--purple);flex:1;">
                     <h4 style="font-size:14px;color:var(--purple);">Estructura del Token JWT</h4>
-                    <div class="code-box" style="padding:14px 18px;font-size:12px;margin-top:10px;">
+                    <div class="code-box" style="padding:16px 20px;font-size:12.5px;margin-top:10px;">
 <span class="c-blue">HEADER:</span>
 <span class="c-dim">{</span> <span class="c-white">"alg"</span>: <span class="c-green">"HS256"</span>, <span class="c-white">"typ"</span>: <span class="c-green">"JWT"</span> <span class="c-dim">}</span>
 
@@ -684,22 +806,20 @@
            <span class="c-pink">SECRET_KEY</span><span class="c-dim">)</span></div>
                 </div>
 
-                <div class="card" style="border-left:3px solid var(--green);">
-                    <h4 style="font-size:14px;color:var(--green);">Triple Capa de Seguridad</h4>
-                    <div style="display:flex;gap:10px;margin-top:10px;">
-                        <div class="mini-card" style="flex:1;text-align:center;padding:12px;">
-                            <p style="font-size:20px;margin-bottom:4px;">🛡️</p>
-                            <p style="font-size:11px;color:#94a3b8;"><strong style="color:white;">Angular</strong><br>AuthGuard</p>
-                        </div>
-                        <div class="mini-card" style="flex:1;text-align:center;padding:12px;">
-                            <p style="font-size:20px;margin-bottom:4px;">🚪</p>
-                            <p style="font-size:11px;color:#94a3b8;"><strong style="color:white;">Gateway</strong><br>JWT Filter</p>
-                        </div>
-                        <div class="mini-card" style="flex:1;text-align:center;padding:12px;">
-                            <p style="font-size:20px;margin-bottom:4px;">🔒</p>
-                            <p style="font-size:11px;color:#94a3b8;"><strong style="color:white;">Servicio</strong><br>Security</p>
-                        </div>
-                    </div>
+                <div class="card" style="border-left:3px solid var(--cyan);">
+                    <h4 style="font-size:14px;color:var(--cyan);">Flujo Visual</h4>
+                    <div class="code-box" style="padding:12px 16px;font-size:11.5px;margin-top:8px;line-height:1.6;">
+<span class="c-pink">Usuario</span> envia credenciales
+  <span class="c-dim">↓</span>
+<span class="c-blue">Auth Service</span> genera <span class="c-green">JWT token</span>
+  <span class="c-dim">↓</span>
+<span class="c-pink">Frontend</span> guarda en <span class="c-orange">localStorage</span>
+  <span class="c-dim">↓</span>
+<span class="c-purple">Interceptor</span> agrega <span class="c-green">Bearer token</span>
+  <span class="c-dim">↓</span>
+<span class="c-purple">Gateway</span> valida <span class="c-orange">firma HMAC</span>
+  <span class="c-dim">↓</span>
+<span class="c-blue">Microservicio</span> recibe <span class="c-white">X-Username</span></div>
                 </div>
             </div>
         </div>
@@ -719,14 +839,14 @@
         <div class="slide-title">Pagos + <span class="gradient-text">RabbitMQ</span></div>
         <div class="slide-desc">Cuando se confirma un pago, el servicio de pagos publica un evento. El servicio de miembros lo consume y activa la membresia automaticamente.</div>
 
-        <div class="content-area" style="gap:20px;">
+        <div class="content-area" style="gap:16px;">
             <!-- FLOW VISUAL -->
-            <div class="h-flow" style="margin:10px 0 20px;">
+            <div class="h-flow" style="margin:0;">
                 <div class="h-flow-box" style="border-top:3px solid var(--pink);">
                     <h5 style="color:var(--pink);">💳 Payment Service</h5>
-                    <p style="margin:8px 0 4px;"><strong style="color:white;">1.</strong> Crea pago</p>
+                    <p style="margin:10px 0 6px;"><strong style="color:white;">1.</strong> Crea pago</p>
                     <p><strong style="color:white;">2.</strong> Estado: CONFIRMADO</p>
-                    <p style="margin-top:6px;color:var(--purple);font-size:10px;font-weight:600;">Publica EventoPago ──▶</p>
+                    <p style="margin-top:10px;color:var(--purple);font-size:11px;font-weight:600;">Publica EventoPago ──▶</p>
                 </div>
 
                 <div class="h-flow-arrow">
@@ -735,9 +855,9 @@
 
                 <div class="h-flow-box" style="border-top:3px solid var(--orange);background:rgba(245,158,11,0.05);">
                     <h5 style="color:var(--orange);">🐰 RabbitMQ</h5>
-                    <p style="margin:6px 0;"><strong style="color:white;">Exchange:</strong> fitzone.exchange</p>
+                    <p style="margin:10px 0;"><strong style="color:white;">Exchange:</strong> fitzone.exchange</p>
                     <p><strong style="color:white;">Queue:</strong> payment.confirmed</p>
-                    <p style="margin-top:4px;font-size:10px;">Topic Exchange + Durable Queue</p>
+                    <p style="margin-top:10px;font-size:11px;">Topic Exchange + Durable Queue</p>
                 </div>
 
                 <div class="h-flow-arrow">
@@ -746,17 +866,17 @@
 
                 <div class="h-flow-box" style="border-top:3px solid var(--blue);">
                     <h5 style="color:var(--blue);">👥 Member Service</h5>
-                    <p style="margin:8px 0 4px;"><strong style="color:white;">3.</strong> @RabbitListener</p>
+                    <p style="margin:10px 0 6px;"><strong style="color:white;">3.</strong> @RabbitListener</p>
                     <p><strong style="color:white;">4.</strong> Estado → ACTIVO</p>
-                    <p style="margin-top:6px;color:var(--green);font-size:10px;font-weight:600;">Membresia activada ✓</p>
+                    <p style="margin-top:10px;color:var(--green);font-size:11px;font-weight:600;">Membresia activada ✓</p>
                 </div>
             </div>
 
             <!-- DETALLE -->
-            <div style="display:flex;gap:16px;">
-                <div class="card" style="flex:1;border-left:3px solid var(--orange);">
+            <div style="display:flex;gap:14px;flex:1;">
+                <div class="card" style="flex:1;border-left:3px solid var(--orange);display:flex;flex-direction:column;">
                     <h4 style="color:var(--orange);font-size:14px;">EventoPago (mensaje JSON)</h4>
-                    <div class="code-box" style="padding:14px 18px;font-size:13px;margin-top:10px;">
+                    <div class="code-box" style="padding:16px 20px;font-size:13.5px;margin-top:10px;flex:1;">
 <span class="c-dim">{</span>
   <span class="c-blue">"miembroId"</span>:   <span class="c-orange">2</span>,
   <span class="c-blue">"planId"</span>:      <span class="c-orange">1</span>,
@@ -764,14 +884,21 @@
 <span class="c-dim">}</span></div>
                 </div>
 
-                <div class="card" style="flex:1;border-left:3px solid var(--purple);">
+                <div class="card" style="flex:1;border-left:3px solid var(--purple);display:flex;flex-direction:column;">
                     <h4 style="color:var(--purple);font-size:14px;">Por que RabbitMQ y no HTTP directo?</h4>
-                    <table class="styled-table" style="margin-top:10px;">
+                    <table class="styled-table" style="margin-top:12px;">
                         <tr><th style="width:35%;">Aspecto</th><th>HTTP</th><th>RabbitMQ</th></tr>
                         <tr><td style="color:white;">Acoplamiento</td><td style="color:var(--red);">Fuerte</td><td style="color:var(--green);">Debil</td></tr>
                         <tr><td style="color:white;">Si el destino cae</td><td style="color:var(--red);">Falla</td><td style="color:var(--green);">Espera en cola</td></tr>
                         <tr><td style="color:white;">Escalabilidad</td><td style="color:var(--orange);">1 a 1</td><td style="color:var(--green);">N consumidores</td></tr>
                     </table>
+                    <div style="margin-top:auto;padding-top:12px;">
+                        <div class="mini-card" style="padding:10px 14px;">
+                            <p style="font-size:11px;margin:0;color:#94a3b8;">
+                                <strong style="color:var(--green);">Ventaja clave:</strong> si Member Service esta caido, el mensaje espera en la cola y se procesa cuando vuelva a estar disponible
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -789,13 +916,13 @@
         </div>
         <div class="slide-title">Angular 17 + <span class="gradient-text">Bootstrap 5</span></div>
 
-        <div class="two-col" style="gap:40px;">
-            <div class="col" style="gap:16px;">
-                <div class="slide-desc" style="font-size:14px;margin-bottom:10px;">SPA (Single Page Application) con componentes standalone, rutas protegidas, y comunicacion reactiva con el backend.</div>
+        <div class="two-col" style="gap:28px;">
+            <div class="col" style="gap:12px;">
+                <div class="slide-desc" style="font-size:13.5px;margin-bottom:4px;">SPA con componentes standalone, rutas protegidas, y comunicacion reactiva con el backend.</div>
 
                 <div class="card" style="border-left:3px solid var(--pink);">
-                    <h4 style="font-size:14px;color:var(--pink);">Caracteristicas Implementadas</h4>
-                    <ul class="blist" style="margin:8px 0 0;">
+                    <h4 style="font-size:13px;color:var(--pink);">Caracteristicas Implementadas</h4>
+                    <ul class="blist" style="margin:6px 0 0;">
                         <li><strong>Standalone Components</strong> — Sin NgModule (Angular 17)</li>
                         <li><strong>Lazy Loading</strong> — Cada ruta carga bajo demanda</li>
                         <li><strong>HTTP Interceptor</strong> — Inyecta JWT automaticamente</li>
@@ -805,61 +932,61 @@
                 </div>
 
                 <div class="card" style="border-left:3px solid var(--cyan);">
-                    <h4 style="font-size:14px;color:var(--cyan);">Flujo de una peticion</h4>
-                    <div class="code-box" style="padding:12px 16px;font-size:12px;margin-top:8px;">
+                    <h4 style="font-size:13px;color:var(--cyan);">Flujo de una peticion</h4>
+                    <div class="code-box" style="padding:10px 14px;font-size:11.5px;margin-top:6px;line-height:1.6;">
 <span class="c-pink">Componente</span> llama al <span class="c-blue">Servicio</span>
-    ↓
+  <span class="c-dim">↓</span>
 <span class="c-blue">HttpClient</span> crea peticion HTTP
-    ↓
+  <span class="c-dim">↓</span>
 <span class="c-purple">Interceptor</span> agrega <span class="c-green">Bearer token</span>
-    ↓
+  <span class="c-dim">↓</span>
 <span class="c-orange">Gateway :8080</span> valida JWT
-    ↓
+  <span class="c-dim">↓</span>
 <span class="c-green">Microservicio</span> responde JSON
-    ↓
+  <span class="c-dim">↓</span>
 <span class="c-pink">Componente</span> renderiza los datos</div>
-                </div>
-            </div>
-
-            <div class="col" style="gap:16px;">
-                <div class="card">
-                    <h4 style="font-size:14px;">Estructura del Proyecto</h4>
-                    <div class="code-box" style="padding:16px 20px;font-size:12.5px;margin-top:10px;">
-<span class="c-purple">src/app/</span>
-<span class="c-dim">│</span>
-<span class="c-dim">├──</span> app.component.ts       <span class="c-green">← Layout principal</span>
-<span class="c-dim">├──</span> app.routes.ts           <span class="c-green">← 6 rutas definidas</span>
-<span class="c-dim">│</span>
-<span class="c-dim">├──</span> <span class="c-blue">core/</span>
-<span class="c-dim">│   ├──</span> guards/auth.guard     <span class="c-orange">← Proteccion rutas</span>
-<span class="c-dim">│   ├──</span> interceptors/auth     <span class="c-orange">← JWT automatico</span>
-<span class="c-dim">│   ├──</span> models/models.ts      <span class="c-orange">← Interfaces TS</span>
-<span class="c-dim">│   └──</span> services/
-<span class="c-dim">│       ├──</span> auth.service       <span class="c-orange">← Login/Logout</span>
-<span class="c-dim">│       └──</span> api.services       <span class="c-orange">← 4 servicios API</span>
-<span class="c-dim">│</span>
-<span class="c-dim">└──</span> <span class="c-pink">features/</span>
-<span class="c-dim">    ├──</span> landing/              <span class="c-cyan">← Pagina publica</span>
-<span class="c-dim">    ├──</span> dashboard/            <span class="c-cyan">← Panel principal</span>
-<span class="c-dim">    ├──</span> members/              <span class="c-cyan">← CRUD miembros</span>
-<span class="c-dim">    ├──</span> plans/                <span class="c-cyan">← CRUD planes</span>
-<span class="c-dim">    ├──</span> attendance/           <span class="c-cyan">← Asistencia</span>
-<span class="c-dim">    └──</span> payments/             <span class="c-cyan">← Pagos</span></div>
                 </div>
 
                 <div class="stat-row" style="margin:0;">
                     <div class="stat">
-                        <div class="stat-num" style="color:var(--purple);font-size:24px;">5</div>
-                        <div class="stat-label">Rutas Protegidas</div>
+                        <div class="stat-num" style="color:var(--purple);font-size:22px;">5</div>
+                        <div class="stat-label" style="font-size:9px;">Rutas Protegidas</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-num" style="color:var(--blue);font-size:24px;">4</div>
-                        <div class="stat-label">Servicios API</div>
+                        <div class="stat-num" style="color:var(--blue);font-size:22px;">4</div>
+                        <div class="stat-label" style="font-size:9px;">Servicios API</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-num" style="color:var(--green);font-size:24px;">6</div>
-                        <div class="stat-label">Componentes</div>
+                        <div class="stat-num" style="color:var(--green);font-size:22px;">6</div>
+                        <div class="stat-label" style="font-size:9px;">Componentes</div>
                     </div>
+                </div>
+            </div>
+
+            <div class="col" style="gap:12px;">
+                <div class="card" style="flex:1;display:flex;flex-direction:column;">
+                    <h4 style="font-size:13px;">Estructura del Proyecto</h4>
+                    <div class="code-box" style="padding:14px 18px;font-size:12px;margin-top:8px;flex:1;">
+<span class="c-purple">src/app/</span>
+<span class="c-dim">│</span>
+<span class="c-dim">├──</span> app.component.ts        <span class="c-green">← Layout principal</span>
+<span class="c-dim">├──</span> app.routes.ts            <span class="c-green">← 6 rutas definidas</span>
+<span class="c-dim">│</span>
+<span class="c-dim">├──</span> <span class="c-blue">core/</span>
+<span class="c-dim">│   ├──</span> guards/auth.guard      <span class="c-orange">← Proteccion rutas</span>
+<span class="c-dim">│   ├──</span> interceptors/auth      <span class="c-orange">← JWT automatico</span>
+<span class="c-dim">│   ├──</span> models/models.ts       <span class="c-orange">← Interfaces TS</span>
+<span class="c-dim">│   └──</span> services/
+<span class="c-dim">│       ├──</span> auth.service        <span class="c-orange">← Login/Logout</span>
+<span class="c-dim">│       └──</span> api.services        <span class="c-orange">← 4 servicios API</span>
+<span class="c-dim">│</span>
+<span class="c-dim">└──</span> <span class="c-pink">features/</span>
+<span class="c-dim">    ├──</span> landing/               <span class="c-cyan">← Pagina publica</span>
+<span class="c-dim">    ├──</span> dashboard/             <span class="c-cyan">← Panel principal</span>
+<span class="c-dim">    ├──</span> members/               <span class="c-cyan">← CRUD miembros</span>
+<span class="c-dim">    ├──</span> plans/                 <span class="c-cyan">← CRUD planes</span>
+<span class="c-dim">    ├──</span> attendance/            <span class="c-cyan">← Asistencia</span>
+<span class="c-dim">    └──</span> payments/              <span class="c-cyan">← Pagos</span></div>
                 </div>
             </div>
         </div>
@@ -879,44 +1006,44 @@
         </div>
         <div class="slide-title">Patrones <span class="gradient-text">Implementados</span></div>
 
-        <div class="content-area" style="gap:24px;">
-            <div class="card-grid g3">
-                <div class="card" style="text-align:center;padding:24px 20px;">
-                    <div style="font-size:36px;margin-bottom:10px;">🏗️</div>
+        <div class="content-area" style="gap:20px;">
+            <div class="pattern-grid">
+                <div class="pattern-card">
+                    <div class="icon">🏗️</div>
                     <h4>Microservicios</h4>
                     <p>5 servicios independientes, cada uno con su base de datos propia</p>
                 </div>
-                <div class="card" style="text-align:center;padding:24px 20px;">
-                    <div style="font-size:36px;margin-bottom:10px;">🚪</div>
+                <div class="pattern-card">
+                    <div class="icon">🚪</div>
                     <h4>API Gateway</h4>
                     <p>Punto unico de entrada con filtro JWT y balanceo de carga</p>
                 </div>
-                <div class="card" style="text-align:center;padding:24px 20px;">
-                    <div style="font-size:36px;margin-bottom:10px;">🔍</div>
+                <div class="pattern-card">
+                    <div class="icon">🔍</div>
                     <h4>Service Discovery</h4>
                     <p>Eureka registra servicios automaticamente al iniciar</p>
                 </div>
-                <div class="card" style="text-align:center;padding:24px 20px;">
-                    <div style="font-size:36px;margin-bottom:10px;">📨</div>
+                <div class="pattern-card">
+                    <div class="icon">📨</div>
                     <h4>Event-Driven</h4>
                     <p>RabbitMQ para comunicacion desacoplada entre servicios</p>
                 </div>
-                <div class="card" style="text-align:center;padding:24px 20px;">
-                    <div style="font-size:36px;margin-bottom:10px;">🔒</div>
+                <div class="pattern-card">
+                    <div class="icon">🔒</div>
                     <h4>JWT Stateless</h4>
                     <p>Autenticacion sin estado con tokens firmados HMAC-SHA256</p>
                 </div>
-                <div class="card" style="text-align:center;padding:24px 20px;">
-                    <div style="font-size:36px;margin-bottom:10px;">🗄️</div>
+                <div class="pattern-card">
+                    <div class="icon">🗄️</div>
                     <h4>Database per Service</h4>
                     <p>5 bases PostgreSQL aisladas evitando acoplamiento de datos</p>
                 </div>
             </div>
 
-            <div style="text-align:center;margin-top:10px;">
-                <div class="cover-divider" style="margin:0 auto 16px;"></div>
-                <div style="font-size:48px;font-weight:900;background:linear-gradient(135deg,#a78bfa,#60a5fa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Gracias</div>
-                <p style="color:#64748b;margin-top:8px;font-size:18px;font-weight:300;">Preguntas?</p>
+            <div style="text-align:center;">
+                <div class="cover-divider" style="margin:0 auto 12px;"></div>
+                <div style="font-size:52px;font-weight:900;background:linear-gradient(135deg,#a78bfa,#60a5fa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Gracias</div>
+                <p style="color:#64748b;margin-top:6px;font-size:18px;font-weight:300;">Preguntas?</p>
             </div>
         </div>
     </div>
